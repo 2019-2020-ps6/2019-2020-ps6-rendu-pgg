@@ -14,4 +14,5 @@
 - [Mohammed Khayoussef]()
 
 Test GitKraken
+Test clone
 
