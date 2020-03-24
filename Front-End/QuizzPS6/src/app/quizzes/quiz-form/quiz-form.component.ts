@@ -10,7 +10,7 @@ import { Quiz } from '../../../models/quiz.model';
   styleUrls: ['./quiz-form.component.scss']
 })
 export class QuizFormComponent implements OnInit {
-  public THEME_LIST: String[] = ['Sport', 'Histoire'];
+  public THEME_LIST: string[] = ['Sport', 'Histoire'];
   // Note: We are using here ReactiveForms to create our form. Be careful when you look for some documentation to
   // avoid TemplateDrivenForm (another type of form)
 

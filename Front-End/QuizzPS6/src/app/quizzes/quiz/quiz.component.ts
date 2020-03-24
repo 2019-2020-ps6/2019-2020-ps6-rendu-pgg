@@ -16,6 +16,8 @@ export class QuizComponent implements OnInit {
 
   @Output()
   quizDeleted: EventEmitter<Quiz> = new EventEmitter<Quiz>();
+  @Output()
+  quizEdited: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
   constructor() {
   }
@@ -29,5 +31,8 @@ export class QuizComponent implements OnInit {
 
   deleteQuiz() {
     this.quizDeleted.emit(this.quiz);
+  }
+  editQuiz() {
+    this.quizEdited.emit(this.quiz);
   }
 }
