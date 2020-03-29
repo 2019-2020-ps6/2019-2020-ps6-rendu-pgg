@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { QuizFormComponent } from './quizzes/quiz-form/quiz-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { QuizCreationComponent } from './quizzes/quiz-creation/quiz-creation.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { QuizCreationComponent } from './quizzes/quiz-creation/quiz-creation.com
     HeaderComponent,
     QuizFormComponent,
     GestionChoseQuizComponent,
-    QuizCreationComponent
+    QuizCreationComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

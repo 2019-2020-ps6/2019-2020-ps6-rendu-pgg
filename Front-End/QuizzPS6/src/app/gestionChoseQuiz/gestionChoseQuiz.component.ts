@@ -6,10 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gestionChoseQuiz.component.scss']
 })
 export class GestionChoseQuizComponent implements OnInit {
+  state: number;
 
-  constructor() { }
+  constructor() {
+    this.state = 0;
+  }
 
   ngOnInit() {
+    console.log('menu chargé');
+  }
+
+  createQuiz() {
+    this.state = 1;
   }
 
 }
