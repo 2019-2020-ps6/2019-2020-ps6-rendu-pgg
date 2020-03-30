@@ -24,15 +24,13 @@ export class QuizService {
    * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
    */
   public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject(this.quizzes);
-  public url = 'https://api.myjson.com/bins/silu2';
+  public url = 'http://localhost:9428/api/quizzes';
 
   constructor(private http: HttpClient) {
     this.setQuizzesFromUrl();
   }
 
   addQuiz(quiz: Quiz) {
-    // You need here to update the list of quiz and then update our observable (Subject) with the new list
-    // More info: https://angular.io/tutorial/toh-pt6#the-searchterms-rxjs-subject
     this.quizzes.push(quiz);
     this.quizzes$.next(this.quizzes);
     console.log(quiz);
@@ -47,9 +45,10 @@ export class QuizService {
   }
 
   setQuizzesFromUrl() {
-    return this.http.get<{quizzes: Quiz[]}>(this.url).subscribe((quizzes) => {
-      this.quizzes = quizzes.quizzes;
+    return this.http.get<Quiz[]>(this.url).subscribe((quizzes) => {
+      this.quizzes = quizzes;
       this.quizzes$.next(this.quizzes);
+      console.log(this.quizzes);
     });
   }
 }
