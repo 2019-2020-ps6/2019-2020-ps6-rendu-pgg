@@ -11,6 +11,7 @@ import { QuizFormComponent } from './quizzes/quiz-form/quiz-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { QuizCreationComponent } from './quizzes/quiz-creation/quiz-creation.component';
 import { MenuComponent } from './menu/menu.component';
+import { NouveauQuizComponent } from './quizzes/quiz-creation/nouveau-quiz/nouveau-quiz.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MenuComponent } from './menu/menu.component';
     QuizFormComponent,
     GestionChoseQuizComponent,
     QuizCreationComponent,
-    MenuComponent
+    MenuComponent,
+    NouveauQuizComponent
   ],
   imports: [
     BrowserModule,
