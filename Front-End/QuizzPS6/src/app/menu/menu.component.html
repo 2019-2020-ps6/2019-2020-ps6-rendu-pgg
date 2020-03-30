@@ -11,10 +11,11 @@
         <app-gestion-chose-quiz></app-gestion-chose-quiz>
         <button type="button" class="button-card" (click)="backToMain()">Retour à l'accueil</button>
     </div>
-
-    <button *ngSwitchDefault type="button" class="button-card" (click)="playQuiz()">Jouer à un Quiz</button>
-    <button *ngSwitchDefault type="button" class="button-card" (click)="editQuiz()">Gérer les Quiz</button>
-    <button *ngSwitchDefault type="button" class="button-card" (click)="editUser()">Gérer les Utilisateurs</button>
-
+    <div class="container">
+    <button *ngSwitchDefault type="button" class="btn btn1" (click)="playQuiz()">Jouer à un Quiz</button>
+    <button *ngSwitchDefault type="button" class="btn btn2" (click)="editQuiz()">Gérer les Quiz</button>
+    <button *ngSwitchDefault type="button" class="btn btn3" (click)="editUser()">Gérer les Utilisateurs</button>
+    </div>
+    
     
 </div>
