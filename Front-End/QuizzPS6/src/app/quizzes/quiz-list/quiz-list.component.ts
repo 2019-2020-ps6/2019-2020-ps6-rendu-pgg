@@ -8,8 +8,9 @@ import { Quiz } from '../../../models/quiz.model';
   styleUrls: ['./quiz-list.component.scss']
 })
 export class QuizListComponent implements OnInit {
-
   public quizList: Quiz[] = [];
+  public state: number;
+  public currentQuiz: Quiz;
 
   constructor(public quizService: QuizService) {
     this.quizService.quizzes$.subscribe((quiz) => this.quizList = quiz);
@@ -18,8 +19,9 @@ export class QuizListComponent implements OnInit {
   ngOnInit() {
   }
 
-  quizSelected(selected: boolean) {
+  quizSelected(selected: Quiz) {
     console.log('event received from child:', selected);
+    this.state = 1;
   }
 
   deleteQuiz(quiz: Quiz) {

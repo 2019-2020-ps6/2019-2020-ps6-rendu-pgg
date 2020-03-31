@@ -5,11 +5,11 @@
 <div *ngSwitchDefault>
   <button class="button-card">Quitter l'édition de Quiz</button>
   <br>
-  <table>
-    <tr>
-      <td>NomQuiz1</td>
-    </tr>
-  </table>
+  <ul>
+  <li class="quiz" *ngFor="let quiz of quizList">
+    {{ quiz.name }}
+  </li>
+  </ul>
   <button class="button-card" (click)="createQuiz()">Créer un nouveau Quiz</button>
   <app-quiz-form ></app-quiz-form>
 </div>

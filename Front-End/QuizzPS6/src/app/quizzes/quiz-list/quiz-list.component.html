@@ -1,5 +1,13 @@
-<div class="quiz-list">
-    <div class="quiz" *ngFor="let quiz of quizList">
-        <app-quiz [quiz]="quiz" (quizSelected)="quizSelected($event)" (quizDeleted)="deleteQuiz($event)"></app-quiz>
+<div [ngSwitch]="state">
+    <div *ngSwitchCase="1" class="quiz">
+        <app-quiz [quiz]="currentQuiz"></app-quiz>
     </div>
-  </div>
+
+    <div *ngSwitchDefault>
+        <div class="quiz-list">
+            <div class="quiz" *ngFor="let quiz of quizList">
+                <app-quiz [quiz]="quiz" (quizSelected)="quizSelected($event)" (quizDeleted)="deleteQuiz($event)"></app-quiz>
+            </div>
+        </div>
+    </div>
+</div>
