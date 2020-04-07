@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./quiz-creation.component.scss']
 })
 export class QuizCreationComponent implements OnInit {
-
+  state: number;
   constructor() { }
 
   ngOnInit() {
   }
+  ajouterQuiz() {
+    this.state = 1;
+  }
+
 
 }
