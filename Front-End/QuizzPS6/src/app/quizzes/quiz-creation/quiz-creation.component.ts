@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NewQuiz } from '../../../models/quiz.model';
 
 @Component({
   selector: 'app-quiz-creation',
@@ -7,11 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuizCreationComponent implements OnInit {
   state: number;
-  constructor() { }
+  quizObject: NewQuiz;
 
-  ngOnInit() {
-  }
+  // 1. Setup a quizz object and get values from textboxe,etc to it
+  constructor() {
+
+   }
+
+   ngOnInit() {
+    this.quizObject = {};
+    }
   ajouterQuiz() {
+    console.log('quiz:', this.quizObject);
     this.state = 1;
   }
 

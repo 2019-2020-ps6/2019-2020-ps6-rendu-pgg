@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { GestionChoseQuizComponent} from './gestionChoseQuiz/gestionChoseQuiz.component';
@@ -28,7 +28,8 @@ import { NouveauQuizComponent } from './quizzes/quiz-creation/nouveau-quiz/nouve
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

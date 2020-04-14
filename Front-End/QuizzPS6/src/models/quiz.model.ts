@@ -6,3 +6,8 @@ export interface Quiz {
     creationDate?: Date;
     questions: Question[];
 }
+
+export interface NewQuiz {
+    name?: string;
+    theme?: string;
+}
