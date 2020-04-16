@@ -1,11 +1,12 @@
 const { Router } = require('express')
 
-const { Theme, Quiz } = require('../../../models')
+const { Theme, Quiz } = require('../../models')
 
 const router = new Router()
 
 router.get('/', (req, res) => {
   try {
+    console.log('getting themes...')
     res.status(200).json(Theme.get())
   } catch (err) {
     res.status(500).json(err)
