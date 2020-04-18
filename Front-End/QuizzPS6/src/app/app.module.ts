@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { QuizCreationComponent } from './quizzes/quiz-creation/quiz-creation.component';
 import { MenuComponent } from './menu/menu.component';
 import { NouveauQuizComponent } from './quizzes/quiz-creation/nouveau-quiz/nouveau-quiz.component';
+import { SelectionThemeComponent } from './selection-theme/selection-theme.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NouveauQuizComponent } from './quizzes/quiz-creation/nouveau-quiz/nouve
     GestionChoseQuizComponent,
     QuizCreationComponent,
     MenuComponent,
-    NouveauQuizComponent
+    NouveauQuizComponent,
+    SelectionThemeComponent
   ],
   imports: [
     BrowserModule,

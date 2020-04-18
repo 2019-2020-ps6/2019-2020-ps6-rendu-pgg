@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lng=fr>
+	<head>
+		<title>Choix du theme</title>
+			<style type="text/css">
+			h1  {
+					text-align: center;
+				}
+			ul li{
+				 	list-style: none;
+				 	font-size: 18px;
+				 	display: inline-flex;
+				 	border: 1px solid black;
+				 	border-radius: 8px;
+				 	margin-left: 20px;
+				 	padding: 90px;
+				 	padding-bottom: 125px;
+				 	padding-top: 125px;
+				 }
+			.cont{
+				 	width: 1200px;
+				 	height: 300px;
+				 	overflow: hidden;
+				 	padding-bottom: 80px;
+				 	text-align: center;
+				 }
+			#bouton1{
+				font-size: 20px;
+				border-radius: 14px 2px 2px 14px;
+				background-color: white;
+				border-color: black;
+				padding-right: 15px;
+				padding-left: 15px;
+					}
+			.bouton{
+				width: 700px;
+				height: 80px;
+				border-color: black;
+				font-size: 20px;
+					}
+			
+			li:hover{
+				background-color: silver;
+			}
+			.center{
+				text-align: center;
+			}
+
+
+			</style>
+	</head>
+	<body>
+			
+	
+	<h1>Choisir un théme</h1>
+	<div class="cont">
+			<ul>
+				<li *ngFor="let themeItem of themeList" value="themeItem" >{{themeItem.name}} <br/> 2 Quiz</li>
+			</ul>
+	</div>
+				
+				<div class="center"><input class="bouton" value="Valider" type="button"></div>
+		
+	</body>
+	</html>
