@@ -13,12 +13,20 @@ export class QuizCreationComponent implements OnInit {
   themeList: any = [
     {
       id: 1,
-      name: 'theme1'
+      name: 'Les Jeux Olympiques'
     },
     {
       id: 2,
-      name: 'theme2'
-    }
+      name: 'Antiquité'
+    },
+    {
+      id: 3,
+      name: 'Nature'
+    },
+    {
+      id: 4,
+      name: 'Cuisine'
+    },
   ];
   // 1. Setup a quizz object and get values from textboxe,etc to it
   constructor() {
