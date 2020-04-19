@@ -4,6 +4,7 @@ export interface Quiz {
     name: string;
     themeId?: number;
     creationDate?: Date;
+    numberOfQuestion?: number;
     questions: Question[];
 }
 

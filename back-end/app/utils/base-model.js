@@ -35,7 +35,11 @@ module.exports = class BaseModel {
   get() {
     return this.items
   }
-
+  
+  /**
+   * 
+   * @param {String} id ID of the item 
+   */
   getById(id) {
     if (typeof id === 'string') id = parseInt(id, 10)
     const item = this.items.find((i) => i.id === id)

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lng=fr>
 	<head>
-		<title>Choix du theme</title>
+		<title>Choix du quiz</title>
 			<style type="text/css">
 			h1  {
 					text-align: center;
@@ -50,21 +50,24 @@
 			</style>
 	</head>
 	<body>
+
 		<div [ngSwitch]="state">
 			<div *ngSwitchCase="1">
-			  <app-selection-quiz></app-selection-quiz>
+			  <app-jouer-quiz></app-jouer-quiz>
 			</div>
 			<div *ngSwitchDefault>	
+			
 	
-	<h1>Choisir un thème</h1>
-	<div class="cont">
-			<ul>
-				<li *ngFor="let themeItem of themeList" value="themeItem" >{{themeItem.name}} <br/>{{themeItem.quizNumber}} Quiz</li>
-			</ul>
-	</div>
-				
-				<div class="center"><input class="bouton" value="Valider" type="button" (click)="selectionnerQuiz()"></div>
+			<h1>Choisir un quiz sur le thème : Histoire</h1>
+			<div class="cont">
+					<ul>
+						<li>Les rois de France <br/> 5 Questions</li>
+						<li>Antiquité <br/> 5 Questions</li>
+					</ul>
 			</div>
-		</div>
-	</body>
-	</html>
+						
+						<div class="center"><input class="bouton" value="Valider" type="button" (click)="JouerQuiz()"></div>
+				</div>
+				</div>
+			</body>
+			</html>

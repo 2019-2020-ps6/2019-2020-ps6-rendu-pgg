@@ -18,11 +18,28 @@ router.get('/', (req, res) => {
   }
 })
 
-router.get('/:quizId', (req, res) => {
+router.get('/:quizId', (req, res) => {//  api/quizz/5
   try {
     const quizz = buildQuizz(req.params.quizId)
     res.status(200).json(quizz)
   } catch (err) {
+    manageAllErrors(res, err)
+  }
+})
+
+router.get('/getQuizzesByThemeId/:themeId',(req, res)=>{  // GET  api/quizzes/getQuizzesByThemeId/5
+  try{
+    const themeId = req.params.themeId
+    // TODO:
+    // 1. fetch a list of quiz,  along with a counter of questions, by theme Id ( filter ),
+    const quizList = Quiz.get().filter(function (quiz) {
+      return quiz.themeId == themeId;
+    })
+    
+    // 2. return the list in the response
+     res.status(200).json(quizList)     
+    // res.status(200).json(themeId)
+  } catch(err){
     manageAllErrors(res, err)
   }
 })

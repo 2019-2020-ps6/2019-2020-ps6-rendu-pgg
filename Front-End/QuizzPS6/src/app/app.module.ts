@@ -13,6 +13,8 @@ import { QuizCreationComponent } from './quizzes/quiz-creation/quiz-creation.com
 import { MenuComponent } from './menu/menu.component';
 import { NouveauQuizComponent } from './quizzes/quiz-creation/nouveau-quiz/nouveau-quiz.component';
 import { SelectionThemeComponent } from './selection-theme/selection-theme.component';
+import { SelectionQuizComponent } from './selection-quiz/selection-quiz.component';
+import { JouerQuizComponent } from './jouer-quiz/jouer-quiz.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { SelectionThemeComponent } from './selection-theme/selection-theme.compo
     QuizCreationComponent,
     MenuComponent,
     NouveauQuizComponent,
-    SelectionThemeComponent
+    SelectionThemeComponent,
+    SelectionQuizComponent,
+    JouerQuizComponent
   ],
   imports: [
     BrowserModule,

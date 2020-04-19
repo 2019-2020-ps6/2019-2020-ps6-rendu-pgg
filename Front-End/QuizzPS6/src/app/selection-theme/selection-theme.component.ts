@@ -8,7 +8,10 @@ import { ThemeService } from '../../services/theme.service';
 })
 export class SelectionThemeComponent implements OnInit {
   themeList: any[];
-  constructor(public themeService: ThemeService) {}
+  state: number;
+  constructor(public themeService: ThemeService) {
+    this.state = 0;
+  }
 
   ngOnInit() {
     // 1. fetch theme list
@@ -25,6 +28,10 @@ export class SelectionThemeComponent implements OnInit {
     console.log('test');
 
 
+  }
+
+  selectionnerQuiz() {
+    this.state = 1;
   }
 
 }
