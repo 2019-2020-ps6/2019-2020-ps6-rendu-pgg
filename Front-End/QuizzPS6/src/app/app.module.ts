@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { GestionChoseQuizComponent} from './gestionChoseQuiz/gestionChoseQuiz.component';
@@ -12,6 +12,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { QuizCreationComponent } from './quizzes/quiz-creation/quiz-creation.component';
 import { MenuComponent } from './menu/menu.component';
 import { NouveauQuizComponent } from './quizzes/quiz-creation/nouveau-quiz/nouveau-quiz.component';
+import { SelectionThemeComponent } from './selection-theme/selection-theme.component';
+import { SelectionQuizComponent } from './selection-quiz/selection-quiz.component';
+import { JouerQuizComponent } from './jouer-quiz/jouer-quiz.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +26,16 @@ import { NouveauQuizComponent } from './quizzes/quiz-creation/nouveau-quiz/nouve
     GestionChoseQuizComponent,
     QuizCreationComponent,
     MenuComponent,
-    NouveauQuizComponent
+    NouveauQuizComponent,
+    SelectionThemeComponent,
+    SelectionQuizComponent,
+    JouerQuizComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

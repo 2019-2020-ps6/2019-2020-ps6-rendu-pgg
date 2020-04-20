@@ -1,15 +1,18 @@
  <div [ngSwitch]="state">
     <div *ngSwitchCase="1">
-        <app-quiz-list></app-quiz-list>
         <button type="button" class="button-card" (click)="backToMain()">Retour à l'accueil</button>
+        <app-selection-theme></app-selection-theme>
+        
     </div>
     <div *ngSwitchCase="2">
-        <app-gestion-chose-quiz></app-gestion-chose-quiz>
         <button type="button" class="button-card" (click)="backToMain()">Retour à l'accueil</button>
+        <app-gestion-chose-quiz></app-gestion-chose-quiz>
+        
     </div>
     <div *ngSwitchCase="3">
-        <app-gestion-chose-quiz></app-gestion-chose-quiz>
         <button type="button" class="button-card" (click)="backToMain()">Retour à l'accueil</button>
+        <app-gestion-chose-quiz></app-gestion-chose-quiz>
+        
     </div>
     <div class="container">
     <button *ngSwitchDefault type="button" class="btn btn1" (click)="playQuiz()">Jouer à un Quiz</button>

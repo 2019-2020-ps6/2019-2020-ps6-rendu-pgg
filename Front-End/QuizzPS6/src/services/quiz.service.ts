@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, ObservableInput, Observable } from 'rxjs';
 import { Quiz } from '../models/quiz.model';
 import { QUIZ_LIST } from '../mocks/quiz-list.mock';
 import { HttpClient } from '@angular/common/http';
@@ -50,5 +50,12 @@ export class QuizService {
       this.quizzes$.next(this.quizzes);
       console.log(this.quizzes);
     });
+  }
+
+
+
+    getQuizzesByThemeId(themeId): Observable<Quiz[]> {
+    // 1. call a GET  api/quizzes/getQuizzesByThemeId/5
+    return this.http.get<Quiz[]>(this.url + '/getQuizzesByThemeId/' + themeId).pipe();
   }
 }

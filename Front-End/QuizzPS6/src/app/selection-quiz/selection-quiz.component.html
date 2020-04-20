@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lng=fr>
+	<head>
+		<title>Choix du quiz</title>
+			<style type="text/css">
+			h1  {
+					text-align: center;
+				}
+			ul li{
+				 	list-style: none;
+				 	font-size: 18px;
+				 	display: inline-flex;
+				 	border: 1px solid black;
+				 	border-radius: 8px;
+				 	margin-left: 20px;
+				 	padding: 90px;
+				 	padding-bottom: 125px;
+				 	padding-top: 125px;
+				 }
+			.cont{
+				 	width: 1200px;
+				 	height: 300px;
+				 	overflow: hidden;
+				 	padding-bottom: 80px;
+				 	text-align: center;
+				 }
+			#bouton1{
+				font-size: 20px;
+				border-radius: 14px 2px 2px 14px;
+				background-color: white;
+				border-color: black;
+				padding-right: 15px;
+				padding-left: 15px;
+					}
+			.bouton{
+				width: 700px;
+				height: 80px;
+				border-color: black;
+				font-size: 20px;
+					}
+			
+			li:hover{
+				background-color: silver;
+			}
+			.center{
+				text-align: center;
+			}
+
+
+			</style>
+	</head>
+	<body>
+
+		<div [ngSwitch]="state">
+			<div *ngSwitchCase="1">
+			  <app-jouer-quiz></app-jouer-quiz>
+			</div>
+			<div *ngSwitchDefault>	
+			
+	
+			<h1>Choisir un quiz sur le thème : Histoire</h1>
+			<div class="cont">
+					<ul>
+						<li>Les rois de France <br/> 5 Questions</li>
+						<li>Antiquité <br/> 5 Questions</li>
+					</ul>
+			</div>
+						
+						<div class="center"><input class="bouton" value="Valider" type="button" (click)="JouerQuiz()"></div>
+				</div>
+				</div>
+			</body>
+			</html>
