@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
+import {Theme} from '../../models/theme.model';
 
 @Component({
   selector: 'app-selection-theme',
@@ -7,9 +8,12 @@ import { ThemeService } from '../../services/theme.service';
   styleUrls: ['./selection-theme.component.scss']
 })
 export class SelectionThemeComponent implements OnInit {
-  themeList: any[];
-  state: number;
+  public themeList: Theme[] = [];
+  public state: number;
+  public currentTheme: Theme;
+
   constructor(public themeService: ThemeService) {
+    this.themeService.themes$.subscribe((theme) => this.themeList = theme);
     this.state = 0;
   }
 
@@ -30,7 +34,7 @@ export class SelectionThemeComponent implements OnInit {
 
   }
 
-  selectionnerQuiz() {
+  selectionnerTheme() {
     this.state = 1;
   }
 

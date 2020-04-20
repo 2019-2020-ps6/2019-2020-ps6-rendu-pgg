@@ -38,7 +38,7 @@
 				border-color: black;
 				font-size: 20px;
 					}
-			
+
 			li:hover{
 				background-color: silver;
 			}
@@ -54,16 +54,16 @@
 			<div *ngSwitchCase="1">
 			  <app-selection-quiz></app-selection-quiz>
 			</div>
-			<div *ngSwitchDefault>	
-	
+			<div *ngSwitchDefault>
+
 	<h1>Choisir un thème</h1>
 	<div class="cont">
 			<ul>
-				<li *ngFor="let themeItem of themeList" value="themeItem" >{{themeItem.name}} <br/>{{themeItem.quizNumber}} Quiz</li>
+				<li *ngFor="let themeItem of themeList" value="themeItem" >{{themeItem.name}} <br/>ID : {{themeItem.id}}</li>
 			</ul>
 	</div>
-				
-				<div class="center"><input class="bouton" value="Valider" type="button" (click)="selectionnerQuiz()"></div>
+
+				<div class="center"><input class="bouton" value="Valider" type="button" (click)="selectionnerTheme()"></div>
 			</div>
 		</div>
 	</body>
