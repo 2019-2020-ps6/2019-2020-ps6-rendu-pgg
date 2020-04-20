@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Theme } from '../models/theme.model';
-import { THEME_LIST} from '../mocks/theme-list.mock';
+import { THEME_LIST } from '../mocks/theme-list.mock';
 import { BehaviorSubject, ObservableInput, Observable } from 'rxjs';
 
 @Injectable({
