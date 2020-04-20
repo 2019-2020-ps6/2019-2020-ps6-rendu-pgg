@@ -8,8 +8,8 @@
     <label for="theme">
       <br>Theme <br>
       <select name="theme" id="theme" [formControlName]="'theme'">
-        <option *ngFor="let currentTheme of THEME_LIST" [value]="currentTheme">
-          {{currentTheme}}
+        <option *ngFor="let currentTheme of themeList" [value]="currentTheme">
+          {{currentTheme.name}}
       </select>
     </label>
     <br>

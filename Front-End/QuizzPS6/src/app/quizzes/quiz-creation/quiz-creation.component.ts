@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NewQuiz } from '../../../models/quiz.model';
+import {Theme} from '../../../models/theme.model';
+import {ThemeService} from '../../../services/theme.service';
 
 @Component({
   selector: 'app-quiz-creation',
@@ -7,10 +9,13 @@ import { NewQuiz } from '../../../models/quiz.model';
   styleUrls: ['./quiz-creation.component.scss']
 })
 export class QuizCreationComponent implements OnInit {
-  state: number;
   quizObject: NewQuiz;
   selectedTheme: any;
-  themeList: any = [
+  public themeList: Theme[] = [];
+  public state: number;
+  public currentTheme: Theme;
+
+  huethemeList: any = [
     {
       id: 1,
       name: 'theme1'
@@ -20,10 +25,12 @@ export class QuizCreationComponent implements OnInit {
       name: 'theme2'
     }
   ];
-  // 1. Setup a quizz object and get values from textboxe,etc to it
-  constructor() {
 
-   }
+  // 1. Setup a quizz object and get values from textboxe,etc to it
+  constructor(public themeService: ThemeService) {
+    this.themeService.themes$.subscribe((theme) => this.themeList = theme);
+    this.state = 0;
+  }
 
    ngOnInit() {
     this.quizObject = {};
