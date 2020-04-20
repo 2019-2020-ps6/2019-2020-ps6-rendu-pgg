@@ -3,6 +3,7 @@ const Question = require('./question.model.js')
 const Answer = require('./answer.model.js')
 const User = require('./user.model.js')
 const Theme = require('./theme.model.js')
+const Attempt = require('./attempt.model.js')
 
 module.exports = {
   Quiz,
@@ -10,5 +11,5 @@ module.exports = {
   Answer,
   User,
   Theme,
-
+  Attempt,
 }

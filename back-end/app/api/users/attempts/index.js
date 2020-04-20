@@ -1,96 +1,74 @@
 const { Router } = require('express')
-const { Answer } = require('../../../../models')
 
-const { getQuestionFromQuiz } = require('../manager')
-const { filterAnswersFromQuestion, getAnswerFromQuestion } = require('./manager')
+const { User, Attempt } = require('../../../models')
+const manageAllErrors = require('../../../utils/routes/error-management')
+
+const { filterAttemptsFromUser, getAttemptFromUser } = require('./manager')
 
 const router = new Router({ mergeParams: true })
 
 router.get('/', (req, res) => {
   try {
-    const question = getQuestionFromQuiz(req.params.quizId, req.params.questionId)
-    const answers = filterAnswersFromQuestion(question.id)
-    res.status(200).json(answers)
+    // Check if userId exists, if not it will throw a NotFoundError
+    User.getById(req.params.userId)
+    res.status(200).json(filterAttemptsFromUser(req.params.userId))
   } catch (err) {
-    if (err.name === 'NotFoundError') {
-      res.status(404).end()
-    } else {
-      res.status(500).json(err)
-    }
+    manageAllErrors(res, err)
   }
 })
 
-router.get('/:answerId', (req, res) => {
+router.get('/:attemptId', (req, res) => {
   try {
-    const answer = getAnswerFromQuestion(req.params.quizId, req.params.questionId, req.params.answerId)
-    res.status(200).json(answer)
+    const attempt = getAttemptFromUser(req.params.userId, req.params.attemptId)
+    res.status(200).json(attempt)
   } catch (err) {
-    if (err.name === 'NotFoundError') {
-      res.status(404).end()
-    } else {
-      res.status(500).json(err)
-    }
+    manageAllErrors(res, err)
+  }
+})
+
+router.get('/', (req, res) => {
+  try {
+    const question = filterAttemptsFromUser(req.params.userId)
+    res.status(200).json(question)
+  } catch (err) {
+    manageAllErrors(res, err)
   }
 })
 
 router.post('/', (req, res) => {
   try {
-    const answer = Answer.create({ ...req.body, questionId: req.params.question.id })
-    res.status(201).json(answer)
+    // Check if userId exists, if not it will throw a NotFoundError
+    const userId = parseInt(req.params.userId, 10)
+    const attemptBody = { score: req.body.score, userId }
+    let attempt = Attempt.create(attemptBody)
+    res.status(201).json(attempt)
   } catch (err) {
-    if (err.name === 'NotFoundError') {
-      res.status(404).end()
-    } else if (err.name === 'ValidationError') {
-      res.status(400).json(err.extra)
-    } else {
-      res.status(500).json(err)
-    }
+    manageAllErrors(res, err)
   }
 })
 
-router.put('/:answerId', (req, res) => {
+router.delete('/:attemptId', (req, res) => {
   try {
-    const answer = getAnswerFromQuestion(req.params.quizId, req.params.questionId, req.params.answerId)
-    const updatedAnswer = Answer.update(req.params.answerId, { ...req.body, questionId: answer.questionId })
-    res.status(200).json(updatedAnswer)
-  } catch (err) {
-    if (err.name === 'NotFoundError') {
-      res.status(404).end()
-    } else if (err.name === 'ValidationError') {
-      res.status(400).json(err.extra)
-    } else {
-      res.status(500).json(err)
-    }
-  }
-})
-
-router.delete('/:answerId', (req, res) => {
-  try {
-    getAnswerFromQuestion(req.params.quizId, req.params.questionId, req.params.answerId)
-    Answer.delete(req.params.answerId)
+    // Check if the attempt id exists & if the attempt has the same attemptId as the one provided in the url.
+    getAttemptFromUser(req.params.userId, req.params.attemptId)
+    Attempt.delete(req.params.attemptId)
     res.status(204).end()
   } catch (err) {
-    if (err.name === 'NotFoundError') {
-      res.status(404).end()
-    } else {
-      res.status(500).json(err)
-    }
+    manageAllErrors(res, err)
   }
 })
 
 router.delete('/', (req, res) => {
   try {
-    const answers = filterAnswersFromQuestion(req.params.questionId)
-    answers.array.forEach((answer) => {
-      Answer.delete(answer)
+    // Check if the attempt id exists & if the attempt has the same attemptId as the one provided in the url.
+    const attempts = filterAttemptsFromUser(req.params.userId)
+    Question.delete(req.params.questionId)
+    questions.array.forEach((element) => {
+      Question.delete(element)
     })
     res.status(204).end()
   } catch (err) {
-    if (err.name === 'NotFoundError') {
-      res.status(404).end()
-    } else {
-      res.status(500).json(err)
-    }
+    manageAllErrors(res, err)
   }
 })
 
