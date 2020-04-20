@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Quiz} from '../../models/quiz.model';
+import {QuizService} from '../../services/quiz.service';
+import {Theme} from '../../models/theme.model';
+
 
 @Component({
   selector: 'app-selection-quiz',
@@ -6,13 +10,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./selection-quiz.component.scss']
 })
 export class SelectionQuizComponent implements OnInit {
-  state: number;
-  constructor() {
-    this.state = 0;
-}
+  public quizList: Quiz[] = [];
+  public state: number;
+  public selectedQuiz: Quiz;
+  public selectedTheme: Theme;
+  public selectedThemeId: number;
 
-  ngOnInit() {
+  constructor(public quizService: QuizService) {
+    this.quizService.quizzes$.subscribe((quiz) => this.quizList = quiz);
+    this.state = 0;
+    // this.selectedThemeId = selectedTheme.id;
+    this.selectedThemeId = 1;
   }
+
+
+  ngOnInit() {}
   JouerQuiz() {
     this.state = 1;
   }

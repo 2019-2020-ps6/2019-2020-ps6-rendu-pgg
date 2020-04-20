@@ -32,10 +32,14 @@ export const QUESTION_SPORT: Question = {
 export const QUIZ_LIST: Quiz[] = [
     {
         name: 'Antiquité',
+        themeId: 1,
         questions: [QUESTION_ACTOR],
+        numberOfQuestion: 5,
     },
     {
         name: 'Les Jeux Olympiques',
+        themeId: 2,
         questions: [QUESTION_SPORT],
+        numberOfQuestion: 5,
     }
 ];

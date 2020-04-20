@@ -38,7 +38,7 @@
 				border-color: black;
 				font-size: 20px;
 					}
-			
+
 			li:hover{
 				background-color: silver;
 			}
@@ -55,17 +55,25 @@
 			<div *ngSwitchCase="1">
 			  <app-jouer-quiz></app-jouer-quiz>
 			</div>
-			<div *ngSwitchDefault>	
-			
-	
+			<div *ngSwitchDefault>
+
+
+
 			<h1>Choisir un quiz sur le thème : Histoire</h1>
+        <!--<div *ngIf="selectedTheme" class="cont">
+        Quand on aura acces au selectedTheme, on utilsera cette valeur -->
 			<div class="cont">
-					<ul>
-						<li>Les rois de France <br/> 5 Questions</li>
-						<li>Antiquité <br/> 5 Questions</li>
-					</ul>
+        <ul>
+          <li *ngFor="let quizItem of quizList" value="themeItem" >
+            <div *ngIf="quizItem.themeId == selectedThemeId">
+              {{quizItem.name}} <br/>
+              Nombre de questions:
+              {{quizItem.numberOfQuestion}}
+            </div>
+          </li>
+        </ul>
 			</div>
-						
+
 						<div class="center"><input class="bouton" value="Valider" type="button" (click)="JouerQuiz()"></div>
 				</div>
 				</div>
