@@ -13,7 +13,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('menu chargé');
+    console.log('menu Hub chargé');
   }
 
   playQuiz() {

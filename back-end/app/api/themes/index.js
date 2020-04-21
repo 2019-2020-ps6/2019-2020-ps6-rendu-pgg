@@ -1,7 +1,7 @@
 const { Router } = require('express')
 
 const { Theme, Quiz } = require('../../models')
-
+const manageAllErrors = require('../../utils/routes/error-management')
 const router = new Router()
 
 router.get('/', (req, res) => {
@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     console.log('getting themes...')
     res.status(200).json(Theme.get())
   } catch (err) {
-    res.status(500).json(err)
+    manageAllErrors(res, err)
   }
 })
 
@@ -18,7 +18,7 @@ router.get('/:themeId', (req, res) => {
   try {
     res.status(200).json(Theme.getById(req.params.themeId))
   } catch (err) {
-    res.status(404).json(err)
+    manageAllErrors(res, err)
   }
 })
 
@@ -27,11 +27,7 @@ router.post('/', (req, res) => {
     const theme = Theme.create({ ...req.body })
     res.status(201).json(theme)
   } catch (err) {
-    if (err.name === 'ValidationError') {
-      res.status(400).json(err.extra)
-    } else {
-      res.status(500).json(err)
-    }
+    manageAllErrors(res, err)
   }
 })
 
@@ -43,7 +39,7 @@ router.delete('/:themeId', (req, res) => {
     });
     res.status(200).json(Theme.delete(req.params.themeId))
   } catch (err) {
-    res.status(404).json(err)
+    manageAllErrors(res, err)
   }
 })
 
@@ -51,7 +47,7 @@ router.put('/:themeId', (req, res) => {
   try {
     res.status(200).json(Theme.update(req.params.themeId,req.body))
   } catch (err) {
-    res.status(404).json(err)
+    manageAllErrors(res, err)
   }
 })
 

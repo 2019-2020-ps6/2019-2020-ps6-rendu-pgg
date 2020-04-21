@@ -12,6 +12,7 @@ export class JouerQuizComponent implements OnInit {
    }
 
   ngOnInit() {
+    console.log('Jouer Quiz chargement');
   }
   JouerQuiz() {
     this.state = 1;

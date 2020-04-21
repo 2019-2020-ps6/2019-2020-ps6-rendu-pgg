@@ -18,7 +18,7 @@ export class GestionChoseQuizComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('menu chargé');
+    console.log('menu chargé gestion quiz');
   }
 
   createQuiz() {

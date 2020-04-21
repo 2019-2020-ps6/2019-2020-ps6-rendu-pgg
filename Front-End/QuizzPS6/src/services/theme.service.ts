@@ -1,29 +1,41 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Theme } from '../models/theme.model';
-import { THEME_LIST } from '../mocks/theme-list.mock';
 import { BehaviorSubject, ObservableInput, Observable } from 'rxjs';
+import { serverUrl, httpOptionsBase } from '../configs/server.config';
+// import {THEME_LIST} from '../../../../back-end/mocks/theme-list.mock';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
-  private themes: Theme[] = THEME_LIST;
-
+  private themes: Theme[];
   public themes$: BehaviorSubject<Theme[]> = new BehaviorSubject(this.themes);
-  public url = 'http://localhost:9428/api/themes';
+  private themeUrl = serverUrl + '/themes';
+  private httpOptions = httpOptionsBase;
+  // public url = 'http://localhost:9428/api/themes';
 
-  constructor(private http: HttpClient) { }
-
-
-  getThemes(): Observable<Theme[]> {
-    return this.http.get<Theme[]>(this.url).pipe();
+  constructor(private http: HttpClient) {
+    this.setThemesFromUrl();
   }
 
-  createTheme() { }
+  setThemesFromUrl() {
+    return this.http.get<Theme[]>(this.themeUrl).subscribe((themeList) => {
+      this.themes = themeList;
+      this.themes$.next(this.themes);
+      console.log(this.themes);
+    });
+  }
+
+  createTheme(theme: Theme) {
+    this.http.post<Theme>(this.themeUrl, theme, this.httpOptions).subscribe(() => this.setThemesFromUrl());
+  }
 
   editTheme() { }
 
-  deleteTheme() { }
+  deleteTheme(theme: Theme) {
+    const urlWithId = this.themeUrl + '/' + theme.id;
+    this.http.delete<Theme>(urlWithId, this.httpOptions).subscribe(() => this.setThemesFromUrl());
+  }
 
 }

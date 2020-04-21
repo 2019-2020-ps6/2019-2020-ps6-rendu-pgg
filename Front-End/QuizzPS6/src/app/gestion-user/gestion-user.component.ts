@@ -20,7 +20,7 @@ export class GestionUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('menu chargé');
+    console.log('menu user chargé');
   }
 
   selectUser(user: User) {

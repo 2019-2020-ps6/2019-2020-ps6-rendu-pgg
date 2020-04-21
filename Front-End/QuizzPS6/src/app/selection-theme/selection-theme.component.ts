@@ -20,16 +20,7 @@ export class SelectionThemeComponent implements OnInit {
   ngOnInit() {
     // 1. fetch theme list
    // 2. assign theme list fetched into themeList
-    this.themeService.getThemes().subscribe((listItem) => {
-      this.themeList = listItem;
-
-
-    }, err => {
-      console.log(err);
-    });
-
-
-    console.log('test');
+    console.log('Selection theme : ');
 
 
   }

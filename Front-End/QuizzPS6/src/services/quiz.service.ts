@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, ObservableInput, Observable } from 'rxjs';
 import { Quiz } from '../models/quiz.model';
-import { QUIZ_LIST } from '../mocks/quiz-list.mock';
 import { HttpClient } from '@angular/common/http';
+// import {QUIZ_LIST} from '../../../../back-end/mocks/quiz-list.mock';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class QuizService {
     * The list of quiz.
     * The list is retrieved from the mock.
     */
-  private quizzes: Quiz[] = QUIZ_LIST;
+  private quizzes: Quiz[];
 
   /**
    * Observable which contains the list of the quiz.

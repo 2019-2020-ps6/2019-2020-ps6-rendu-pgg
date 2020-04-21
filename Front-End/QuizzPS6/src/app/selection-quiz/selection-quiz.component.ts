@@ -24,7 +24,9 @@ export class SelectionQuizComponent implements OnInit {
   }
 
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('Selection Quiz');
+  }
   JouerQuiz() {
     this.state = 1;
   }

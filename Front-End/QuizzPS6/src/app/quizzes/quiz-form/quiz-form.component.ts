@@ -41,13 +41,7 @@ export class QuizFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.themeService.getThemes().subscribe((listItem) => {
-      this.themeList = listItem;
-
-
-    }, err => {
-      console.log(err);
-    });
+    console.log('Quiz Form Component');
   }
 
   addQuiz() {
