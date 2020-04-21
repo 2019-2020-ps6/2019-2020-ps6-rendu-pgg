@@ -65,7 +65,7 @@
 			<div class="cont">
         <ul>
           <li *ngFor="let quizItem of quizList" value="themeItem" >
-            <div *ngIf="quizItem.themeId == selectedThemeId">
+            <div *ngIf="quizItem.themeId == selectedTheme.id">
               {{quizItem.name}} <br/>
               Nombre de questions:
               {{quizItem.numberOfQuestion}}
@@ -74,7 +74,7 @@
         </ul>
 			</div>
 
-						<div class="center"><input class="bouton" value="Valider" type="button" (click)="JouerQuiz()"></div>
+						<div class="center"><input class="bouton" value="Valider" type="button" (click)="check()"></div>
 				</div>
 				</div>
 			</body>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Theme } from '../models/theme.model';
-import { BehaviorSubject, ObservableInput, Observable } from 'rxjs';
+import {BehaviorSubject, ObservableInput, Observable, Subject} from 'rxjs';
 import { serverUrl, httpOptionsBase } from '../configs/server.config';
 // import {THEME_LIST} from '../../../../back-end/mocks/theme-list.mock';
 
@@ -13,10 +13,19 @@ export class ThemeService {
   public themes$: BehaviorSubject<Theme[]> = new BehaviorSubject(this.themes);
   private themeUrl = serverUrl + '/themes';
   private httpOptions = httpOptionsBase;
+  private themeSelected: Theme;
+  public themeSelected$: BehaviorSubject<Theme> = new BehaviorSubject(this.themeSelected);
   // public url = 'http://localhost:9428/api/themes';
 
   constructor(private http: HttpClient) {
     this.setThemesFromUrl();
+  }
+
+  setSelectedTheme(themeId: string) {
+    const urlWithId = this.themeUrl + '/' + themeId;
+    this.http.get<Theme>(urlWithId).subscribe((theme) => {
+      this.themeSelected$.next(theme);
+    });
   }
 
   setThemesFromUrl() {

@@ -59,11 +59,15 @@
 	<h1>Choisir un thème</h1>
 	<div class="cont">
 			<ul>
-				<li *ngFor="let themeItem of themeList" value="themeItem" >{{themeItem.name}} <br/>ID : {{themeItem.id}}</li>
+				<li *ngFor="let themeItem of themeList" value="themeItem" >
+          <button class="button-card" (click)="selectionnerTheme(themeItem.id)">
+            {{themeItem.name}} <br/>ID : {{themeItem.id}}
+          </button>
+        </li>
 			</ul>
 	</div>
 
-				<div class="center"><input class="bouton" value="Valider" type="button" (click)="selectionnerTheme()"></div>
+				<div class="center"><input class="bouton" value="Valider" type="button" (click)="validerTheme()"></div>
 			</div>
 		</div>
 	</body>

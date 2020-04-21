@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import {Theme} from '../../models/theme.model';
+import {getTemplateExpressionDiagnostics} from '@angular/compiler-cli';
 
 @Component({
   selector: 'app-selection-theme',
@@ -21,12 +22,30 @@ export class SelectionThemeComponent implements OnInit {
     // 1. fetch theme list
    // 2. assign theme list fetched into themeList
     console.log('Selection theme : ');
-
-
   }
 
-  selectionnerTheme() {
-    this.state = 1;
+  selectionnerTheme(themeId: number) {
+    console.log('Theme selectionne !');
+    console.log(themeId);
+    // console.log('Patate');
+    this.themeService.setSelectedTheme(themeId.toString());
+    // console.log(themeId.toString());
+    // console.log(this.currentTheme);
+    // console.log('fin selection theme !');
+    this.themeService.themeSelected$.subscribe((theme) => this.currentTheme = theme);
+    // console.log(this.currentTheme);
+    this.state = 2;
+  }
+
+  validerTheme() {
+    console.log('Theme Valide !');
+    console.log(this.currentTheme);
+    if (this.state === 2) {
+      console.log('theme valide');
+      this.state = 1;
+    } else {
+      console.log('NUL');
+    }
   }
 
 }
