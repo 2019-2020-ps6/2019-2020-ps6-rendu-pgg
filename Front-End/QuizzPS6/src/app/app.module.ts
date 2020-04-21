@@ -15,6 +15,7 @@ import { NouveauQuizComponent } from './quizzes/quiz-creation/nouveau-quiz/nouve
 import { SelectionThemeComponent } from './selection-theme/selection-theme.component';
 import { SelectionQuizComponent } from './selection-quiz/selection-quiz.component';
 import { JouerQuizComponent } from './jouer-quiz/jouer-quiz.component';
+import { GestionUserComponent } from './gestion-user/gestion-user.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { JouerQuizComponent } from './jouer-quiz/jouer-quiz.component';
     NouveauQuizComponent,
     SelectionThemeComponent,
     SelectionQuizComponent,
-    JouerQuizComponent
+    JouerQuizComponent,
+    GestionUserComponent
   ],
   imports: [
     BrowserModule,
