@@ -15,6 +15,7 @@ export class SelectionThemeComponent implements OnInit {
 
   constructor(public themeService: ThemeService) {
     this.themeService.themes$.subscribe((theme) => this.themeList = theme);
+    this.themeService.themeSelected$.subscribe((theme) => this.currentTheme = theme);
     this.state = 0;
   }
 
@@ -32,7 +33,7 @@ export class SelectionThemeComponent implements OnInit {
     // console.log(themeId.toString());
     // console.log(this.currentTheme);
     // console.log('fin selection theme !');
-    this.themeService.themeSelected$.subscribe((theme) => this.currentTheme = theme);
+    // this.themeService.themeSelected$.subscribe((theme) => this.currentTheme = theme);
     // console.log(this.currentTheme);
     this.state = 2;
   }

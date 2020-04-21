@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, ObservableInput, Observable } from 'rxjs';
 import { Quiz } from '../models/quiz.model';
 import { HttpClient } from '@angular/common/http';
+import {Theme} from '../models/theme.model';
 // import {QUIZ_LIST} from '../../../../back-end/mocks/quiz-list.mock';
 
 @Injectable({
@@ -18,16 +19,25 @@ export class QuizService {
     * The list is retrieved from the mock.
     */
   private quizzes: Quiz[];
+  private quizSelected: Quiz;
 
   /**
    * Observable which contains the list of the quiz.
    * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
    */
   public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject(this.quizzes);
+  public quizSelected$: BehaviorSubject<Quiz> = new BehaviorSubject(this.quizSelected);
   public url = 'http://localhost:9428/api/quizzes';
 
   constructor(private http: HttpClient) {
     this.setQuizzesFromUrl();
+  }
+
+  setSelectedQuiz(quizId: string) {
+    const urlWithId = this.url + '/' + quizId;
+    this.http.get<Quiz>(urlWithId).subscribe((quiz) => {
+      this.quizSelected$.next(quiz);
+    });
   }
 
   addQuiz(quiz: Quiz) {

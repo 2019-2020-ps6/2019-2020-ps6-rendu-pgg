@@ -18,8 +18,9 @@ export class SelectionQuizComponent implements OnInit {
 
   constructor(public quizService: QuizService, public themeService: ThemeService) {
     this.quizService.quizzes$.subscribe((quiz) => this.quizList = quiz);
-    this.state = 0;
     this.themeService.themeSelected$.subscribe((theme) => this.selectedTheme = theme);
+    this.quizService.quizSelected$.subscribe((quiz) => this.selectedQuiz = quiz);
+    this.state = 0;
   }
 
 
@@ -29,8 +30,18 @@ export class SelectionQuizComponent implements OnInit {
     console.log(this.selectedTheme);
     console.log('Fin affichage selection Quiz');
   }
-  JouerQuiz() {
-    this.state = 1;
+
+  selectionnerQuiz(quizId: number) {
+    console.log('Quiz selectionne !');
+    console.log(quizId);
+    // console.log('Patate');
+    this.quizService.setSelectedQuiz(quizId.toString());
+    // console.log(themeId.toString());
+    // console.log(this.currentTheme);
+    // console.log('fin selection theme !');
+    // this.themeService.themeSelected$.subscribe((theme) => this.currentTheme = theme);
+    // console.log(this.currentTheme);
+    this.state = 2;
   }
 
   check() {
@@ -38,5 +49,19 @@ export class SelectionQuizComponent implements OnInit {
     console.log(this.selectedTheme);
     console.log('champion');
     console.log('Fin affichage selection Quiz');
+  }
+
+  validerQuiz() {
+    console.log(this.selectedQuiz);
+    if (this.state === 2) {
+      console.log('Quiz valide');
+      this.state = 1;
+    } else {
+      console.log('NUL');
+    }
+  }
+
+  JouerQuiz() {
+    this.state = 1;
   }
 }
