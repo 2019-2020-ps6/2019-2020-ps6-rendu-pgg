@@ -1,40 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion du quiz</title>
-</head>
-<body>
-  <div [ngSwitch]="state">
-    <div *ngSwitchCase="1">
-     <app-quiz-creation></app-quiz-creation>
-  </div>
-  <div *ngSwitchDefault>
-    <div style="width: 82%; height: 515px; border: 2px solid black;  margin: 0 auto; margin-top: 60px;">
-      <h1 style="text-align: center; margin-top: 50px; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 36px;">Gestion des Quiz</h1>
-     
-      <div style="width: 44%; margin-left: 80px;">
-          <fieldset>
-              <legend style="font-family: Arial, Helvetica, sans-serif; font-weight: 600;">Liste des Quiz</legend>
-                <!--<button class="button-card">Quitter l'édition de Quiz</button>-->
-               <ul> 
-                  <li class="user" *ngFor="let quiz of quizList">
-                    {{ quiz.name }}
-                  </li>
-              </ul>
-          </fieldset>
-     </div>
-     <div style="width: 34%; margin-left: 60px;">
-     <button class="button-card" (click)="createUser()" style="margin:0 auto; width: 94%; margin-top: 10px; height: 70px; border: 2px solid black; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 18px; border-radius: 7px;">Créer un quiz</button>
-     </div> 
-           <app-quiz-form ></app-quiz-form>
-     </div>
-    </div>
-  </div>
-</body>
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Gestion du quiz</title>
+  </head>
+  <body>
+    <h1 style="text-align: center; margin-top: 50px; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 36px;">Gestion des Quiz</h1>
+      <div style="width: 45%; border:1px solid #000; float: left; margin: 20px;">
+        <fieldset>
+          <legend style="font-family: Arial, Helvetica, sans-serif; font-weight: 600;margin: 20px;">Liste des Quiz</legend>
+              <div class="user" *ngFor="let quiz of quizList" style="border:1px solid #000;">
+                {{ quiz.name }}
+                <button style="float: right;" (click)="selectQuiz(quiz)">Sélectionner</button>
+              </div>
+        </fieldset>
+      </div>
+
+      <div style="width: 45%; border:1px solid #000; float: right; margin: 20px; text-align: center;">
+        <div *ngIf="currentQuiz">
+          <h2>{{ currentQuiz.name }}</h2>
+          <h3>{{ currentQuiz.questions.length }} questions</h3>
+          <button (click)="deleteQuiz(currentQuiz)">Supprimer ce Quiz</button>
+        </div>
+      </div>
+  </body>
 </html>
 
 
 
+<!--
+<div [ngSwitch]="state">
+  <div *ngSwitchCase="1">
+   <app-quiz-creation></app-quiz-creation>
+  </div>
+  <div *ngSwitchCase="2">
+    <app-quiz-creation></app-quiz-creation>
+   </div>
 
+<div *ngSwitchDefault>
+  <div style="width: 82%; height: 515px; border: 2px solid black;  margin: 0 auto; margin-top: 60px;">
+    <h1 style="text-align: center; margin-top: 50px; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 36px;">Gestion des Quiz</h1>
+   
+    <div style="width: 44%; margin-left: 80px;">
+        <fieldset>
+            <legend style="font-family: Arial, Helvetica, sans-serif; font-weight: 600;">Liste des Quiz</legend>
+             <ul> 
+                <li class="user" *ngFor="let quiz of quizList">
+                  {{ quiz.name }}
+                </li>
+            </ul>
+        </fieldset>
+   </div>
+   <div style="width: 34%; margin-left: 60px;">
+      <button class="button-card" (click)="createQuiz()" style="margin:0 auto; width: 94%; margin-top: 10px; height: 70px; border: 2px solid black; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 18px; border-radius: 7px;">Créer un quiz</button>
+   </div> 
+      <app-quiz-form ></app-quiz-form>
+   </div>
+  </div>
+</div>
+-->

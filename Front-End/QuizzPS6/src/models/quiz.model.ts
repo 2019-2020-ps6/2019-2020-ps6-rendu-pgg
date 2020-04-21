@@ -6,6 +6,7 @@ export interface Quiz {
     creationDate?: Date;
     numberOfQuestion?: number;
     questions: Question[];
+    id?: number;
 }
 
 export interface NewQuiz {

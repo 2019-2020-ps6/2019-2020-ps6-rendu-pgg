@@ -42,6 +42,10 @@ export class QuizService {
     if (index > -1) {
       this.quizzes.splice(index, 1);
     }
+    console.log('Deleting quiz...');
+    this.http.delete<Quiz>(this.url + '/' + quiz.id).subscribe( (quizzes) => {
+      console.log( 'success' );
+    });
   }
 
   setQuizzesFromUrl() {

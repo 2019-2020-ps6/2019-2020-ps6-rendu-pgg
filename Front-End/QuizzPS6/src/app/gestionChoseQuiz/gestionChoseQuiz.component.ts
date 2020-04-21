@@ -9,6 +9,7 @@ import { Quiz } from '../../models/quiz.model';
 })
 export class GestionChoseQuizComponent implements OnInit {
   public quizList: Quiz[] = [];
+  currentQuiz: Quiz;
   state: number;
 
   constructor(public quizService: QuizService) {
@@ -22,6 +23,14 @@ export class GestionChoseQuizComponent implements OnInit {
 
   createQuiz() {
     this.state = 1;
+  }
+
+  selectQuiz(quiz: Quiz) {
+    this.currentQuiz = quiz;
+  }
+
+  deleteQuiz(quiz: Quiz) {
+    this.quizService.deleteQuiz(quiz);
   }
 
 }
