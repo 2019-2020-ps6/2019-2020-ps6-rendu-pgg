@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import {Theme} from '../../models/theme.model';
-import {getTemplateExpressionDiagnostics} from '@angular/compiler-cli';
 
 @Component({
   selector: 'app-selection-theme',

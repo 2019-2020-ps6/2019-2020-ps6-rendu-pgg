@@ -1,16 +1,19 @@
 const { User } = require('../../models')
+const { filterAttemptsFromUser } = require('./attempts/manager')
 
 /**
  * @param userId
  */
 const buildUser = (userId) => {
   const user = User.getById(userId)
-  /*const attempts = filterAttemptsFromUser(user.id)
-  const attemptsWIth = questions.map((question) => {
+  console.log('ID : '+user.id)
+  const attempts = filterAttemptsFromUser(user.id)
+  //console.log(attempts)
+  /*const attemptsWIth = questions.map((question) => {
     const answers = filterAnswersFromQuestion(question.id)
     return { ...question, answers }
   })*/
-  return user
+  return { ...user, attempts }
 }
 
 /**

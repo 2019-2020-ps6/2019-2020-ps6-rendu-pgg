@@ -5,6 +5,7 @@ const NotFoundError = require('../../../utils/errors/not-found-error')
  * This file contains all the logic needed to by the question routes.
  */
 const filterAttemptsFromUser = (userId) => {
+  console.log('Filtering attempts...')
   const attempts = Attempt.get()
   const parsedId = parseInt(userId, 10)
   return attempts.filter((attempt) => attempt.userId === parsedId)
