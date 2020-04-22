@@ -29,7 +29,12 @@
        <div [ngSwitch]="state" style="float: right;width: 34%;">
         <div *ngSwitchCase="1">
             Statistiques de {{ currentUser.firstName }}
-            {{ currentUser.attempts }}
+            <br>Tentatives :
+            <ul>
+                <li *ngFor="let attempt of currentUser.attempts">
+                    {{ attempt.score }} points
+                </li>
+            </ul>
         </div>
         <div *ngSwitchDefault>
             Créer un nouvel utilisateur
