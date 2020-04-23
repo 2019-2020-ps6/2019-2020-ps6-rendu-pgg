@@ -24,11 +24,11 @@ export class SelectionThemeComponent implements OnInit {
     console.log('Selection theme : ');
   }
 
-  selectionnerTheme(themeId: number) {
+  selectionnerTheme(themeId: string) {
     console.log('Theme selectionne !');
     console.log(themeId);
     // console.log('Patate');
-    this.themeService.setSelectedTheme(themeId.toString());
+    this.themeService.setSelectedTheme(themeId);
     // console.log(themeId.toString());
     // console.log(this.currentTheme);
     // console.log('fin selection theme !');
