@@ -6,23 +6,34 @@
     <title>Document</title>
 </head>
 <body>
-    <div style="width: 80%; border: 2px solid black; margin: 0 auto;">
-        <div *ngFor="let themeItem of themeList" value="themeItem">{{themeItem.name}}>
-
-            <h2 style="text-align: center; font-family: Arial, Helvetica, sans-serif; font-weight: 600;">Question: Qui était surnommé "Le Roi Soleil"?</h2>
-        </div>
-        <br><br><br>
-        <div style="display: flex; width: 100%;">
-            <Button style="width: 36%; height: 80px; border-radius: 5px; border: none; color: #fff; background: linear-gradient(to left top, #FF2732, #FF2751); margin-left: 10%; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 20px;">Henri IV</Button>
-            <Button style="width: 36%; height: 80px; border-radius: 5px; border: none; color: #fff; background: linear-gradient(to left top, #27FF67, #4FFF27); margin-left: 5%; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 20px;">Louis XIV</Button>
-        </div>
-        <br><br><br>
-        <div style="display: flex; width: 100%;">
-            <Button style="width: 36%; height: 80px; border-radius: 5px; border: none; color: #fff; background: linear-gradient(to left top, #FFDB27, #D8FF27); margin-left: 10%; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 20px;">Jeanne d'Arc</Button>
-            <Button style="width: 36%; height: 80px; border-radius: 5px; border: none; color: #fff; background: linear-gradient(to left top, #27F4FF, #275DFF); margin-left: 5%; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 20px;">Jean-Paul Sartre</Button>
-        </div>
-        <br><br>
-        <p style="text-align: center;"><button style="margin: 0 auto; width: 300px; height: 45px; background-color: transparent; color: black; border: 2px solid black; border-radius: 7px; font-weight: 800; font-family: Arial, Helvetica, sans-serif;">Veuillez choisir une réponse</button></p>
+<div [ngSwitch]="state">
+  <div *ngSwitchCase="1">
+    <app-jouer-quiz></app-jouer-quiz>
+  </div>
+  <div *ngSwitchDefault>
+    <h1>Choisis une réponse à la question :</h1>
+    <!--<div *ngIf="selectedTheme" class="cont">
+    Quand on aura acces au selectedTheme, on utilsera cette valeur -->
+    <div class="cont">
+      <ul>
+        <div>{{currentQuestion.label}}</div>
+        <li *ngFor="let answerItem of currentQuestion.answers" value="answerItem">
+          <div>
+          <button class="button-card" (click)="selectionnerAnswer(answerItem)">
+            {{answerItem.value}}
+            Réponse ? :
+            {{answerItem.isCorrect}}
+          </button>
+          </div>
+        </li>
+      </ul>
     </div>
+
+    <div class="center"><input class="bouton" value="Check" type="button" (click)="check()"></div>
+    <div class="center"><input class="bouton" value="Valider" type="button" (click)="validerAnswer()"></div>
+  </div>
+</div>
 </body>
 </html>
+
+

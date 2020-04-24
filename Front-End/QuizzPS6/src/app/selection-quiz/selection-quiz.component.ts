@@ -25,17 +25,18 @@ export class SelectionQuizComponent implements OnInit {
 
 
   ngOnInit() {
+    console.log('New one');
     console.log('Selection Quiz');
     console.log('Theme Selectionne dans Quiz : ');
     console.log(this.selectedTheme);
     console.log('Fin affichage selection Quiz');
   }
 
-  selectionnerQuiz(quizId: number) {
+  selectionnerQuiz(quizId: string) {
     console.log('Quiz selectionne !');
     console.log(quizId);
     // console.log('Patate');
-    this.quizService.setSelectedQuiz(quizId.toString());
+    this.quizService.setSelectedQuiz(quizId);
     // console.log(themeId.toString());
     // console.log(this.currentTheme);
     // console.log('fin selection theme !');
@@ -59,9 +60,5 @@ export class SelectionQuizComponent implements OnInit {
     } else {
       console.log('NUL');
     }
-  }
-
-  JouerQuiz() {
-    this.state = 1;
   }
 }

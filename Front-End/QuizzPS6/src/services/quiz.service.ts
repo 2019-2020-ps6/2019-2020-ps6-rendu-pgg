@@ -3,7 +3,8 @@ import { BehaviorSubject, ObservableInput, Observable } from 'rxjs';
 import { Quiz } from '../models/quiz.model';
 import { HttpClient } from '@angular/common/http';
 import {Theme} from '../models/theme.model';
-import { httpOptionsBase } from 'src/configs/server.config';
+import {Answer, Question} from '../models/question.model';
+import { serverUrl, httpOptionsBase } from '../configs/server.config';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,9 @@ export class QuizService {
     */
   private quizzes: Quiz[];
   private quizSelected: Quiz;
+  private questions: Question[];
+  private currentQuestion: Question;
+  private currentAnswer: Answer;
 
   /**
    * Observable which contains the list of the quiz.
@@ -27,49 +31,56 @@ export class QuizService {
    */
   public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject(this.quizzes);
   public quizSelected$: BehaviorSubject<Quiz> = new BehaviorSubject(this.quizSelected);
-  public url = 'http://localhost:9428/api/quizzes';
+  public questions$: BehaviorSubject<Question[]> = new BehaviorSubject(this.questions);
+  public currentQuestion$: BehaviorSubject<Question> = new BehaviorSubject(this.currentQuestion);
+  public currentAnswer$: BehaviorSubject<Answer> = new BehaviorSubject(this.currentAnswer);
+
+
+  private quizUrl = serverUrl + '/quizzes';
+  private questionsPath = 'questions';
+
   private httpOptions = httpOptionsBase;
+
 
   constructor(private http: HttpClient) {
     this.setQuizzesFromUrl();
   }
 
+
   setSelectedQuiz(quizId: string) {
-    const urlWithId = this.url + '/' + quizId;
+    const urlWithId = this.quizUrl + '/' + quizId;
     this.http.get<Quiz>(urlWithId).subscribe((quiz) => {
       this.quizSelected$.next(quiz);
     });
   }
 
+  setQuizzesFromUrl() {
+    return this.http.get<Quiz[]>(this.quizUrl).subscribe((quizzes) => {
+      this.quizzes = quizzes;
+      this.quizzes$.next(this.quizzes);
+      // console.log(this.quizzes);
+    });
+  }
+
   addQuiz(quiz: Quiz) {
-    this.quizzes.push(quiz);
-    this.quizzes$.next(this.quizzes);
-    console.log(quiz);
     const parsed = JSON.parse(JSON.stringify(quiz));
     delete parsed.date;
     delete parsed.questions;
-    this.http.post<Quiz>(this.url, parsed, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
+    this.http.post<Quiz>(this.quizUrl, parsed, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
   }
 
   deleteQuiz(quiz: Quiz) {
-    console.log('Deleting quiz...');
-    this.http.delete<Quiz>(this.url + '/' + quiz.id).subscribe( (quizzes) => {
-      console.log( 'success' );
-    });
+    const urlWithId = this.quizUrl + '/' + quiz.id;
+    this.http.delete<Quiz>(urlWithId, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
   }
 
-  setQuizzesFromUrl() {
-    return this.http.get<Quiz[]>(this.url).subscribe((quizzes) => {
-      this.quizzes = quizzes;
-      this.quizzes$.next(this.quizzes);
-      console.log(this.quizzes);
-    });
+  addQuestion(quiz: Quiz, question: Question) {
+    const questionUrl = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath;
+    this.http.post<Question>(questionUrl, question, this.httpOptions).subscribe(() => this.setSelectedQuiz(quiz.id.toString()));
   }
 
-
-
-    getQuizzesByThemeId(themeId): Observable<Quiz[]> {
-    // 1. call a GET  api/quizzes/getQuizzesByThemeId/5
-    return this.http.get<Quiz[]>(this.url + '/getQuizzesByThemeId/' + themeId).pipe();
+  deleteQuestion(quiz: Quiz, question: Question) {
+    const questionUrl = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath + '/' + question.id.toString();
+    this.http.delete<Question>(questionUrl, this.httpOptions).subscribe(() => this.setSelectedQuiz(quiz.id.toString()));
   }
 }

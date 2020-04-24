@@ -2,11 +2,11 @@ import { Question } from './question.model';
 
 export interface Quiz {
     name: string;
-    themeId?: number;
+    themeId?: string;
     creationDate?: Date;
     numberOfQuestion?: number;
     questions: Question[];
-    id?: number;
+    id?: string;
 }
 
 export interface NewQuiz {

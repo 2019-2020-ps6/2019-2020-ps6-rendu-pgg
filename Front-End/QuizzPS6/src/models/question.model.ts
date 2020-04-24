@@ -1,10 +1,11 @@
 export interface Answer {
-    type?: string;
-    value: string;
-    isCorrect: boolean;
+  type?: string;
+  value: string;
+  isCorrect: boolean;
 }
 
 export interface Question {
-    label: string;
-    answers: Answer[];
+  id: string;
+  label: string;
+  answers: Answer[];
 }
