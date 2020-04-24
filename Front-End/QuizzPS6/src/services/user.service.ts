@@ -3,6 +3,7 @@ import { BehaviorSubject, ObservableInput, Observable } from 'rxjs';
 import { User } from '../models/user.model';
 // import { USER_LIST } from '../mocks/user-list.mock';
 import { HttpClient } from '@angular/common/http';
+import { httpOptionsBase } from 'src/configs/server.config';
 
 @Injectable({
   providedIn: 'root'
@@ -25,26 +26,23 @@ export class UserService {
    */
   public users$: BehaviorSubject<User[]> = new BehaviorSubject(this.users);
   public url = 'http://localhost:9428/api/users';
+  private httpOptions = httpOptionsBase;
 
   constructor(private http: HttpClient) {
-    console.log('AVANT USER');
     this.setUsersFromUrl();
-    console.log('APRES USER');
   }
 
   addUser(user: User) {
-    this.users.push(user);
-    this.users$.next(this.users);
-    console.log(user);
-    console.log('ICI');
-
+    const parsed = JSON.parse(JSON.stringify(user));
+    delete parsed.attempts;
+    return this.http.post<User>(this.url, parsed, this.httpOptions).subscribe( () => this.setUsersFromUrl());
   }
 
-  deleteQuiz(user: User) {
-    const index = this.users.indexOf(user);
-    if (index > -1) {
-      this.users.splice(index, 1);
-    }
+  deleteUser(user: User) {
+    console.log('Deleting user...');
+    this.http.delete<User>(this.url + '/' + user.id).subscribe( (users) => {
+      console.log( 'success' );
+    });
   }
 
   setUsersFromUrl() {

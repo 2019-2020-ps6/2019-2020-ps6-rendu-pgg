@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Theme } from '../models/theme.model';
 import {BehaviorSubject, ObservableInput, Observable, Subject} from 'rxjs';
 import { serverUrl, httpOptionsBase } from '../configs/server.config';
-// import {THEME_LIST} from '../../../../back-end/mocks/theme-list.mock';
 
 @Injectable({
   providedIn: 'root'

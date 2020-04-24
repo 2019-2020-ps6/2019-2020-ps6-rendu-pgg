@@ -3,7 +3,7 @@ import { BehaviorSubject, ObservableInput, Observable } from 'rxjs';
 import { Quiz } from '../models/quiz.model';
 import { HttpClient } from '@angular/common/http';
 import {Theme} from '../models/theme.model';
-// import {QUIZ_LIST} from '../../../../back-end/mocks/quiz-list.mock';
+import { httpOptionsBase } from 'src/configs/server.config';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,7 @@ export class QuizService {
   public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject(this.quizzes);
   public quizSelected$: BehaviorSubject<Quiz> = new BehaviorSubject(this.quizSelected);
   public url = 'http://localhost:9428/api/quizzes';
+  private httpOptions = httpOptionsBase;
 
   constructor(private http: HttpClient) {
     this.setQuizzesFromUrl();
@@ -44,14 +45,13 @@ export class QuizService {
     this.quizzes.push(quiz);
     this.quizzes$.next(this.quizzes);
     console.log(quiz);
-
+    const parsed = JSON.parse(JSON.stringify(quiz));
+    delete parsed.date;
+    delete parsed.questions;
+    this.http.post<Quiz>(this.url, parsed, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
   }
 
   deleteQuiz(quiz: Quiz) {
-    const index = this.quizzes.indexOf(quiz);
-    if (index > -1) {
-      this.quizzes.splice(index, 1);
-    }
     console.log('Deleting quiz...');
     this.http.delete<Quiz>(this.url + '/' + quiz.id).subscribe( (quizzes) => {
       console.log( 'success' );

@@ -21,8 +21,17 @@
                 </ul>
             </fieldset>
             <div style="width: 34%; margin-left: 60px;">
-                <button class="button-card" (click)="createUser()" style="margin:0 auto; width: 94%; margin-top: 10px; height: 70px; border: 2px solid black; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 18px; border-radius: 7px;">Créer un utilisateur</button>
-               </div> 
+                <form [formGroup]="userForm">
+                    <label for="firstName">
+                      Prénom : <input class="input-custom" type="text" id="name" [formControlName]="'firstName'">
+                    </label>
+                    <label for="lastName">
+                        Nom : <input class="input-custom" type="text" id="name" [formControlName]="'lastName'">
+                    </label>
+                    <br>
+                    <button type="submit" class="button-card" (click)="createUser()">Créer un nouvel utilisateur</button>
+                </form>
+            </div> 
        </div>
        
 
@@ -35,9 +44,10 @@
                     {{ attempt.score }} points
                 </li>
             </ul>
+            <button (click)="deleteUser(currentUser)">Supprimer l'utilisateur</button>
         </div>
         <div *ngSwitchDefault>
-            Créer un nouvel utilisateur
+            Sélectionnez un utilisateur dans la liste
         </div>
         
       </div>
