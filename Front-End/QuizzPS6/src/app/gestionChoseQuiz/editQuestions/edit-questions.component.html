@@ -1,0 +1,47 @@
+<h1 style="text-align: center; margin-top: 50px; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 36px;">Ajouter/Modifier les questions du Quiz : {{ quiz.name }}</h1>
+<div style="width: 45%; border:1px solid #000; float: left; margin: 20px;">
+    <fieldset>
+      <legend style="font-family: Arial, Helvetica, sans-serif; font-weight: 600;margin: 20px;">Liste des Questions</legend>
+          <div class="user" *ngFor="let question of quiz.questions" style="border:1px solid #000;">
+            {{ question.label }}
+            <button style="float: right;" (click)="selectQuestion(question)">Sélectionner</button>
+          </div>
+    </fieldset>
+    <button (click)="this.state=1">Ajouter une nouvelle question</button>
+  </div>
+
+  <div style="width: 45%; border:1px solid #000; float: right; margin: 20px; text-align: center;" [ngSwitch]="state">
+        <!--Création d'une nouvelle question-->
+        <div *ngSwitchCase="0">
+            <h2>Créer une nouvelle question</h2>
+            <form [formGroup]="questionForm">
+                <label for="label">
+                  Énoncé de la question : <input class="input-custom" type="text" id="name" [formControlName]="'label'">
+                </label>
+                <br>
+                <label for="answer1">
+                    Réponse 1 : <input class="input-custom" type="text" id="answer1" [formControlName]="'answer1'"></label>
+                    <label for="answer1true"><input type="checkbox" id="answer1true" name="answer1true" [formControlName]="'answer1true'">bonne réponse</label>
+                <br>
+                <label for="answer2">
+                    Réponse 2 : <input class="input-custom" type="text" id="answer2" [formControlName]="'answer2'"></label>
+                    <label for="answer2true"><input type="checkbox" id="answer2true" name="answer2true" [formControlName]="'answer2true'">bonne réponse</label>
+                <br>
+                <label for="answer3">
+                    Réponse 3 : <input class="input-custom" type="text" id="answer3" [formControlName]="'answer3'"></label>
+                    <label for="answer3true"><input type="checkbox" id="answer3true" name="answer3true" [formControlName]="'answer3true'">bonne réponse</label>
+                <br>
+                <label for="answer4">
+                    Réponse 4 : <input class="input-custom" type="text" id="answer4" [formControlName]="'answer4'"></label>
+                    <label for="answer4true"><input type="checkbox" id="answer4true" name="answer4true" [formControlName]="'answer4true'">bonne réponse</label>
+                <br>
+                <button type="submit" class="button-card" (click)="createQuestions()">Valider cette question</button>
+            </form>
+        </div>
+
+        <!--Modification d'une question existante-->
+        <div *ngSwitchCase="1">
+            <h2>Modifier une question</h2>
+        </div>
+
+    </div>

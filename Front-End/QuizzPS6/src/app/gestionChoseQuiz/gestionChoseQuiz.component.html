@@ -26,6 +26,7 @@
           <div *ngIf="currentQuiz">
             <h2>{{ currentQuiz.name }}</h2>
             <h3>{{ currentQuiz.questions.length }} questions</h3>
+            <button (click)="this.state=2">Ajouter/modifier des questions</button><br>
             <button (click)="deleteQuiz(currentQuiz)">Supprimer ce Quiz</button>
           </div>
         </div>
@@ -58,6 +59,11 @@
         <button (click)="this.state=0">Annuler et quitter</button>
       </div>
 
+    </div>
+
+    <!--Edition des questions d'un quiz-->
+    <div *ngSwitchCase="2">
+      <app-edit-questions [quiz]="this.currentQuiz"></app-edit-questions>
     </div>
   </body>
 </html>

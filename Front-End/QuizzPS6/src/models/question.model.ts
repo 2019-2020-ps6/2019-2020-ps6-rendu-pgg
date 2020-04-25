@@ -1,4 +1,4 @@
-export interface Answer {
+export class Answer {
   type?: string;
   value: string;
   isCorrect: boolean;
