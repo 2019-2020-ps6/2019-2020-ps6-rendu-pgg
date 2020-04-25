@@ -21,6 +21,6 @@ const getAttemptFromUser = (userId, attemptId) => {
 }
 
 module.exports = {
-    filterAttemptsFromUser,
-    getAttemptFromUser,
+  filterAttemptsFromUser,
+  getAttemptFromUser,
 }

@@ -4,7 +4,7 @@ export class Answer {
   isCorrect: boolean;
 }
 
-export interface Question {
+export class Question {
   id: string;
   label: string;
   answers: Answer[];

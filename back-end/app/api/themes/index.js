@@ -2,6 +2,7 @@ const { Router } = require('express')
 
 const { Theme, Quiz } = require('../../models')
 const manageAllErrors = require('../../utils/routes/error-management')
+
 const router = new Router()
 
 router.get('/', (req, res) => {
@@ -33,10 +34,10 @@ router.post('/', (req, res) => {
 
 router.delete('/:themeId', (req, res) => {
   try {
-    Quiz.get().filter((quiz)=>quiz.themeId==req.params.themeId).forEach(element => {
+    Quiz.get().filter((quiz) => quiz.themeId == req.params.themeId).forEach((element) => {
       element.themeId = 0
-      Quiz.update(element.id,element)
-    });
+      Quiz.update(element.id, element)
+    })
     res.status(200).json(Theme.delete(req.params.themeId))
   } catch (err) {
     manageAllErrors(res, err)
@@ -45,7 +46,7 @@ router.delete('/:themeId', (req, res) => {
 
 router.put('/:themeId', (req, res) => {
   try {
-    res.status(200).json(Theme.update(req.params.themeId,req.body))
+    res.status(200).json(Theme.update(req.params.themeId, req.body))
   } catch (err) {
     manageAllErrors(res, err)
   }

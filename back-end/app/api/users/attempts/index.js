@@ -40,7 +40,7 @@ router.post('/', (req, res) => {
     // Check if userId exists, if not it will throw a NotFoundError
     const userId = parseInt(req.params.userId, 10)
     const attemptBody = { score: req.body.score, userId }
-    let attempt = Attempt.create(attemptBody)
+    const attempt = Attempt.create(attemptBody)
     res.status(201).json(attempt)
   } catch (err) {
     manageAllErrors(res, err)
