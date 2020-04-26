@@ -11,6 +11,8 @@ export class SelectionThemeComponent implements OnInit {
   public themeList: Theme[] = [];
   public state: number;
   public currentTheme: Theme;
+  public start = 0;
+  public end = 4;
 
   constructor(public themeService: ThemeService) {
     this.themeService.themes$.subscribe((theme) => this.themeList = theme);
@@ -47,5 +49,15 @@ export class SelectionThemeComponent implements OnInit {
       console.log('NUL');
     }
   }
+  viewNext() {
+    this.start = this.start + 4;
+    this.end = this.start + 4;
+  }
+  viewPrevious() {
+    this.start = this.start - 4;
+    this.end = this.end - 4;
+  }
+
+
 
 }

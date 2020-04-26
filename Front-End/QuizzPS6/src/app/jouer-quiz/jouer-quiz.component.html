@@ -18,21 +18,46 @@
       <ul>
         <div>{{currentQuestion.label}}</div>
         <div style="display: flex; width: 100%;">
-          <Button (click)="selectionnerAnswer(currentQuestion.answers[0])" style="width: 36%; height: 80px; border-radius: 5px; border: none; color: #fff; background: linear-gradient(to left top, #FF2732, #FF2751); margin-left: 10%; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 20px;">
+          <table style="width: 100%;">
+            <tr>
+              <td width="5%"></td>
+              <td width="45%">
+                <Button *ngIf="showTopLeft" (click)="selectionnerAnswer(currentQuestion.answers[0], 'showTopLeft')"
+                        style="width: 80%; height: 80px; border-radius: 5px; border: none; color: #fff; background: linear-gradient(to left top, #FF2732, #FF2751); margin-left: 10%; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 20px;">
             {{currentQuestion.answers[0].value}}<br>
             {{currentQuestion.answers[0].isCorrect}}</Button>
-          <Button (click)="selectionnerAnswer(currentQuestion.answers[1])" style="width: 36%; height: 80px; border-radius: 5px; border: none; color: #fff; background: linear-gradient(to left top, #27FF67, #4FFF27); margin-left: 5%; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 20px;">
+              </td>
+              <td width="45%">
+                <Button *ngIf="showTopRight" (click)="selectionnerAnswer(currentQuestion.answers[1], 'showTopRight')"
+                        style="width: 80%; height: 80px; border-radius: 5px; border: none; color: #fff; background: linear-gradient(to left top, #27FF67, #4FFF27); margin-left: 5%; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 20px;">
             {{currentQuestion.answers[1].value}}<br>
             {{currentQuestion.answers[1].isCorrect}}</Button>
+              </td>
+              <td width="5%"></td>
+            </tr>
+          </table>
         </div>
         <br><br><br>
+
         <div style="display: flex; width: 100%;">
-          <Button (click)="selectionnerAnswer(currentQuestion.answers[2])" style="width: 36%; height: 80px; border-radius: 5px; border: none; color: #fff; background: linear-gradient(to left top, #FFDB27, #D8FF27); margin-left: 10%; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 20px;">
+          <table style="width: 100%;">
+          <tr>
+            <td width="5%"></td>
+            <td width="45%">
+              <Button *ngIf="showBottomLeft" (click)="selectionnerAnswer(currentQuestion.answers[2], 'showBottomLeft')"
+                      style="width: 80%; height: 80px; border-radius: 5px; border: none; color: #fff; background: linear-gradient(to left top, #FFDB27, #D8FF27); margin-left: 10%; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 20px;">
             {{currentQuestion.answers[2].value}}<br>
             {{currentQuestion.answers[2].isCorrect}}</Button>
-          <Button (click)="selectionnerAnswer(currentQuestion.answers[3])" style="width: 36%; height: 80px; border-radius: 5px; border: none; color: #fff; background: linear-gradient(to left top, #27F4FF, #275DFF); margin-left: 5%; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 20px;">
+            </td>
+            <td width="45%">
+              <Button *ngIf="showBottomRight" (click)="selectionnerAnswer(currentQuestion.answers[3], 'showBottomRight')"
+                      style="width: 80%; height: 80px; border-radius: 5px; border: none; color: #fff; background: linear-gradient(to left top, #27F4FF, #275DFF); margin-left: 5%; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 20px;">
             {{currentQuestion.answers[3].value}}<br>
             {{currentQuestion.answers[3].isCorrect}}</Button>
+            </td>
+            <td width="5%"></td>
+          </tr>
+          </table>
         </div>
       </ul>
     </div>
