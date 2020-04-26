@@ -50,6 +50,9 @@ export class SelectionQuizComponent implements OnInit {
     console.log(this.selectedTheme);
     console.log('champion');
     console.log('Fin affichage selection Quiz');
+    console.log('Quiz a choisir : ');
+    console.log(this.quizList);
+    console.log('Fin quiz a choisir');
   }
 
   validerQuiz() {
