@@ -66,6 +66,7 @@ export class QuizService {
     const parsed = JSON.parse(JSON.stringify(quiz));
     delete parsed.date;
     delete parsed.questions;
+    delete parsed.theme;
     this.http.post<Quiz>(this.quizUrl, parsed, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
   }
 
