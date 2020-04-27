@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResultatQuizComponent implements OnInit {
 
-  constructor() { }
+  public state: number;
+
+  constructor() {
+    console.log('RESULTAT QUIZ');
+  }
 
   ngOnInit() {
+  }
+
+  recommencerQuiz() {
+    this.state = 2;
+  }
+
+  choisirQuiz() {
+    this.state = 3;
   }
 
 }
