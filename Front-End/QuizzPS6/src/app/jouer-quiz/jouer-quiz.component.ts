@@ -14,13 +14,7 @@ export class JouerQuizComponent implements OnInit {
   public index = 0;
   public selectedQuiz: Quiz;
   public currentQuestion: Question;
-  public secondQuestion: Question;
   public selectedAnswer: Answer;
-  public showTopLeft = true;
-  public showTopRight = true;
-  public showBottomLeft = true;
-  public showBottomRight = true;
-  public wrongAnswerCount = 0;
 
   // faire l initialisation du quiz et le recuperer avec le QuizService
   constructor(public quizService: QuizService) {
@@ -29,53 +23,30 @@ export class JouerQuizComponent implements OnInit {
       this.selectedQuiz = quiz;
     });
     this.currentQuestion = this.selectedQuiz.questions[this.index];
-    // this.secondQuestion = this.selectedQuiz.questions[this.index];
-    // this.secondQuestion.label = 'this.selectedQuiz.questions[this.index]';
     // this.quizService.questions$.subscribe((questions) => this.questionList = questions);
     // console.log(this.questionList);
     console.log('APPEL');
     console.log(this.currentQuestion);
     console.log('Apres current Question');
     this.state = 0;
-   }
+  }
 
   ngOnInit() {
     console.log('Jouer Quiz chargement');
   }
 
-  selectionnerAnswer(answer: Answer,  btnProp) {
-    // console.log(this.selectedQuiz.questions[this.selectedQuiz.questions.length - 1]);
-    // console.log('Reponse selectionne !');
+  selectionnerAnswer(answer: Answer) {
+    console.log('Taille test ts : ');
+    console.log(this.selectedQuiz.questions[this.selectedQuiz.questions.length - 1]);
+    console.log('Reponse selectionne !');
     console.log(answer);
     console.log('Patate');
     this.selectedAnswer = answer;
-
-    if (!answer.isCorrect && this.wrongAnswerCount < 2) {
-      if (btnProp === 'showTopLeft') {
-        this.showTopLeft = false;
-      } else if (btnProp === 'showTopRight') {
-        this.showTopRight = false;
-      } else if (btnProp === 'showBottomLeft') {
-        this.showBottomLeft = false;
-      } else if (btnProp === 'showBottomRight') {
-        this.showBottomRight = false;
-      }
-      this.wrongAnswerCount++;
-    } else {
-      this.state = 2;
-      this.currentQuestion = this.selectedQuiz.questions[0];
-      // this.currentQuestion = this.selectedQuiz.questions[this.index + 1];
-      this.wrongAnswerCount = 0;
-      this.showTopLeft = true;
-      this.showTopRight = true;
-      this.showBottomLeft = true;
-      this.showBottomRight = true;
-    }
     // this.themeService.themeSelected$.subscribe((theme) => this.currentTheme = theme);
     // console.log(this.currentTheme);
+    this.state = 2;
     // this.selectedQuiz = this.selectedQuiz.questions[1];
   }
-
 
   check() {
     console.log('Question Selectionne dans Quiz : ');
@@ -105,6 +76,7 @@ export class JouerQuizComponent implements OnInit {
         } else {
           // Ici, il faudra renvoyer sur l ecran de fin de partie
           console.log('Taille depassee ! ');
+          this.state = 1;
           this.index = 0;
         }
       } else {
