@@ -4,6 +4,7 @@ import { User } from '../models/user.model';
 // import { USER_LIST } from '../mocks/user-list.mock';
 import { HttpClient } from '@angular/common/http';
 import { httpOptionsBase } from 'src/configs/server.config';
+import { Attempt } from 'src/models/attempt.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,17 +20,26 @@ export class UserService {
     * The list is retrieved from the mock.
     */
   private users: User[];
+  public currentUser: User;
 
   /**
    * Observable which contains the list of the quiz.
    * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
    */
   public users$: BehaviorSubject<User[]> = new BehaviorSubject(this.users);
+  public currentUser$: BehaviorSubject<User> = new BehaviorSubject(this.currentUser);
   public url = 'http://localhost:9428/api/users';
   private httpOptions = httpOptionsBase;
 
   constructor(private http: HttpClient) {
     this.setUsersFromUrl();
+  }
+
+  setSelectedUser(userId: string) {
+    const urlWithId = this.url + '/' + userId;
+    return this.http.get<User>(urlWithId).subscribe((user) => {
+      this.currentUser$.next(user);
+    });
   }
 
   addUser(user: User) {
@@ -43,6 +53,10 @@ export class UserService {
     this.http.delete<User>(this.url + '/' + user.id).subscribe( (users) => {
       console.log( 'success' );
     });
+  }
+
+  addAttempt(user: User, attempt: Attempt) {
+    return this.http.post<User>(this.url + '/' + user.id + '/attempts', attempt, this.httpOptions).subscribe( () => this.setUsersFromUrl());
   }
 
   setUsersFromUrl() {

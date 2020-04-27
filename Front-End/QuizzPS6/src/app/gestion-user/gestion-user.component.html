@@ -41,10 +41,14 @@
         Statistiques de {{ currentUser.firstName }}
         <br>
         <button type ="button" class="ButtonParameter" (click)="userOption(currentUser)">Paramètres de {{currentUser.firstName}}</button>
-        <br>Tentatives :
+        <br>{{ currentUser.attempts.length }} tentative(s) :
         <ul>
           <li *ngFor="let attempt of currentUser.attempts">
-            {{ attempt.score }} points
+            <div *ngFor="let quiz of quizList">
+              <div *ngIf="quiz.id === attempt.quizId">
+                {{ quiz.name }} : {{ attempt.score }} points
+              </div>
+            </div>
           </li>
         </ul>
         <button (click)="deleteUser(currentUser)">Supprimer l'utilisateur</button>

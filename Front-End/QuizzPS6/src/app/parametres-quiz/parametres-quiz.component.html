@@ -70,12 +70,11 @@ input:checked + .slider:before {
     <div style="width: 80%; border: 2px solid black; margin: 0 auto;">
         <div>
          
-            <h1 style="text-align: center; font-family: Arial, Helvetica, sans-serif; font-weight: 600;">Paramètres du Quiz</h1>
-            <p style="text-align: center;"><select id="pet-select">
-                <option value="">Joueur</option>
-                <option value="dog">Charles</option>
-                <option value="cat">Elizabeth</option>
-            </select></p>
+          <h1 style="text-align: center; font-family: Arial, Helvetica, sans-serif; font-weight: 600;">Paramètres du Quiz</h1>
+            <div class="user" *ngFor="let user of userList" style="border:1px solid #000;">
+              {{ user.firstName }} {{ user.lastName }}
+              <button style="float: right;" (click)="selectUser(user)">Sélectionner</button>
+            </div>
         </div>
         <br><br><br>
         <div style="display: flex; width: 100%; ">
