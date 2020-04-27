@@ -45,7 +45,7 @@
           </label>
           <label for="theme">
             <br>Theme <br>
-            <select name="theme" id="theme" [formControlName]="'theme'">
+            <select name="theme" id="theme" [formControlName]="'theme'" type="number">
               <option *ngFor="let currentTheme of themeList" [value]="currentTheme.id">
                 {{currentTheme.name}}
             </select>
