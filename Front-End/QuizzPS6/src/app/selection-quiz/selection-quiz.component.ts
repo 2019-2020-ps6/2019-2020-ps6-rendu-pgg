@@ -12,9 +12,12 @@ import {Theme} from '../../models/theme.model';
 })
 export class SelectionQuizComponent implements OnInit {
   public quizList: Quiz[];
+  public filteredQuizzes: Quiz[];
   public state: number;
   public selectedQuiz: Quiz;
   public selectedTheme: Theme;
+  public start = 0;
+  public end = 4;
 
   constructor(public quizService: QuizService, public themeService: ThemeService) {
     this.quizService.quizzes$.subscribe((quiz) => this.quizList = quiz);
@@ -64,4 +67,28 @@ export class SelectionQuizComponent implements OnInit {
       console.log('NUL');
     }
   }
+
+  viewNext() {
+    this.start = this.start + 4;
+    this.end = this.start + 4;
+  }
+  viewPrevious() {
+    this.start = this.start - 4;
+    this.end = this.end - 4;
+  }
+
+  filterQuiz() {
+    console.log('TestFront');
+    console.log(this.quizList);
+    if(this.quizList.length > 0) {
+      for ( const quizItem of this.quizList ) {
+        console.log('TestFor');
+        if ( quizItem.themeId.toString() === this.selectedTheme.id ) {
+          console.log('TestIf');
+          this.filteredQuizzes.push(quizItem);
+        }
+      }
+    }
+  }
+
 }
