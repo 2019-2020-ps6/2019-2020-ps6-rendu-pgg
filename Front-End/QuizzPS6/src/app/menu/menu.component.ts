@@ -32,4 +32,7 @@ export class MenuComponent implements OnInit {
     this.state = 0;
   }
 
+  userOption() {
+    this.state = 4;
+  }
 }
