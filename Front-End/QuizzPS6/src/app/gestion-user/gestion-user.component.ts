@@ -55,4 +55,9 @@ export class GestionUserComponent implements OnInit {
     this.state = 0;
     this.userService.deleteUser(user);
   }
+
+  userOption(user: User) {
+    console.log(user);
+    this.state = 4;
+  }
 }
