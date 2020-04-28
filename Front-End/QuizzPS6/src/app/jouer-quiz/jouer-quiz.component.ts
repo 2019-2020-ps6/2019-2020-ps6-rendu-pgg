@@ -91,6 +91,7 @@ export class JouerQuizComponent implements OnInit {
         }
       } else {
         console.log('Mauvaise reponse ! ');
+        this.score = this.score - 10;
       }
     } else {
       console.log('NUL');
