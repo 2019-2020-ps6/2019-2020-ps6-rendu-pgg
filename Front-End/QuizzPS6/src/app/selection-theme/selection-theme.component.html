@@ -68,8 +68,10 @@
 	</div>
     <div class="center">
       <input *ngIf="start>=4" type="button" class="button" value="<< Previous" (click)="viewPrevious()">
-      <input *ngIf="end<themeList.length" type="button" class="button" value="Next >>" (click)="viewNext()" style="margin-left: 10px;">
-			</div>
+      <div *ngIf="themeList">
+        <input *ngIf="end<themeList.length" type="button" class="button" value="Next >>" (click)="viewNext()" style="margin-left: 10px;">
+      </div>
+      </div>
     <br><br>
     <div class="center"><input class="bouton" value="Valider" type="button" (click)="validerTheme()"></div>
 		</div>
