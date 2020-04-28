@@ -1,9 +1,22 @@
+<!DOCTYPE html>
+<html lng=fr>
+<head>
+  <title>Choix du quiz</title>
+  <style type="text/css">
+    h1  {
+      text-align: center;
+    }
+
+  </style>
+</head>
+
 <div [ngSwitch]="state">
     <div *ngSwitchCase="1">
         <app-selection-theme></app-selection-theme>
     </div>
 
     <div *ngSwitchDefault style="width: 82%; height: 515px; border: 2px solid black;  margin: 0 auto; margin-top: 60px;">
+      <h1>Choisissez un profil d'utilisateur</h1>
         <ul>
             <li class="user" *ngFor="let user of userList">
               {{ user.firstName }} {{ user.lastName }}
