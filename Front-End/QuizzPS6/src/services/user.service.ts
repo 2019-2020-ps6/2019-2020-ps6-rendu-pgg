@@ -20,14 +20,14 @@ export class UserService {
     * The list is retrieved from the mock.
     */
   private users: User[];
-  public currentUser: User;
+  public userSelected: User;
 
   /**
    * Observable which contains the list of the quiz.
    * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
    */
   public users$: BehaviorSubject<User[]> = new BehaviorSubject(this.users);
-  public currentUser$: BehaviorSubject<User> = new BehaviorSubject(this.currentUser);
+  public userSelected$: BehaviorSubject<User> = new BehaviorSubject(this.userSelected);
   public url = 'http://localhost:9428/api/users';
   private httpOptions = httpOptionsBase;
 
@@ -38,7 +38,7 @@ export class UserService {
   setSelectedUser(userId: string) {
     const urlWithId = this.url + '/' + userId;
     return this.http.get<User>(urlWithId).subscribe((user) => {
-      this.currentUser$.next(user);
+      this.userSelected$.next(user);
     });
   }
 

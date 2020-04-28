@@ -1,0 +1,14 @@
+<div [ngSwitch]="state">
+    <div *ngSwitchCase="1">
+        <app-selection-theme></app-selection-theme>
+    </div>
+
+    <div *ngSwitchDefault style="width: 82%; height: 515px; border: 2px solid black;  margin: 0 auto; margin-top: 60px;">
+        <ul>
+            <li class="user" *ngFor="let user of userList">
+              {{ user.firstName }} {{ user.lastName }}
+              <button (click)="selectUser(user.id)">Sélectionner</button>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -21,7 +21,7 @@ export class ParametresQuizComponent implements OnInit {
 
   selectUser(user: User) {
     this.userService.setSelectedUser(user.id);
-    this.currentUser = this.userService.currentUser;
+    this.currentUser = this.userService.userSelected;
     console.log('User : ' + this.currentUser.firstName + ' ' + this.currentUser.lastName);
   }
 }

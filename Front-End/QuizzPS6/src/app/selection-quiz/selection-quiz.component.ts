@@ -80,7 +80,7 @@ export class SelectionQuizComponent implements OnInit {
   filterQuiz() {
     console.log('TestFront');
     console.log(this.quizList);
-    if(this.quizList.length > 0) {
+    if (this.quizList.length > 0) {
       for ( const quizItem of this.quizList ) {
         console.log('TestFor');
         if ( quizItem.themeId.toString() === this.selectedTheme.id ) {
