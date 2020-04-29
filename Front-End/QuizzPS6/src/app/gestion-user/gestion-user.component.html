@@ -26,6 +26,7 @@
           <label for="firstName">
             Prénom : <input class="input-custom" type="text" id="name" [formControlName]="'firstName'">
           </label>
+          <br>
           <label for="lastName">
             Nom : <input class="input-custom" type="text" id="name" [formControlName]="'lastName'">
           </label>
@@ -39,8 +40,6 @@
     <div [ngSwitch]="state" style="float: right;width: 34%;">
       <div *ngSwitchCase="1">
         Statistiques de {{ currentUser.firstName }}
-        <br>
-        <button type ="button" class="ButtonParameter" (click)="userOption(currentUser)">Paramètres de {{currentUser.firstName}}</button>
         <br>{{ currentUser.attempts.length }} tentative(s) :
         <ul>
           <li *ngFor="let attempt of currentUser.attempts">
@@ -51,6 +50,8 @@
             </div>
           </li>
         </ul>
+        <button type ="button" class="ButtonParameter" (click)="userOption(currentUser)">Paramètres de {{currentUser.firstName}}</button>
+        <br>
         <button (click)="deleteUser(currentUser)">Supprimer l'utilisateur</button>
       </div>
       <div *ngSwitchDefault>
@@ -61,7 +62,7 @@
   </div>
 
   <div *ngSwitchCase="4">
-    <app-parametres-quiz></app-parametres-quiz>
+    <app-parametres-quiz [currentUser]="currentUser"></app-parametres-quiz>
   </div>
 </div>
 </body>

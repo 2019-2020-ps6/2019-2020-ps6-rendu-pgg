@@ -43,6 +43,12 @@ export class UserService {
   }
 
   addUser(user: User) {
+    user.nextQuestionFollows = false;
+    user.bigPointer = false;
+    user.previousQuestion = false;
+    user.repeatQuestion = true;
+    user.answersColor = true;
+    user.displayScore = true;
     const parsed = JSON.parse(JSON.stringify(user));
     delete parsed.attempts;
     return this.http.post<User>(this.url, parsed, this.httpOptions).subscribe( () => this.setUsersFromUrl());

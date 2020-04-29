@@ -5,4 +5,11 @@ export interface User {
     firstName: string;
     lastName: string;
     attempts: Attempt[];
+    // User Params
+    nextQuestionFollows: boolean;
+    bigPointer: boolean;
+    previousQuestion: boolean;
+    repeatQuestion: boolean;
+    answersColor: boolean;
+    displayScore: boolean;
 }
