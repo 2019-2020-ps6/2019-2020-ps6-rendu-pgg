@@ -12,15 +12,19 @@ import {Theme} from '../../models/theme.model';
 })
 export class SelectionQuizComponent implements OnInit {
   public quizList: Quiz[];
+  public filteredQuizzes: Quiz[] = [];
   public state: number;
   public selectedQuiz: Quiz;
   public selectedTheme: Theme;
+  public start = 0;
+  public end = 4;
 
   constructor(public quizService: QuizService, public themeService: ThemeService) {
     this.quizService.quizzes$.subscribe((quiz) => this.quizList = quiz);
     this.themeService.themeSelected$.subscribe((theme) => this.selectedTheme = theme);
     this.quizService.quizSelected$.subscribe((quiz) => this.selectedQuiz = quiz);
     this.state = 0;
+    this.filterQuiz();
   }
 
 
@@ -64,4 +68,45 @@ export class SelectionQuizComponent implements OnInit {
       console.log('NUL');
     }
   }
+
+  viewNext() {
+    this.start = this.start + 4;
+    this.end = this.start + 4;
+  }
+  viewPrevious() {
+    this.start = this.start - 4;
+    this.end = this.end - 4;
+  }
+
+  filterQuiz() {
+    this.filteredQuizzes = [];
+    if (this.quizList === undefined) {
+      console.log('OLALALA BAH DIS DONC');
+    } else {
+      console.log('TestFront');
+      console.log(this.quizList);
+      if (this.quizList.length > 0) {
+        for ( const quizItem of this.quizList ) {
+          console.log('TestFor');
+          console.log(quizItem.themeId.toString());
+          console.log(this.selectedTheme.id);
+          if (quizItem.questions.length > 0 ) {
+            console.log('Plus d 1 question');
+            if ( quizItem.themeId.toString() === this.selectedTheme.id.toString() ) {
+              console.log('TestIf');
+              console.log(quizItem);
+              this.filteredQuizzes.push(quizItem);
+            }
+          }
+        }
+      }
+    }
+    console.log('Les quizz filtres');
+    console.log(this.filteredQuizzes);
+  }
+
+  coucou() {
+    console.log('coucou');
+  }
+
 }

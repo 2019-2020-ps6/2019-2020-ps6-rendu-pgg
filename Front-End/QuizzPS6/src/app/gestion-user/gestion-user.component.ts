@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class GestionUserComponent implements OnInit {
   public userList: User[] = [];
+  public quizList: Quiz[] = [];
   public currentUser: User;
   state: number;
 
@@ -24,6 +25,7 @@ export class GestionUserComponent implements OnInit {
     });
 
     this.userService.users$.subscribe((user) => this.userList = user);
+    this.quizService.quizzes$.subscribe((quiz) => this.quizList = quiz);
     this.state = 0;
   }
 

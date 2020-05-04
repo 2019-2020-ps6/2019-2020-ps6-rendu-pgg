@@ -9,7 +9,7 @@
 <body>
 <div [ngSwitch]="state">
   <div *ngSwitchCase="1">
-    <app-resultat-quiz></app-resultat-quiz>
+    <app-resultat-quiz [score]="score"></app-resultat-quiz>
   </div>
   <div *ngSwitchDefault>
     <h1>Choisis une réponse à la question :</h1>

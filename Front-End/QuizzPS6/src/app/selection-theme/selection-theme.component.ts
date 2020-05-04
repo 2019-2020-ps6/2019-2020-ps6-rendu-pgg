@@ -13,6 +13,7 @@ export class SelectionThemeComponent implements OnInit {
   public currentTheme: Theme;
   public start = 0;
   public end = 4;
+  public buttonText = 'Choisissez un thème';
 
   constructor(public themeService: ThemeService) {
     this.themeService.themes$.subscribe((theme) => this.themeList = theme);
@@ -37,6 +38,7 @@ export class SelectionThemeComponent implements OnInit {
     // this.themeService.themeSelected$.subscribe((theme) => this.currentTheme = theme);
     // console.log(this.currentTheme);
     this.state = 2;
+    this.buttonText = 'Valider';
   }
 
   validerTheme() {
@@ -57,7 +59,4 @@ export class SelectionThemeComponent implements OnInit {
     this.start = this.start - 4;
     this.end = this.end - 4;
   }
-
-
-
 }

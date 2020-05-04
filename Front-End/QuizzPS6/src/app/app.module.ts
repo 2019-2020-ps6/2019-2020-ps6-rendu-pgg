@@ -19,6 +19,7 @@ import { GestionUserComponent } from './gestion-user/gestion-user.component';
 import { EditQuestionsComponent } from './gestionChoseQuiz/editQuestions/edit-questions.component';
 import { ResultatQuizComponent } from './resultat-quiz/resultat-quiz.component';
 import { ParametresQuizComponent } from './parametres-quiz/parametres-quiz.component';
+import { SelectionUserComponent } from './selection-user/selection-user.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ParametresQuizComponent } from './parametres-quiz/parametres-quiz.compo
     GestionUserComponent,
     EditQuestionsComponent,
     ResultatQuizComponent,
-    ParametresQuizComponent
+    ParametresQuizComponent,
+    SelectionUserComponent
   ],
   imports: [
     BrowserModule,

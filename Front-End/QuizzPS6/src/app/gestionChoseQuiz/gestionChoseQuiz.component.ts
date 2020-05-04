@@ -39,6 +39,7 @@ export class GestionChoseQuizComponent implements OnInit {
 
   selectQuiz(quiz: Quiz) {
     this.currentQuiz = quiz;
+    this.quizService.setSelectedQuiz(this.currentQuiz.id);
   }
 
   deleteQuiz(quiz: Quiz) {

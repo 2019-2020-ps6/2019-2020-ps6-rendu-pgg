@@ -17,6 +17,7 @@ export class EditQuestionsComponent implements OnInit {
   editedQuestion: Question;
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService) {
+    this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
     this.questionForm = this.formBuilder.group({
       label: [''],
       answer1: [''],

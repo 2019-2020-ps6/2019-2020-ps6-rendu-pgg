@@ -1,35 +1,31 @@
- <div [ngSwitch]="state">
-    <div *ngSwitchCase="1">
-        <button type="button" class="button-card" (click)="backToMain()">Retour à l'accueil</button>
-        <button type ="button" class="button-card ButtonParameter" (click)="userOption()">Paramètres</button>
-        <app-selection-theme></app-selection-theme>
+<div [ngSwitch]="state">
+  <div *ngSwitchCase="1">
+    <button type="button" class="button-card" (click)="backToMain()">Retour à l'accueil</button>
+    <app-selection-user></app-selection-user>
 
-    </div>
-    <div *ngSwitchCase="2">
-        <button type="button" class="button-card" (click)="backToMain()">Retour à l'accueil</button>
-        <button type ="button" class="button-card ButtonParameter" (click)="userOption()">Paramètres</button>
-        <app-gestion-chose-quiz></app-gestion-chose-quiz>
+  </div>
+  <div *ngSwitchCase="2">
+    <button type="button" class="button-card" (click)="backToMain()">Retour à l'accueil</button>
+    <app-gestion-chose-quiz></app-gestion-chose-quiz>
 
-    </div>
-    <div *ngSwitchCase="3">
-   <button type="button" class="button-card" (click)="backToMain()">Retour à l'accueil</button>
-   <button type ="button" class=" button-card ButtonParameter" (click)="userOption()">Paramètres</button>
-   <app-gestion-user></app-gestion-user>
+  </div>
+  <div *ngSwitchCase="3">
+    <button type="button" class="button-card" (click)="backToMain()">Retour à l'accueil</button>
+    <app-gestion-user></app-gestion-user>
 
 
-    </div>
-   <div *ngSwitchCase="4">
-     <button type="button" class="button-card" (click)="backToMain()">Retour à l'accueil</button>
-     <button type ="button" class="button-card ButtonParameter" (click)="userOption()">Paramètres</button>
-     <app-parametres-quiz></app-parametres-quiz>
+  </div>
+  <div *ngSwitchCase="4">
+    <button type="button" class="button-card" (click)="backToMain()">Retour à l'accueil</button>
+    <app-parametres-quiz></app-parametres-quiz>
 
-   </div>
+  </div>
 
-    <div class="container">
+  <div class="container">
     <button *ngSwitchDefault type="button" class="btn btn1" (click)="playQuiz()">Jouer à un Quiz</button>
     <button *ngSwitchDefault type="button" class="btn btn2" (click)="editQuiz()">Gérer les Quiz</button>
     <button *ngSwitchDefault type="button" class="btn btn3" (click)="editUser()">Gérer les Utilisateurs</button>
-    </div>
+  </div>
 
 
 </div>
