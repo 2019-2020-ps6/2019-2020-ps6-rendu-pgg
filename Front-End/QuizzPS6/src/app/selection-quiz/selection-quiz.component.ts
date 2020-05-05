@@ -81,7 +81,7 @@ export class SelectionQuizComponent implements OnInit {
   filterQuiz() {
     this.filteredQuizzes = [];
     if (this.quizList === undefined) {
-      console.log('OLALALA BAH DIS DONC');
+      console.log('Liste de Quiz non instanciee');
     } else {
       console.log('TestFront');
       console.log(this.quizList);
@@ -101,9 +101,11 @@ export class SelectionQuizComponent implements OnInit {
         }
       }
     }
-    console.log('Les quizz filtres');
+    console.log('Filtered Quiz : ');
     console.log(this.filteredQuizzes);
   }
+
+
 
   coucou() {
     console.log('coucou');
