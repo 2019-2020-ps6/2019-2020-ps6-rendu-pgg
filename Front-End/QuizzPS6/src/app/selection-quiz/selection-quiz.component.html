@@ -64,7 +64,7 @@
         <!--<div *ngIf="selectedTheme" class="cont">
         Quand on aura acces au selectedTheme, on utilsera cette valeur -->
         <div *ngIf="quizList" class="cont">
-          <div *ngIf="filteredQuizzes; else filterQuiz()">
+          <div *ngIf="filteredQuizzes">
             <ul>
               <ng-container *ngFor="let quizItem of filteredQuizzes | slice:start:end" value="quizItem" >
                 <li>

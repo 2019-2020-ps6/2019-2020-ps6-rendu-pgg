@@ -20,11 +20,19 @@ export class SelectionQuizComponent implements OnInit {
   public end = 4;
 
   constructor(public quizService: QuizService, public themeService: ThemeService) {
-    this.quizService.quizzes$.subscribe((quiz) => this.quizList = quiz);
+    this.quizService.quizzes$.subscribe((quiz) => {
+      this.quizList = quiz;
+      if (quiz) {
+        if (this.selectedTheme) {
+           this.testFilter();
+           console.log('CONSTRUCTEUR INIT ABONNEMENT');
+        }
+      }
+    });
     this.themeService.themeSelected$.subscribe((theme) => this.selectedTheme = theme);
     this.quizService.quizSelected$.subscribe((quiz) => this.selectedQuiz = quiz);
     this.state = 0;
-    this.filterQuiz();
+    // this.testFilter();
   }
 
 
@@ -34,6 +42,11 @@ export class SelectionQuizComponent implements OnInit {
     console.log('Theme Selectionne dans Quiz : ');
     console.log(this.selectedTheme);
     console.log('Fin affichage selection Quiz');
+    if (this.quizList) {
+      if (this.selectedTheme) {
+        this.testFilter();
+      }
+    }
   }
 
   selectionnerQuiz(quizId: string) {
@@ -78,37 +91,17 @@ export class SelectionQuizComponent implements OnInit {
     this.end = this.end - 4;
   }
 
-  filterQuiz() {
-    this.filteredQuizzes = [];
+  testFilter() {
     if (this.quizList === undefined) {
       console.log('Liste de Quiz non instanciee');
     } else {
-      console.log('TestFront');
-      console.log(this.quizList);
-      if (this.quizList.length > 0) {
-        for ( const quizItem of this.quizList ) {
-          console.log('TestFor');
-          console.log(quizItem.themeId.toString());
-          console.log(this.selectedTheme.id);
-          if (quizItem.questions.length > 0 ) {
-            console.log('Plus d 1 question');
-            if ( quizItem.themeId.toString() === this.selectedTheme.id.toString() ) {
-              console.log('TestIf');
-              console.log(quizItem);
-              this.filteredQuizzes.push(quizItem);
-            }
-          }
-        }
-      }
+      console.log('Avant testFilter');
+      console.log(this.filteredQuizzes);
+      this.filteredQuizzes = this.quizList.filter(quiz => (quiz.themeId.toString() === this.selectedTheme.id.toString())
+        && (quiz.questions.length > 0));
+      console.log('Apres testFilter');
+      console.log(this.filteredQuizzes);
+      console.log('Fin de methode testFilter');
     }
-    console.log('Filtered Quiz : ');
-    console.log(this.filteredQuizzes);
   }
-
-
-
-  coucou() {
-    console.log('coucou');
-  }
-
 }
