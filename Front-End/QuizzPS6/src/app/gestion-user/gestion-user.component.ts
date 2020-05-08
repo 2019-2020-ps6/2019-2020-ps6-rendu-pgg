@@ -36,6 +36,7 @@ export class GestionUserComponent implements OnInit {
   selectUser(user: User) {
     this.state = 1;
     this.currentUser = user;
+    this.userService.setSelectedUser(user.id);
   }
 
   createUser() {

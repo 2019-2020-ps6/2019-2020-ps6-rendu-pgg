@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/models/user.model';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from 'src/services/user.service';
 
 @Component({
@@ -9,17 +9,58 @@ import { UserService } from 'src/services/user.service';
   styleUrls: ['./parametres-quiz.component.scss']
 })
 export class ParametresQuizComponent implements OnInit {
-  @Input() currentUser: User;
+  public paramsForm: FormGroup;
+  public user: User;
 
   constructor(public formBuilder: FormBuilder, public userService: UserService) {
+    this.paramsForm = this.formBuilder.group({
+      nextQuestionFollows: [],
+      bigPointer: [],
+      previousQuestion: [],
+      repeatQuestion: [],
+      answersColor: [],
+      displayScore: [],
+    });
+
+    this.userService.userSelected$.subscribe((user) => {
+      this.user = user;
+      if (user) {
+        this.presetParams(user);
+      }
+    });
    }
 
   ngOnInit() {
+    this.userService.userSelected$.subscribe((user) => {
+      this.user = user;
+      if (user) {
+        this.presetParams(user);
+      }
+    });
+  }
+
+  presetParams(user: User) {
+    this.paramsForm.get('nextQuestionFollows').setValue(user.nextQuestionFollows);
+    this.paramsForm.get('bigPointer').setValue(user.bigPointer);
+    this.paramsForm.get('previousQuestion').setValue(user.previousQuestion);
+    this.paramsForm.get('repeatQuestion').setValue(user.repeatQuestion);
+    this.paramsForm.get('answersColor').setValue(user.answersColor);
+    this.paramsForm.get('displayScore').setValue(user.displayScore);
   }
 
   selectUser(user: User) {
     this.userService.setSelectedUser(user.id);
-    this.currentUser = this.userService.userSelected;
-    console.log('User : ' + this.currentUser.firstName + ' ' + this.currentUser.lastName);
+    this.user = this.userService.userSelected;
+    console.log('User : ' + this.user.firstName + ' ' + this.user.lastName);
+  }
+
+  validateParams() {
+    this.user.nextQuestionFollows = this.paramsForm.controls.nextQuestionFollows.value;
+    this.user.bigPointer = this.paramsForm.controls.bigPointer.value;
+    this.user.previousQuestion = this.paramsForm.controls.previousQuestion.value;
+    this.user.repeatQuestion = this.paramsForm.controls.repeatQuestion.value;
+    this.user.answersColor = this.paramsForm.controls.answersColor.value;
+    this.user.displayScore = this.paramsForm.controls.displayScore.value;
+    this.userService.updateUser(this.user);
   }
 }
