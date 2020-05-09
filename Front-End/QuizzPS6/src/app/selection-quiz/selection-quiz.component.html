@@ -90,8 +90,13 @@
           </div>
         </div>
         <br><br>
-        <div class="center"><input class="bouton" value="Check" type="button" (click)="check()"></div>
-				<div class="center"><input class="bouton" value="Valider" type="button" (click)="validerQuiz()"></div>
+        <div class="center"><input class="bouton" value="Check" type="button" (click)="check()">
+        </div>
+				<div class="center">
+          <button class="bouton" (click)="validerQuiz()">
+            <span> {{ selectedQuiz ? 'Valider' : 'Selectionnez un quiz'}}</span>
+          </button>
+        </div>
       </div>
 				</div>
 			</body>
