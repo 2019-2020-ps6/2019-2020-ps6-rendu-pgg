@@ -7,12 +7,33 @@
       text-align: center;
     }
 
+    .button {
+        margin: 0 auto;
+        width: 300px;
+        height: 45px;
+        background-color: transparent;
+        color: black;
+        border: 2px solid black;
+        border-radius: 7px;
+        font-weight: 800;
+        font-family: Arial, Helvetica, sans-serif;
+        cursor: pointer;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 20px;
+    }
+
   </style>
 </head>
-
 <div [ngSwitch]="state">
     <div *ngSwitchCase="1">
-        <app-selection-theme></app-selection-theme>
+        <app-parametres-quiz></app-parametres-quiz>
+        <button class="button" (click)="selectTheme()">Choisissez un theme</button>
+    </div>
+
+    <div *ngSwitchCase="2">
+      <app-selection-theme></app-selection-theme>
     </div>
 
     <div *ngSwitchDefault style="width: 82%; height: 515px; border: 2px solid black;  margin: 0 auto; margin-top: 60px;">

@@ -6,7 +6,7 @@ import { UserService } from 'src/services/user.service';
 @Component({
   selector: 'app-parametres-quiz',
   templateUrl: './parametres-quiz.component.html',
-  styleUrls: ['./parametres-quiz.component.scss']
+  styleUrls: [ './parametres-quiz.component.scss' ]
 })
 export class ParametresQuizComponent implements OnInit {
   public paramsForm: FormGroup;
@@ -19,7 +19,7 @@ export class ParametresQuizComponent implements OnInit {
       previousQuestion: [],
       repeatQuestion: [],
       answersColor: [],
-      displayScore: [],
+      displayScore: []
     });
 
     this.userService.userSelected$.subscribe((user) => {
@@ -28,7 +28,7 @@ export class ParametresQuizComponent implements OnInit {
         this.presetParams(user);
       }
     });
-   }
+  }
 
   ngOnInit() {
     this.userService.userSelected$.subscribe((user) => {

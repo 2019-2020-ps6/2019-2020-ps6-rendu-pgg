@@ -114,6 +114,11 @@
         <span> {{ selectedAnswer ? 'Valider' : 'Selectionnez une reponse'}}</span>
       </button>
     </div>
+    <div class="center" *ngIf="selectedUser.previousQuestion === true">
+      <button class="bouton" (click)="previousQuestion()">
+        <span>Question Precedente</span>
+      </button>
+    </div>
   </div>
 </div>
 </body>

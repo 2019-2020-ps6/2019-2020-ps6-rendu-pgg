@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Quiz} from '../../models/quiz.model';
-import {QuizService} from '../../services/quiz.service';
-import {Answer, Question} from '../../models/question.model';
+import { Quiz } from '../../models/quiz.model';
+import { QuizService } from '../../services/quiz.service';
+import { Answer, Question } from '../../models/question.model';
 import { Attempt } from 'src/models/attempt.model';
 import { UserService } from 'src/services/user.service';
 import { User } from 'src/models/user.model';
@@ -9,7 +9,7 @@ import { User } from 'src/models/user.model';
 @Component({
   selector: 'app-jouer-quiz',
   templateUrl: './jouer-quiz.component.html',
-  styleUrls: ['./jouer-quiz.component.scss']
+  styleUrls: [ './jouer-quiz.component.scss' ]
 })
 export class JouerQuizComponent implements OnInit {
   public questionList: Question[];
@@ -31,6 +31,7 @@ export class JouerQuizComponent implements OnInit {
       this.selectedUser = user;
     });
     this.currentQuestion = this.selectedQuiz.questions[this.index];
+
     // this.quizService.questions$.subscribe((questions) => this.questionList = questions);
     // console.log(this.questionList);
     console.log('APPEL');
@@ -66,6 +67,13 @@ export class JouerQuizComponent implements OnInit {
     console.log('Fin affichage Reponses check');
   }
 
+  previousQuestion() {
+    if (this.index !== 0) {
+      this.index--;
+      this.currentQuestion = this.selectedQuiz.questions[this.index];
+    }
+  }
+
   validerAnswer() {
     console.log(this.selectedAnswer);
     console.log('Index courant : ');
@@ -78,7 +86,7 @@ export class JouerQuizComponent implements OnInit {
         this.state = 0;
         console.log('Taille');
         console.log(this.selectedQuiz.questions.length);
-        if ( this.index !== this.selectedQuiz.questions.length - 1) {
+        if (this.index !== this.selectedQuiz.questions.length - 1) {
           console.log('Taille pas depassee ! ');
           this.index++;
           this.currentQuestion = this.selectedQuiz.questions[this.index];
@@ -98,5 +106,4 @@ export class JouerQuizComponent implements OnInit {
       console.log('NUL');
     }
   }
-
 }
