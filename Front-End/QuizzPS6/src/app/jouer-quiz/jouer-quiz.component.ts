@@ -70,6 +70,7 @@ export class JouerQuizComponent implements OnInit {
   previousQuestion() {
     if (this.index !== 0) {
       this.index--;
+      this.score -= 50;
       this.currentQuestion = this.selectedQuiz.questions[this.index];
     }
   }
