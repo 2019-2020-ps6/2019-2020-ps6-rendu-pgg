@@ -72,6 +72,7 @@ export class JouerQuizComponent implements OnInit {
       this.index--;
       this.score -= 50;
       this.currentQuestion = this.selectedQuiz.questions[this.index];
+      this.selectedAnswer = undefined;
     }
   }
 
@@ -79,12 +80,14 @@ export class JouerQuizComponent implements OnInit {
     console.log(this.selectedAnswer);
     console.log('Index courant : ');
     console.log(this.index);
-    if (this.state === 2) {
+    // if (this.state === 2) {
+    if (this.selectedAnswer !== undefined) {
       console.log('Reponse selectionee');
       if (this.selectedAnswer.isCorrect) {
         console.log('Bonne reponse ! ');
         this.score = this.score + 50;
         this.state = 0;
+        this.selectedAnswer = undefined;
         console.log('Taille');
         console.log(this.selectedQuiz.questions.length);
         if (this.index !== this.selectedQuiz.questions.length - 1) {

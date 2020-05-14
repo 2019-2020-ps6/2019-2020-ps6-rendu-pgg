@@ -44,6 +44,7 @@ export class MenuComponent implements OnInit {
   }
 
   setBigCursor() {
+
     const cursor = 'url("assets/cursor.png"), url("assets/cursor.cur"), auto';
     const htmls = document.getElementsByTagName('html');
     const btns = document.getElementsByTagName('button');
