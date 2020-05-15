@@ -1,6 +1,6 @@
 import { Attempt } from './attempt.model';
 
-export interface User {
+export class User {
     id: string;
     firstName: string;
     lastName: string;

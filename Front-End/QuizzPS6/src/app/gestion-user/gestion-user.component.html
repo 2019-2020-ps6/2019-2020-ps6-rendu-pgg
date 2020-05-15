@@ -62,7 +62,8 @@
   </div>
 
   <div *ngSwitchCase="4">
-    <app-parametres-quiz [currentUser]="currentUser"></app-parametres-quiz>
+    <app-parametres-quiz></app-parametres-quiz>
+    <button (click)="this.state = 0">Retour à la liste des utilisateurs</button>
   </div>
 </div>
 </body>

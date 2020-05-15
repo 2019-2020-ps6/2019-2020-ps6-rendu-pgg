@@ -54,6 +54,13 @@ export class UserService {
     return this.http.post<User>(this.url, parsed, this.httpOptions).subscribe( () => this.setUsersFromUrl());
   }
 
+  updateUser(user: User) {
+    this.deleteUser(user);
+    const parsed = JSON.parse(JSON.stringify(user));
+    delete parsed.attempts;
+    return this.http.post<User>(this.url, parsed, this.httpOptions).subscribe( () => this.setUsersFromUrl());
+  }
+
   deleteUser(user: User) {
     console.log('Deleting user...');
     this.http.delete<User>(this.url + '/' + user.id).subscribe( (users) => {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Quiz} from '../../models/quiz.model';
-import {QuizService} from '../../services/quiz.service';
-import {Answer, Question} from '../../models/question.model';
+import { Quiz } from '../../models/quiz.model';
+import { QuizService } from '../../services/quiz.service';
+import { Answer, Question } from '../../models/question.model';
 import { Attempt } from 'src/models/attempt.model';
 import { UserService } from 'src/services/user.service';
 import { User } from 'src/models/user.model';
@@ -9,7 +9,7 @@ import { User } from 'src/models/user.model';
 @Component({
   selector: 'app-jouer-quiz',
   templateUrl: './jouer-quiz.component.html',
-  styleUrls: ['./jouer-quiz.component.scss']
+  styleUrls: [ './jouer-quiz.component.scss' ]
 })
 export class JouerQuizComponent implements OnInit {
   public questionList: Question[];
@@ -20,6 +20,7 @@ export class JouerQuizComponent implements OnInit {
   public currentQuestion: Question;
   public selectedAnswer: Answer;
   public selectedUser: User;
+  public indexAnswer: number;
 
   // faire l initialisation du quiz et le recuperer avec le QuizService
   constructor(public quizService: QuizService, public userService: UserService) {
@@ -31,6 +32,7 @@ export class JouerQuizComponent implements OnInit {
       this.selectedUser = user;
     });
     this.currentQuestion = this.selectedQuiz.questions[this.index];
+
     // this.quizService.questions$.subscribe((questions) => this.questionList = questions);
     // console.log(this.questionList);
     console.log('APPEL');
@@ -43,7 +45,7 @@ export class JouerQuizComponent implements OnInit {
     console.log('Jouer Quiz chargement');
   }
 
-  selectionnerAnswer(answer: Answer) {
+  selectionnerAnswer(answer: Answer, index: number) {
     console.log('Taille test ts : ');
     console.log(this.selectedQuiz.questions[this.selectedQuiz.questions.length - 1]);
     console.log('Reponse selectionne !');
@@ -53,6 +55,7 @@ export class JouerQuizComponent implements OnInit {
     // this.themeService.themeSelected$.subscribe((theme) => this.currentTheme = theme);
     // console.log(this.currentTheme);
     this.state = 2;
+    this.indexAnswer = index;
     // this.selectedQuiz = this.selectedQuiz.questions[1];
   }
 
@@ -66,19 +69,30 @@ export class JouerQuizComponent implements OnInit {
     console.log('Fin affichage Reponses check');
   }
 
+  previousQuestion() {
+    if (this.index !== 0) {
+      this.index--;
+      this.score -= 50;
+      this.currentQuestion = this.selectedQuiz.questions[this.index];
+      this.selectedAnswer = undefined;
+    }
+  }
+
   validerAnswer() {
     console.log(this.selectedAnswer);
     console.log('Index courant : ');
     console.log(this.index);
-    if (this.state === 2) {
+    // if (this.state === 2) {
+    if (this.selectedAnswer !== undefined) {
       console.log('Reponse selectionee');
       if (this.selectedAnswer.isCorrect) {
         console.log('Bonne reponse ! ');
         this.score = this.score + 50;
         this.state = 0;
+        this.selectedAnswer = undefined;
         console.log('Taille');
         console.log(this.selectedQuiz.questions.length);
-        if ( this.index !== this.selectedQuiz.questions.length - 1) {
+        if (this.index !== this.selectedQuiz.questions.length - 1) {
           console.log('Taille pas depassee ! ');
           this.index++;
           this.currentQuestion = this.selectedQuiz.questions[this.index];
@@ -93,10 +107,17 @@ export class JouerQuizComponent implements OnInit {
         console.log('Mauvaise reponse ! ');
         this.state = 0;
         this.score = this.score - 10;
+        if ( this.selectedUser.repeatQuestion) {
+          this.currentQuestion.answers.splice(this.indexAnswer, 1 );
+        }
       }
     } else {
       console.log('NUL');
     }
   }
 
+  deleteAnswer() {
+    this.currentQuestion.answers.pop();
+
+  }
 }

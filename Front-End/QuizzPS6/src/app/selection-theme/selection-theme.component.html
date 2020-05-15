@@ -56,25 +56,29 @@
 			</div>
 			<div *ngSwitchDefault>
 
-	<h1>Choisissez un thème</h1>
-	<div class="cont">
-			<ul>
-        <li *ngFor="let themeItem of themeList | slice:start:end" value="themeItem">
-          <button class="button-card" (click)="selectionnerTheme(themeItem.id)">
-            {{themeItem.name}} <br/>ID : {{themeItem.id}}
+	      <h1>Choisissez un thème</h1>
+        <div class="cont">
+          <ul>
+            <li *ngFor="let themeItem of themeList | slice:start:end" value="themeItem">
+              <button class="button-card" (click)="selectionnerTheme(themeItem.id)">
+                {{themeItem.name}} <br/>ID : {{themeItem.id}}
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="center">
+          <input *ngIf="start>=4" type="button" class="button" value="<< Previous" (click)="viewPrevious()">
+          <div *ngIf="themeList">
+            <input *ngIf="end<themeList.length" type="button" class="button" value="Next >>" (click)="viewNext()" style="margin-left: 10px;">
+          </div>
+        </div>
+        <br><br>
+        <div class="center">
+          <button class="bouton" (click)="validerTheme()">
+            <span> {{ currentTheme ? 'Valider' : 'Selectionnez un theme'}}</span>
           </button>
-        </li>
-			</ul>
-	</div>
-    <div class="center">
-      <input *ngIf="start>=4" type="button" class="button" value="<< Previous" (click)="viewPrevious()">
-      <div *ngIf="themeList">
-        <input *ngIf="end<themeList.length" type="button" class="button" value="Next >>" (click)="viewNext()" style="margin-left: 10px;">
+        </div>
       </div>
-      </div>
-    <br><br>
-    <div class="center"><input class="bouton" value="Valider" type="button" (click)="validerTheme()"></div>
-		</div>
 </div>
 </body>
 </html>
