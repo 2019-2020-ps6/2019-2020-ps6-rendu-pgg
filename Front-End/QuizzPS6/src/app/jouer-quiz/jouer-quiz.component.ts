@@ -20,6 +20,7 @@ export class JouerQuizComponent implements OnInit {
   public currentQuestion: Question;
   public selectedAnswer: Answer;
   public selectedUser: User;
+  public indexAnswer: number;
 
   // faire l initialisation du quiz et le recuperer avec le QuizService
   constructor(public quizService: QuizService, public userService: UserService) {
@@ -44,7 +45,7 @@ export class JouerQuizComponent implements OnInit {
     console.log('Jouer Quiz chargement');
   }
 
-  selectionnerAnswer(answer: Answer) {
+  selectionnerAnswer(answer: Answer, index: number) {
     console.log('Taille test ts : ');
     console.log(this.selectedQuiz.questions[this.selectedQuiz.questions.length - 1]);
     console.log('Reponse selectionne !');
@@ -54,6 +55,7 @@ export class JouerQuizComponent implements OnInit {
     // this.themeService.themeSelected$.subscribe((theme) => this.currentTheme = theme);
     // console.log(this.currentTheme);
     this.state = 2;
+    this.indexAnswer = index;
     // this.selectedQuiz = this.selectedQuiz.questions[1];
   }
 
@@ -105,9 +107,17 @@ export class JouerQuizComponent implements OnInit {
         console.log('Mauvaise reponse ! ');
         this.state = 0;
         this.score = this.score - 10;
+        if ( this.selectedUser.repeatQuestion) {
+          this.currentQuestion.answers.splice(this.indexAnswer, 1 );
+        }
       }
     } else {
       console.log('NUL');
     }
+  }
+
+  deleteAnswer() {
+    this.currentQuestion.answers.pop();
+
   }
 }

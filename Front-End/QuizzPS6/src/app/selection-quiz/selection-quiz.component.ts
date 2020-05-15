@@ -17,7 +17,7 @@ export class SelectionQuizComponent implements OnInit {
   public selectedQuiz: Quiz;
   public selectedTheme: Theme;
   public start = 0;
-  public end = 4;
+  public end = 3;
 
   constructor(public quizService: QuizService, public themeService: ThemeService) {
     this.quizService.quizzes$.subscribe((quiz) => {
@@ -83,12 +83,12 @@ export class SelectionQuizComponent implements OnInit {
   }
 
   viewNext() {
-    this.start = this.start + 4;
-    this.end = this.start + 4;
+    this.start = this.start + 3;
+    this.end = this.start + 3;
   }
   viewPrevious() {
-    this.start = this.start - 4;
-    this.end = this.end - 4;
+    this.start = this.start - 3;
+    this.end = this.end - 3;
   }
 
   testFilter() {
