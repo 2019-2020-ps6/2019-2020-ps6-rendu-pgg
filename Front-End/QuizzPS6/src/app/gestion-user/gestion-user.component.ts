@@ -15,6 +15,7 @@ export class GestionUserComponent implements OnInit {
   public quizList: Quiz[] = [];
   public currentUser: User;
   state: number;
+  deleteState: number;
 
   public userForm: FormGroup;
 
@@ -27,6 +28,7 @@ export class GestionUserComponent implements OnInit {
     this.userService.users$.subscribe((user) => this.userList = user);
     this.quizService.quizzes$.subscribe((quiz) => this.quizList = quiz);
     this.state = 0;
+    this.deleteState = 0;
   }
 
   ngOnInit() {
@@ -37,6 +39,7 @@ export class GestionUserComponent implements OnInit {
     this.state = 1;
     this.currentUser = user;
     this.userService.setSelectedUser(user.id);
+    this.deleteState = 0;
   }
 
   createUser() {
@@ -50,17 +53,23 @@ export class GestionUserComponent implements OnInit {
 
     // Now, add your quiz in the list!
     this.userService.addUser(userToCreate);
+    this.deleteState = 0;
+  }
+
+  confirmDelete() {
+    this.deleteState = 1;
   }
 
   deleteUser(user: User) {
     // tslint:disable-next-line:no-shadowed-variable
-    this.userService.users$.subscribe((user) => this.userList = user);
     this.state = 0;
+    this.deleteState = 0;
     this.userService.deleteUser(user);
   }
 
   userOption(user: User) {
     console.log(user);
+    this.deleteState = 0;
     this.state = 4;
   }
 }

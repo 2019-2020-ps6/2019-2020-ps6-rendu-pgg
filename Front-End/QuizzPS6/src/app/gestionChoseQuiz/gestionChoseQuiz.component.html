@@ -16,7 +16,7 @@
             <legend style="font-family: Arial, Helvetica, sans-serif; font-weight: 600;margin: 20px;">Liste des Quiz</legend>
                 <div class="user" *ngFor="let quiz of quizList" style="border:1px solid #000;">
                   {{ quiz.name }}
-                  <button style="float: right;" (click)="selectQuiz(quiz)">Sélectionner</button>
+                  <button style="float: right; margin-right: 1em;" (click)="selectQuiz(quiz)">Sélectionner</button>
                 </div>
           </fieldset>
           <button (click)="this.state=1">Créer un nouveau quiz</button>
@@ -27,7 +27,13 @@
             <h2>{{ currentQuiz.name }}</h2>
             <h3>{{ currentQuiz.questions.length }} questions</h3>
             <button (click)="this.state=2">Ajouter/modifier des questions</button><br>
-            <button (click)="deleteQuiz(currentQuiz)">Supprimer ce Quiz</button>
+            <button (click)="this.deleteState = 1">Supprimer ce Quiz</button>
+            <div *ngIf="this.deleteState === 1" class="confirmBox">
+              <p>Êtes-vous sûr de vouloir supprimer ce quiz ?</p>
+              <p>Cette action est irréversible.</p>
+              <button type ="button" (click)="this.deleteState = 0">Annuler</button>
+              <button type ="button" (click)="deleteQuiz(currentQuiz)">Supprimer</button>
+            </div>
           </div>
         </div>
 

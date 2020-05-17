@@ -16,10 +16,12 @@ export class GestionChoseQuizComponent implements OnInit {
   state: number;
   public quizForm: FormGroup;
   themeList: Theme[] = [];
+  deleteState: number;
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService, public themeService: ThemeService) {
     this.quizService.quizzes$.subscribe((quiz) => this.quizList = quiz);
     this.state = 0;
+    this.deleteState = 0;
     this.themeService.themes$.subscribe((theme) => this.themeList = theme);
 
     this.quizForm = this.formBuilder.group({
@@ -35,15 +37,23 @@ export class GestionChoseQuizComponent implements OnInit {
 
   createQuiz() {
     this.state = 1;
+    this.deleteState = 0;
   }
 
   selectQuiz(quiz: Quiz) {
     this.currentQuiz = quiz;
     this.quizService.setSelectedQuiz(this.currentQuiz.id);
+    this.deleteState = 0;
   }
 
   deleteQuiz(quiz: Quiz) {
     this.quizService.deleteQuiz(quiz);
+    this.deleteState = 0;
+    this.currentQuiz = this.quizList[0];
+  }
+
+  confirmDelete() {
+    this.deleteState = 1;
   }
 
   submitQuiz() {

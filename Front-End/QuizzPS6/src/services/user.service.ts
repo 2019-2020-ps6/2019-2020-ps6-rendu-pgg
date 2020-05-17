@@ -63,9 +63,7 @@ export class UserService {
 
   deleteUser(user: User) {
     console.log('Deleting user...');
-    this.http.delete<User>(this.url + '/' + user.id).subscribe( (users) => {
-      console.log( 'success' );
-    });
+    this.http.delete<User>(this.url + '/' + user.id).subscribe(() => this.setUsersFromUrl());
   }
 
   addAttempt(user: User, attempt: Attempt) {
