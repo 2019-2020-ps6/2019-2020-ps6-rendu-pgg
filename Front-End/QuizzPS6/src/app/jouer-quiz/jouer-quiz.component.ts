@@ -96,18 +96,23 @@ export class JouerQuizComponent implements OnInit {
         this.score = this.score + 50;
         this.state = 0;
         this.selectedAnswer = undefined;
-        console.log('Reponses avant fill');
-        console.log(this.currentQuestion);
-        this.fillQuestionWithAnswers();
-        console.log('Reponses apres fill');
-        console.log(this.currentQuestion);
+        if (this.selectedUser.repeatQuestion) {
+          console.log('Reponses avant fill');
+          console.log(this.currentQuestion);
+          this.fillQuestionWithAnswers();
+          console.log('Reponses apres fill');
+          console.log(this.currentQuestion);
+        }
         console.log('Taille');
         console.log(this.selectedQuiz.questions.length);
         if (this.index !== this.selectedQuiz.questions.length - 1) {
           console.log('Taille pas depassee ! ');
           this.index++;
           this.currentQuestion = this.selectedQuiz.questions[this.index];
-          console.log('INIT FLEXIBLE');
+          this.currentLessQuestionsNumber--;
+          this.currentLessQuestionsNumber = Math.max(0, this.currentLessQuestionsNumber);
+          console.log('Math max 0 et lessQuestions : ' + this.currentLessQuestionsNumber);
+          console.log('INIT FLEXIBLE Bonne reponse');
           this.initFlexibleDifficultyOnQuestion();
           console.log('Fin init flexible');
         } else {
@@ -117,14 +122,10 @@ export class JouerQuizComponent implements OnInit {
           this.state = 1;
           this.index = 0;
         }
-        this.currentLessQuestionsNumber = Math.min(0, this.currentLessQuestionsNumber--);
       } else {
         console.log('Mauvaise reponse ! ');
         this.state = 0;
         this.score = this.score - 10;
-        if (this.currentLessQuestionsNumber < 2 ) {
-          this.currentLessQuestionsNumber ++;
-        }
         if (this.selectedUser.repeatQuestion) {
           console.log('Debut ANswers');
           console.log(this.currentAnswers);
@@ -147,6 +148,9 @@ export class JouerQuizComponent implements OnInit {
             console.log('Taille pas depassee ! ');
             this.index++;
             this.currentQuestion = this.selectedQuiz.questions[this.index];
+            this.currentLessQuestionsNumber++;
+            this.currentLessQuestionsNumber = Math.min(2, this.currentLessQuestionsNumber);
+            console.log('Math min 2 et lessQuestions : ' + this.currentLessQuestionsNumber);
             console.log('INIT FLEXIBLE');
             this.initFlexibleDifficultyOnQuestion();
             console.log('Fin init flexible');
@@ -160,7 +164,7 @@ export class JouerQuizComponent implements OnInit {
         }
       }
     } else {
-      console.log('NUL');
+      console.log('Pas de reponse identifiee !');
     }
   }
 
