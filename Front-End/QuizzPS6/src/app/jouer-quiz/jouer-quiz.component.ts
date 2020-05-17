@@ -23,6 +23,8 @@ export class JouerQuizComponent implements OnInit {
   public indexAnswer: number;
   public questionCopy: Question;
   public currentAnswers: Answer[] = [];
+  public currentFalseAnswers: Answer[] = [];
+  public currentLessQuestionsNumber = 0;
 
   // faire l initialisation du quiz et le recuperer avec le QuizService
   constructor(public quizService: QuizService, public userService: UserService) {
@@ -45,6 +47,11 @@ export class JouerQuizComponent implements OnInit {
 
   ngOnInit() {
     console.log('Jouer Quiz chargement');
+    if (this.currentQuestion) {
+      console.log('INIT FLEXIBLE');
+      this.initFlexibleDifficultyOnQuestion();
+    }
+    console.log('Fin init flexible');
   }
 
   selectionnerAnswer(answer: Answer, index: number) {
@@ -74,6 +81,7 @@ export class JouerQuizComponent implements OnInit {
       this.currentQuestion = this.selectedQuiz.questions[this.index];
       this.selectedAnswer = undefined;
     }
+    // Rajouter ici des choses pour stocker les objets des questions precedentes
   }
 
   validerAnswer() {
@@ -99,6 +107,9 @@ export class JouerQuizComponent implements OnInit {
           console.log('Taille pas depassee ! ');
           this.index++;
           this.currentQuestion = this.selectedQuiz.questions[this.index];
+          console.log('INIT FLEXIBLE');
+          this.initFlexibleDifficultyOnQuestion();
+          console.log('Fin init flexible');
         } else {
           // Ici, il faudra renvoyer sur l ecran de fin de partie
           this.userService.addAttempt(this.selectedUser, new Attempt(this.score, this.selectedQuiz.id));
@@ -106,10 +117,14 @@ export class JouerQuizComponent implements OnInit {
           this.state = 1;
           this.index = 0;
         }
+        this.currentLessQuestionsNumber = Math.min(0, this.currentLessQuestionsNumber--);
       } else {
         console.log('Mauvaise reponse ! ');
         this.state = 0;
         this.score = this.score - 10;
+        if (this.currentLessQuestionsNumber < 2 ) {
+          this.currentLessQuestionsNumber ++;
+        }
         if (this.selectedUser.repeatQuestion) {
           console.log('Debut ANswers');
           console.log(this.currentAnswers);
@@ -127,6 +142,21 @@ export class JouerQuizComponent implements OnInit {
           // console.log(this.questionCopy);
           console.log('Reponses');
           console.log(this.currentAnswers);
+        } else {
+          if (this.index !== this.selectedQuiz.questions.length - 1) {
+            console.log('Taille pas depassee ! ');
+            this.index++;
+            this.currentQuestion = this.selectedQuiz.questions[this.index];
+            console.log('INIT FLEXIBLE');
+            this.initFlexibleDifficultyOnQuestion();
+            console.log('Fin init flexible');
+          } else {
+            // Ici, il faudra renvoyer sur l ecran de fin de partie
+            this.userService.addAttempt(this.selectedUser, new Attempt(this.score, this.selectedQuiz.id));
+            console.log('Taille depassee ! ');
+            this.state = 1;
+            this.index = 0;
+          }
         }
       }
     } else {
@@ -137,6 +167,54 @@ export class JouerQuizComponent implements OnInit {
   fillQuestionWithAnswers() {
     for (let i = 0; i < this.currentAnswers.length; i++) {
       this.currentQuestion.answers.push(this.currentAnswers[i]);
+    }
+  }
+
+  initFlexibleDifficultyOnQuestion() {
+    if (this.selectedUser.nextQuestionFollows) {
+      console.log('IN FLEXIBLE DELETE');
+      this.currentFalseAnswers = [];
+      let minDelete = 0;
+      for (let i = 0; i < this.currentQuestion.answers.length; i++) {
+        console.log('COUNT ANSWER : ' + i);
+        if (!this.currentQuestion.answers[i].isCorrect) {
+          console.log('COUNT CORRECT ANSWER : ' + i);
+          console.log('Avant PUSH false Answers');
+          console.log(this.currentFalseAnswers);
+          this.currentFalseAnswers.push(this.currentQuestion.answers[i]);
+          console.log('APRES PUSH false ANswers');
+          console.log(this.currentFalseAnswers);
+        }
+      }
+      console.log('FIN premier for');
+      minDelete = Math.min(this.currentLessQuestionsNumber, this.currentFalseAnswers.length);
+      console.log('MIN DELETE : ' + minDelete);
+      for ( let i = 0; i < minDelete; i++) {
+        console.log('COUNT DELETE : ' + i);
+        console.log(this.currentQuestion.answers);
+        const randomNumber = Math.random();
+        console.log('Random Number' + randomNumber);
+        const lengthFalseAnswers = this.currentFalseAnswers.length;
+        console.log('False ANswers length : ' + lengthFalseAnswers);
+        const randomIndex = Math.round((lengthFalseAnswers - 1) * randomNumber);
+        console.log('Random Index : ' + randomIndex);
+        const randomFalseAnswer = this.currentFalseAnswers[randomIndex];
+        console.log('Random False Answer : ');
+        console.log(randomFalseAnswer);
+        const indexToDelete = this.currentQuestion.answers.indexOf(randomFalseAnswer);
+        console.log('Answer dans vraie liste a index : ' + indexToDelete);
+        console.log(this.currentQuestion.answers[indexToDelete]);
+        this.currentQuestion.answers.splice(indexToDelete, 1);
+        console.log('Before slice false answers');
+        console.log(this.currentFalseAnswers);
+        this.currentFalseAnswers.splice(randomIndex, 1);
+        console.log('After slice false answers');
+        console.log(this.currentFalseAnswers);
+        console.log('FIN DU  DELETE : ' + i);
+        console.log(this.currentQuestion.answers);
+      }
+      console.log('CurrentQUestion : ');
+      console.log(this.currentQuestion.answers);
     }
   }
 }
