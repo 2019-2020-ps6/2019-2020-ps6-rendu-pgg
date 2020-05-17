@@ -17,7 +17,13 @@ export class ResultatQuizComponent implements OnInit {
     console.log('RESULTAT QUIZ');
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('Resultat Quiz ngInit');
+    if (this.score) {
+      this.score = Math.max(this.score, 0);
+    }
+    console.log('New Score');
+  }
 
   recommencerQuiz() {
     this.state = 2;
