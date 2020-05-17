@@ -20,6 +20,7 @@ import { EditQuestionsComponent } from './gestionChoseQuiz/editQuestions/edit-qu
 import { ResultatQuizComponent } from './resultat-quiz/resultat-quiz.component';
 import { ParametresQuizComponent } from './parametres-quiz/parametres-quiz.component';
 import { SelectionUserComponent } from './selection-user/selection-user.component';
+import { GestionThemeComponent } from './gestion-theme/gestion-theme.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { SelectionUserComponent } from './selection-user/selection-user.componen
     EditQuestionsComponent,
     ResultatQuizComponent,
     ParametresQuizComponent,
-    SelectionUserComponent
+    SelectionUserComponent,
+    GestionThemeComponent
   ],
   imports: [
     BrowserModule,

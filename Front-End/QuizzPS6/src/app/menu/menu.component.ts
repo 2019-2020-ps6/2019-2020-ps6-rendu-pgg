@@ -35,6 +35,10 @@ export class MenuComponent implements OnInit {
     this.state = 3;
   }
 
+  editTheme() {
+    this.state = 5;
+  }
+
   backToMain() {
     this.state = 0;
   }
@@ -85,4 +89,6 @@ export class MenuComponent implements OnInit {
       sliders[i].style.cursor = cursor;
     }
   }
+
+
 }

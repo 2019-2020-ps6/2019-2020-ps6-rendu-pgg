@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion des Thèmes</title>
+</head>
+<body>
+<div [ngSwitch]="state">
+  <div *ngSwitchDefault style="width: 82%; height: 515px; border: 2px solid black;  margin: 0 auto; margin-top: 60px;">
+    <h1 style="text-align: center; margin-top: 50px; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 36px;">Gestion des Thèmes</h1>
+
+    <div style="width: 44%; margin-left: 80px;float: left;">
+      <fieldset>
+        <legend style="font-family: Arial, Helvetica, sans-serif; font-weight: 600;">Liste des Thèmes</legend>
+        <!--<button class="button-card">Quitter l'édition de Quiz</button>-->
+        <ul>
+          <li class="theme" *ngFor="let theme of themeList">
+            {{ theme.name }}
+            <button (click)="selectTheme(theme)">Sélectionner</button>
+          </li>
+        </ul>
+      </fieldset>
+      <div style="width: 34%; margin-left: 60px;">
+        <form [formGroup]="themeForm">
+          <label for="name">
+            Nom du thème : <input class="input-custom" type="text" id="name" [formControlName]="'name'">
+          </label>
+          <br>
+          <button type="submit" class="button-card" (click)="createTheme()">Créer un nouveau Thème</button>
+        </form>
+      </div>
+    </div>
+
+
+    <div [ngSwitch]="state" style="float: right;width: 34%;">
+      <div *ngSwitchCase="1">
+        Information de  {{ currentTheme.name }}
+        <br>
+        <button (click)="deleteTheme(currentTheme)">Supprimer le thème</button>
+      </div>
+      <div *ngSwitchDefault>
+        Sélectionnez un thème dans la liste
+      </div>
+
+    </div>
+  </div>
+
+  <div *ngSwitchCase="4">
+    <app-parametres-quiz></app-parametres-quiz>
+    <button (click)="this.state = 0">Retour à la liste des thèmes</button>
+  </div>
+</div>
+</body>
+</html>

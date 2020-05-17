@@ -20,11 +20,19 @@
     <app-parametres-quiz></app-parametres-quiz>
 
   </div>
+  <div *ngSwitchCase="5">
+    <button type="button" class="button-card" (click)="backToMain()">Retour à l'accueil</button>
+    <app-gestion-theme></app-gestion-theme>
+
+
+  </div>
+
 
   <div class="container">
     <button *ngSwitchDefault type="button" class="btn btn1" (click)="playQuiz()">Jouer à un Quiz</button>
     <button *ngSwitchDefault type="button" class="btn btn2" (click)="editQuiz()">Gérer les Quiz</button>
     <button *ngSwitchDefault type="button" class="btn btn3" (click)="editUser()">Gérer les Utilisateurs</button>
+    <button *ngSwitchDefault type="button" class="btn btn3" (click)="editTheme()">Gérer les Thèmes</button>
     <ng-container *ngIf="user">
       {{user.bigPointer ? setBigCursor() : removeBigCursor()}}
     </ng-container>

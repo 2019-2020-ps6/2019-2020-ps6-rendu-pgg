@@ -35,8 +35,7 @@ router.post('/', (req, res) => {
 router.delete('/:themeId', (req, res) => {
   try {
     Quiz.get().filter((quiz) => quiz.themeId == req.params.themeId).forEach((element) => {
-      element.themeId = 0
-      Quiz.update(element.id, element)
+      Quiz.delete(element.id)
     })
     res.status(200).json(Theme.delete(req.params.themeId))
   } catch (err) {
