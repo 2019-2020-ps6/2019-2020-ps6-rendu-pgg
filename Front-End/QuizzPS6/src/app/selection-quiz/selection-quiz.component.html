@@ -41,7 +41,7 @@
       }
 
 			li:hover{
-				background-color: silver;
+				background:linear-gradient(to right,#2677CD,#53E9C5);
 			}
 			.center{
 				text-align: center;
@@ -63,12 +63,12 @@
         <h1>Choisir un quiz sur le thème : {{selectedTheme.name}}</h1>
         <!--<div *ngIf="selectedTheme" class="cont">
         Quand on aura acces au selectedTheme, on utilsera cette valeur -->
-        <div *ngIf="quizList" class="cont">
+        <div *ngIf="quizList" class="cont"><br>
           <div *ngIf="filteredQuizzes">
             <ul>
-              <ng-container *ngFor="let quizItem of filteredQuizzes | slice:start:end" value="quizItem" >
+              <ng-container *ngFor="let quizItem of filteredQuizzes | slice:start:end" value="quizItem" > 
                 <li>
-                  <button class="button-card" (click)="selectionnerQuiz(quizItem.id)">
+                  <button class="button-card" (click)="selectionnerQuiz(quizItem.id)" style="color: white; border: none; border-radius: 5px; background-color: black; width: 80px;">
                     {{quizItem.name}} <br/>
 
                     <!--
@@ -84,9 +84,9 @@
 
 
         <div class="center">
-          <input *ngIf="start>=3" type="button" class="button" value="<< Previous" (click)="viewPrevious()">
+          <input *ngIf="start>=3" type="button" class="button" value="<< Previous" (click)="viewPrevious()" style="margin: 0 auto; width: 100px; height: 100px; background-color: transparent; color: black; border: 2px solid #2690CD; border-radius: 50%; font-weight: 800; font-family: Arial, Helvetica, sans-serif;">
           <div *ngIf="filteredQuizzes">
-            <input *ngIf="end<filteredQuizzes.length" type="button" class="button" value="Next >>" (click)="viewNext()" style="margin-left: 10px;">
+            <input *ngIf="end<filteredQuizzes.length" type="button" class="button" value="Next >>" (click)="viewNext()" style="margin: 0 auto; width: 100px; height: 100px; background-color: transparent; color: black; border: 2px solid #2690CD; border-radius: 50%; font-weight: 800; font-family: Arial, Helvetica, sans-serif;">
           </div>
         </div>
         <br><br>

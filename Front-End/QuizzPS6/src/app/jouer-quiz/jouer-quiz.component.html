@@ -64,9 +64,9 @@
     <!--SANS LES COULEURS-->
     <div class="cont" *ngIf="selectedUser.answersColor === false">
       <ul>
-        <div>{{currentQuestion.label}}</div>
+        <div>{{currentQuestion.label}}</div><br>
         <div style="display: flex; width: 100%;">
-          <ng-container *ngIf="currentQuestion.answers[0]">
+          <ng-container *ngIf="currentQuestion.answers[0]"> 
           <Button (click)="selectionnerAnswer(currentQuestion.answers[0],0)" style="width: 36%; height: 80px; border-radius: 5px; border: none; color: #fff; background: #bfbfbf; margin-left: 10%; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 20px;">
             {{currentQuestion.answers[0].value}}<br>
             {{currentQuestion.answers[0].isCorrect}}</Button>
