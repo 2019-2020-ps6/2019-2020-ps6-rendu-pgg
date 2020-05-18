@@ -84,7 +84,7 @@
 
 
         <div class="center">
-          <input *ngIf="start>=4" type="button" class="button" value="<< Previous" (click)="viewPrevious()">
+          <input *ngIf="start>=3" type="button" class="button" value="<< Previous" (click)="viewPrevious()">
           <div *ngIf="filteredQuizzes">
             <input *ngIf="end<filteredQuizzes.length" type="button" class="button" value="Next >>" (click)="viewNext()" style="margin-left: 10px;">
           </div>
