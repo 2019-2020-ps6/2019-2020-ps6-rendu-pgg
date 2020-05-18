@@ -7,7 +7,7 @@
 </head>
 <body>
 <div [ngSwitch]="state">
-  <div *ngSwitchDefault style="width: 82%; height: 515px; border: 2px solid black;  margin: 0 auto; margin-top: 60px;">
+  <div *ngSwitchDefault style="width: 82%; height: 2000px; border: 2px solid black;  margin: 0 auto; margin-top: 60px;">
     <h1 style="text-align: center; margin-top: 50px; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 36px;">Gestion des Utilisateurs</h1>
 
     <div style="width: 44%; margin-left: 80px;float: left;">
@@ -41,15 +41,8 @@
       <div *ngSwitchCase="1">
         Statistiques de {{ currentUser.firstName }}
         <br>{{ currentUser.attempts.length }} tentative(s) :
-        <ul>
-          <li *ngFor="let attempt of currentUser.attempts">
-            <div *ngFor="let quiz of quizList">
-              <div *ngIf="quiz.id === attempt.quizId">
-                {{ quiz.name }} : {{ attempt.score }} points
-              </div>
-            </div>
-          </li>
-        </ul>
+        <button type ="button" class="ButtonAttempts" (click)="seeAttempts()">Voir historiques parties de {{currentUser.firstName}}</button>
+        <br>
         <button type ="button" class="ButtonParameter" (click)="userOption(currentUser)">Paramètres de {{currentUser.firstName}}</button>
         <br>
         <button (click)="confirmDelete()">Supprimer l'utilisateur</button>
@@ -71,6 +64,22 @@
     <app-parametres-quiz></app-parametres-quiz>
     <button (click)="this.state = 0">Retour à la liste des utilisateurs</button>
   </div>
+  <div *ngSwitchCase="5">
+    <app-attempts-user></app-attempts-user>
+    <button (click)="this.state = 0">Retour à la liste des utilisateurs</button>
+  </div>
 </div>
 </body>
 </html>
+
+<!--
+<ul>
+          <li *ngFor="let attempt of currentUser.attempts">
+            <div *ngFor="let quiz of quizList">
+              <div *ngIf="quiz.id === attempt.quizId">
+                {{ quiz.name }} : {{ attempt.score }} points
+              </div>
+            </div>
+          </li>
+        </ul>
+        -->

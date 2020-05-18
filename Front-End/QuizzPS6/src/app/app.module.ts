@@ -21,6 +21,7 @@ import { ResultatQuizComponent } from './resultat-quiz/resultat-quiz.component';
 import { ParametresQuizComponent } from './parametres-quiz/parametres-quiz.component';
 import { SelectionUserComponent } from './selection-user/selection-user.component';
 import { GestionThemeComponent } from './gestion-theme/gestion-theme.component';
+import { AttemptsUserComponent } from './attempts-user/attempts-user.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { GestionThemeComponent } from './gestion-theme/gestion-theme.component';
     ResultatQuizComponent,
     ParametresQuizComponent,
     SelectionUserComponent,
-    GestionThemeComponent
+    GestionThemeComponent,
+    AttemptsUserComponent
   ],
   imports: [
     BrowserModule,

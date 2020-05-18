@@ -72,4 +72,9 @@ export class GestionUserComponent implements OnInit {
     this.deleteState = 0;
     this.state = 4;
   }
+
+  seeAttempts() {
+    this.deleteState = 0;
+    this.state = 5;
+  }
 }

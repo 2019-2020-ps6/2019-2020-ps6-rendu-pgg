@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <ul style="width: 82%; border: 2px solid black;">
+    <h1>Historique des parties de {{currentUser.firstName}} :</h1>
+    <li *ngFor="let attempt of currentUser.attempts">
+      <div *ngFor="let quiz of quizList">
+        <div *ngIf="quiz.id === attempt.quizId">
+          {{ quiz.name }} : {{ attempt.score }} points
+        </div>
+      </div>
+    </li>
+    <button type ="button" class="ButtonAttempts" (click)="deleteAttempts()">Supprimer l'historique des parties de {{currentUser.firstName}}</button>
+  </ul>
+</body>
+</html>

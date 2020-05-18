@@ -11,22 +11,22 @@ PolyQuiz est un site web sur lequel on peut créer des quiz, des thèmes, des ut
 
 PolyQuiz s'adresse aux personnes âgées et aux patients souffrant d'Alzheimer et présente donc des fonctionnalités et outils permettant d'adapter le site web à ces personnes. Ce site web s'adresse également au personnel soignant qui y aura accès et pourra paramétrer les profils des utilisateurs avec leurs préférences de jeu, il pourra également créer des quiz et des thèmes pour que les patients y aient accès. 
 
-
-## Pré-requis
+## Installation
+### Pré-requis pour l'installation de l'application 
 
 Pour pouvoir manipuler l'application il y a quelques pré-requis listés ci-dessous : 
 * Installer :
 
-`* [Windows NodeJs Installer](https://nodejs.org/en/download/) (Pour les **versions Windows**)`
+    * [Windows NodeJs Installer](https://nodejs.org/en/download/) (Pour les **versions Windows**)
 
-`* [Linux NodeJs Installer](https://github.com/nodesource/distributions/blob/master/README.md#debinstall) (Pour les **versions Linux**)`
+    * [Linux NodeJs Installer](https://github.com/nodesource/distributions/blob/master/README.md#debinstall) (Pour les **versions Linux**)
 
 * Installer l'interface de lignes de commandes Angular (installer Angular) avec les lignes suivantes :
 ```bash
 npm install -g @angular/cli
 ```
 
-## Installation de l'application
+### Installation de l'application
 
 Tout d'abord pour accéder à l'application, il faut l'installer en suivant les étapes suivantes : 
 * Se positionner dans le répertoire où l'on souhaite créer le dossier contenant l'application avec une **invite de commande (cmd)**
@@ -35,7 +35,7 @@ Tout d'abord pour accéder à l'application, il faut l'installer en suivant les 
 git clone https://github.com/2019-2020-ps6/2019-2020-ps6-rendu-pgg.git
 ```
 
-## Dépendances
+### Installation des dépendances de l'application
 Pour configurer les dépendances du projet et donc le rendre fonctionnel, il faut installer certaines choses, pour cela on va faire les choses suivantes : 
 - Ouvrir une **invite de commandes** dans laquelle on se positionnera à la racine du projet tout juste cloné :
 ```bash
@@ -62,9 +62,9 @@ dans le répertoire du projet et on fait les commandes suivantes :
  ```bash
   cd 2019-2020-ps6-rendu-pgg\back-end
   ```
- 
+
 ```bash
-cd 2019-2020-ps6-rendu-pgg\Front-End\QuizzPS6
+npm run dev
 ```
 
 - Invite de commandes n°2 : 
@@ -80,6 +80,12 @@ Une fois la commande **ng serve --open** lancée, le site devrait s'ouvrir autom
 sur le navigateur. 
 S'il ne s'ouvre pas ou que vous désirez y accéder par vous même, vous pouvez saisir
 l'adresse suivante dans votre navigateur : ``` http://localhost:4200```
+
+
+##Structure du code 
+
+## Fonctionnalités du projet 
+
 
 
 
