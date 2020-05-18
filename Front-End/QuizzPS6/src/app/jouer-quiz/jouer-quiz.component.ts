@@ -21,17 +21,21 @@ export class JouerQuizComponent implements OnInit {
   public selectedAnswer: Answer;
   public selectedUser: User;
   public indexAnswer: number;
-  public questionCopy: Question;
   public currentAnswers: Answer[] = [];
   public currentFalseAnswers: Answer[] = [];
   public currentLessQuestionsNumber;
   public questionsInfos;
+  public saveQuiz: Quiz;
+  public questionsCopy: Question[] = [];
 
   // faire l initialisation du quiz et le recuperer avec le QuizService
   constructor(public quizService: QuizService, public userService: UserService) {
     console.log('CONSTRUCTEUR');
     this.quizService.quizSelected$.subscribe((quiz) => {
       this.selectedQuiz = quiz;
+      if (quiz) {
+        this.initQuestions();
+      }
     });
     this.userService.userSelected$.subscribe((user) => {
       this.selectedUser = user;
@@ -53,21 +57,15 @@ export class JouerQuizComponent implements OnInit {
   ngOnInit() {
     console.log('Jouer Quiz chargement');
     if (this.currentQuestion) {
+      // setTimeout(() => this.storeCurrentQuestionDatas(), 2000);
+      this.storeCurrentQuestionDatas();
       console.log('INIT FLEXIBLE');
       this.initFlexibleDifficultyOnQuestion();
+      console.log('Fin init flexible');
     }
-    console.log('Fin init flexible');
-    // this.questionsInfos.push([1, 2, 3]);
-    // this.questionsInfos.push([50, 2, this.currentAnswers]);
-    // console.log('Question Infos');
-    // console.log(this.questionsInfos);
   }
 
   selectionnerAnswer(answer: Answer, index: number) {
-    // console.log('Taille test ts : ');
-    // console.log(this.selectedQuiz.questions[this.selectedQuiz.questions.length - 1]);
-    // console.log('Reponse selectionne !');
-    // console.log(answer);
     this.selectedAnswer = answer;
     this.state = 2;
     this.indexAnswer = index;
@@ -84,9 +82,9 @@ export class JouerQuizComponent implements OnInit {
   }
 
   previousQuestion() {
-    this.fillQuestionWithAnswers();
     console.log('Previous Question Button\n\n');
     if (this.index !== 0) {
+      this.resetAlreadyAnsweredQuestion();
       this.index--;
       this.score -= 50;
       this.currentQuestion = this.selectedQuiz.questions[this.index];
@@ -101,6 +99,8 @@ export class JouerQuizComponent implements OnInit {
         // console.log('After POP questions infos ');
         // console.log(this.questionsInfos);
         this.resetAlreadyAnsweredQuestion();
+        this.storeCurrentQuestionDatas();
+        this.initFlexibleDifficultyOnQuestion();
       }
     }
     console.log('End Previous Question\n\n');
@@ -111,13 +111,6 @@ export class JouerQuizComponent implements OnInit {
     console.log(this.selectedAnswer);
     console.log('Index courant : ');
     console.log(this.index);
-    if (!this.selectedUser.repeatQuestion) {
-      console.log('Before Storage current Question :');
-      console.log(this.questionsInfos);
-      this.storeCurrentQuestionDatas();
-      console.log('After Storage current Question :');
-      console.log(this.questionsInfos);
-    }
     // if (this.state === 2) {
     if (this.selectedAnswer !== undefined) {
       console.log('Reponse selectionee');
@@ -187,7 +180,8 @@ export class JouerQuizComponent implements OnInit {
         this.currentLessQuestionsNumber = Math.min(2, this.currentLessQuestionsNumber);
         console.log('Math min 2 et lessQuestions : ' + this.currentLessQuestionsNumber);
       }
-      console.log('INIT FLEXIBLE Bonne reponse');
+      this.storeCurrentQuestionDatas();
+      console.log('INIT FLEXIBLE');
       this.initFlexibleDifficultyOnQuestion();
       console.log('Fin init flexible ');
     } else {
@@ -214,48 +208,48 @@ export class JouerQuizComponent implements OnInit {
       this.currentFalseAnswers = [];
       let minDelete = 0;
       for (let i = 0; i < this.currentQuestion.answers.length; i++) {
-        console.log('COUNT ANSWER : ' + i);
+        // console.log('COUNT ANSWER : ' + i);
         if (!this.currentQuestion.answers[i].isCorrect) {
-          console.log('COUNT FALSE ANSWER : ' + i);
-          console.log('Avant PUSH false Answers');
-          console.log(this.currentFalseAnswers);
+          // console.log('COUNT FALSE ANSWER : ' + i);
+          // console.log('Avant PUSH false Answers');
+          // console.log(this.currentFalseAnswers);
           this.currentFalseAnswers.push(this.currentQuestion.answers[i]);
-          console.log('APRES PUSH false ANswers');
-          console.log(this.currentFalseAnswers);
+          // console.log('APRES PUSH false ANswers');
+          // console.log(this.currentFalseAnswers);
         }
       }
       console.log('FIN premier for');
       minDelete = Math.min(this.currentLessQuestionsNumber, this.currentFalseAnswers.length);
       console.log('MIN DELETE : ' + minDelete);
       for ( let i = 0; i < minDelete; i++) {
-        console.log('COUNT DELETE : ' + i);
-        console.log(this.currentQuestion.answers);
+        // console.log('COUNT DELETE : ' + i);
+        // console.log(this.currentQuestion.answers);
         const randomNumber = Math.random();
-        console.log('Random Number' + randomNumber);
+        // console.log('Random Number' + randomNumber);
         const lengthFalseAnswers = this.currentFalseAnswers.length;
-        console.log('False ANswers length : ' + lengthFalseAnswers);
+        // console.log('False ANswers length : ' + lengthFalseAnswers);
         const randomIndex = Math.round((lengthFalseAnswers - 1) * randomNumber);
-        console.log('Random Index : ' + randomIndex);
+        // console.log('Random Index : ' + randomIndex);
         const randomFalseAnswer = this.currentFalseAnswers[randomIndex];
-        console.log('Random False Answer : ');
-        console.log(randomFalseAnswer);
+        // console.log('Random False Answer : ');
+        // console.log(randomFalseAnswer);
         const indexToDelete = this.currentQuestion.answers.indexOf(randomFalseAnswer);
-        console.log('Answer dans vraie liste a index : ' + indexToDelete);
-        console.log(this.currentQuestion.answers[indexToDelete]);
+        // console.log('Answer dans vraie liste a index : ' + indexToDelete);
+        // console.log(this.currentQuestion.answers[indexToDelete]);
         this.currentQuestion.answers.splice(indexToDelete, 1);
-        console.log('Before slice false answers');
-        console.log(this.currentFalseAnswers);
-        console.log('Before push in flex init currentAnswers');
-        console.log(this.currentAnswers);
+        // console.log('Before slice false answers');
+        // console.log(this.currentFalseAnswers);
+        // console.log('Before push in flex init currentAnswers');
+        // console.log(this.currentAnswers);
         // On ajoute la reponse que l on supprime a la liste des reponses initiales supprimes
         this.currentAnswers.push(this.currentFalseAnswers[randomIndex]);
-        console.log('After push in flex init currentAnswers');
-        console.log(this.currentAnswers);
+        // console.log('After push in flex init currentAnswers');
+        // console.log(this.currentAnswers);
         this.currentFalseAnswers.splice(randomIndex, 1);
-        console.log('After slice false answers');
-        console.log(this.currentFalseAnswers);
-        console.log('FIN DU  DELETE : ' + i);
-        console.log(this.currentQuestion.answers);
+        // console.log('After slice false answers');
+        // console.log(this.currentFalseAnswers);
+        // console.log('FIN DU  DELETE : ' + i);
+        // console.log(this.currentQuestion.answers);
       }
       console.log('CurrentQUestion : ');
       console.log(this.currentQuestion.answers);
@@ -264,15 +258,20 @@ export class JouerQuizComponent implements OnInit {
 
   storeCurrentQuestionDatas() {
     console.log('Storing datas : currentAnswers : ');
-    const currentAnswersToStore = this.currentQuestion.answers;
+    const currentAnswersToStore = JSON.parse(JSON.stringify(this.currentQuestion.answers));
+    // const currentAnswersToStore = this.currentQuestion.answers;
     console.log(currentAnswersToStore);
-    console.log('Fin Storing');
     this.questionsInfos.push([this.currentLessQuestionsNumber, currentAnswersToStore, this.score]);
+    console.log('Questions Infos after storing');
+    console.log(this.questionsInfos);
+    console.log('Fin Storing');
   }
 
   setEndOfQuiz() {
     this.userService.addAttempt(this.selectedUser, new Attempt(this.score, this.selectedQuiz.id));
     console.log('Taille depassee ! ');
+    // this.selectedQuiz = this.saveQuiz;
+    this.resetAnswers();
     this.state = 1;
     // this.index = 0;
     // this.currentLessQuestionsNumber = 0;
@@ -290,6 +289,20 @@ export class JouerQuizComponent implements OnInit {
   }
 
   initQuestions() {
+    for (let i = 0; i < this.selectedQuiz.questions.length; i++) {
+        this.questionsCopy.push(JSON.parse(JSON.stringify(this.selectedQuiz.questions[i])));
+    }
+    console.log('Copie des questions');
+    console.log(this.questionsCopy);
+    console.log('Fin affichage copie des questions');
+  }
 
+  resetAnswers() {
+    // Reset les reponses des questions
+    for (let i = 0; i < this.questionsCopy.length; i++) {
+      for (let j = 0; j < this.questionsCopy[i].answers.length; j++) {
+        this.selectedQuiz.questions[i].answers[j] = this.questionsCopy[i].answers[j];
+      }
+    }
   }
 }
