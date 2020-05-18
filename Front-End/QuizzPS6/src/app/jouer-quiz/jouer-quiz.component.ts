@@ -62,6 +62,7 @@ export class JouerQuizComponent implements OnInit {
       console.log('INIT FLEXIBLE');
       this.initFlexibleDifficultyOnQuestion();
       console.log('Fin init flexible');
+      console.log('CurrentLessQuestions : ' + this.currentLessQuestionsNumber);
     }
   }
 
@@ -127,20 +128,25 @@ export class JouerQuizComponent implements OnInit {
         if (this.selectedUser.repeatQuestion) {
           console.log('Debut ANswers');
           console.log(this.currentAnswers);
-          this.currentAnswers.push(this.selectedAnswer);
-          // console.log('Question Copy');
-          // console.log(this.questionCopy);
-          // console.log('Current Question Variable : ');
-          // console.log(this.currentQuestion);
-          this.currentQuestion.answers.splice(this.indexAnswer, 1);
-          // console.log('Original One Question : ');
-          // console.log(this.selectedQuiz.questions[this.index]);
-          // console.log('Current Question Variable : ');
-          // console.log(this.currentQuestion);
-          // console.log('Question Copy');
-          // console.log(this.questionCopy);
-          console.log('Reponses');
-          console.log(this.currentAnswers);
+          if (this.currentQuestion.answers.length > 2) {
+            this.currentAnswers.push(this.selectedAnswer);
+            // console.log('Question Copy');
+            // console.log(this.questionCopy);
+            // console.log('Current Question Variable : ');
+            // console.log(this.currentQuestion);
+            this.currentQuestion.answers.splice(this.indexAnswer, 1);
+            // console.log('Original One Question : ');
+            // console.log(this.selectedQuiz.questions[this.index]);
+            // console.log('Current Question Variable : ');
+            // console.log(this.currentQuestion);
+            // console.log('Question Copy');
+            // console.log(this.questionCopy);
+            console.log('Reponses');
+            console.log(this.currentAnswers);
+          }
+          this.currentLessQuestionsNumber++;
+          // this.currentLessQuestionsNumber = Math.min(2, this.currentLessQuestionsNumber);
+          this.score = this.score - 10;
         } else {
           this.goToNextQuestion(false);
         }
@@ -173,13 +179,15 @@ export class JouerQuizComponent implements OnInit {
       this.currentQuestion = this.selectedQuiz.questions[this.index];
       if (correct) {
         this.currentLessQuestionsNumber--;
-        this.currentLessQuestionsNumber = Math.max(0, this.currentLessQuestionsNumber);
+        // this.currentLessQuestionsNumber = Math.max(0, this.currentLessQuestionsNumber);
         console.log('Math max 0 et lessQuestions : ' + this.currentLessQuestionsNumber);
       } else {
         this.currentLessQuestionsNumber++;
-        this.currentLessQuestionsNumber = Math.min(2, this.currentLessQuestionsNumber);
+        // this.currentLessQuestionsNumber = Math.min(2, this.currentLessQuestionsNumber);
         console.log('Math min 2 et lessQuestions : ' + this.currentLessQuestionsNumber);
       }
+      this.currentLessQuestionsNumber = Math.min(2, this.currentLessQuestionsNumber);
+      this.currentLessQuestionsNumber = Math.max(0, this.currentLessQuestionsNumber);
       this.storeCurrentQuestionDatas();
       console.log('INIT FLEXIBLE');
       this.initFlexibleDifficultyOnQuestion();
@@ -272,7 +280,12 @@ export class JouerQuizComponent implements OnInit {
     console.log('Taille depassee ! ');
     // this.selectedQuiz = this.saveQuiz;
     this.resetAnswers();
+    for ( let i = 0; i < this.questionsInfos.length; i++) {
+      this.questionsInfos[i] = undefined;
+    }
     this.state = 1;
+    console.log('CurrentLessQuestins fin quizz : ');
+    console.log(this.currentLessQuestionsNumber);
     // this.index = 0;
     // this.currentLessQuestionsNumber = 0;
     // this.resetAlreadyAnsweredQuestion();
