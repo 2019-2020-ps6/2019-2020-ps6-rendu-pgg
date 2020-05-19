@@ -25,8 +25,6 @@ import { AttemptsUserComponent } from './attempts-user/attempts-user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
-import {MAT_BOTTOM_SHEET_DEFAULT_OPTIONS, MatBottomSheet} from '@angular/material/bottom-sheet';
-import { MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 @NgModule({
   declarations: [
@@ -55,15 +53,14 @@ import { MatBottomSheetModule} from '@angular/material/bottom-sheet';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule,
-    MatBottomSheetModule
+    BrowserAnimationsModule
   ],
   entryComponents: [
 ],
   exports: [
     MatSnackBarModule
   ],
-  providers: [{provide: MAT_BOTTOM_SHEET_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
