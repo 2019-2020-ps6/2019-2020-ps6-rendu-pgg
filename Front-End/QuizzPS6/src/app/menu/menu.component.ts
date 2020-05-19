@@ -1,6 +1,7 @@
 import { User } from './../../models/user.model';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-menu',
@@ -11,7 +12,7 @@ export class MenuComponent implements OnInit {
   state: number;
   public user: User;
 
-  constructor(public userService: UserService) {
+  constructor(public userService: UserService, private snackBar: MatSnackBar) {
     this.state = 0;
 
     this.userService.userSelected$.subscribe((user) => {
@@ -21,6 +22,10 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     console.log('menu Hub chargé');
+  }
+
+  openSnackBar(message) {
+    this.snackBar.open(message);
   }
 
   playQuiz() {

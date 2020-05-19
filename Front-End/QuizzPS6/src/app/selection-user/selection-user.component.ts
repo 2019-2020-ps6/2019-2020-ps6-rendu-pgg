@@ -9,7 +9,7 @@ import { User } from 'src/models/user.model';
 })
 export class SelectionUserComponent implements OnInit {
   public userList: User[] = [];
-  private state: number;
+  public state: number;
   public user: User;
 
   constructor(public userService: UserService) {

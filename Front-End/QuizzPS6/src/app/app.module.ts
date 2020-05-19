@@ -10,7 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { QuizFormComponent } from './quizzes/quiz-form/quiz-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { QuizCreationComponent } from './quizzes/quiz-creation/quiz-creation.component';
-import { MenuComponent } from './menu/menu.component';
+import { MenuComponent} from './menu/menu.component';
 import { NouveauQuizComponent } from './quizzes/quiz-creation/nouveau-quiz/nouveau-quiz.component';
 import { SelectionThemeComponent } from './selection-theme/selection-theme.component';
 import { SelectionQuizComponent } from './selection-quiz/selection-quiz.component';
@@ -22,6 +22,11 @@ import { ParametresQuizComponent } from './parametres-quiz/parametres-quiz.compo
 import { SelectionUserComponent } from './selection-user/selection-user.component';
 import { GestionThemeComponent } from './gestion-theme/gestion-theme.component';
 import { AttemptsUserComponent } from './attempts-user/attempts-user.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
+import {MAT_BOTTOM_SHEET_DEFAULT_OPTIONS, MatBottomSheet} from '@angular/material/bottom-sheet';
+import { MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 @NgModule({
   declarations: [
@@ -49,9 +54,16 @@ import { AttemptsUserComponent } from './attempts-user/attempts-user.component';
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatBottomSheetModule
   ],
-  providers: [],
+  entryComponents: [
+],
+  exports: [
+    MatSnackBarModule
+  ],
+  providers: [{provide: MAT_BOTTOM_SHEET_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
