@@ -20,6 +20,13 @@ export class ThemeService {
     this.setThemesFromUrl();
   }
 
+  getLastCreatedTheme() {
+    if (this.themes.length === 0) {
+      return 0;
+    }
+    return this.themes.slice(-1)[0].id;
+  }
+
   setSelectedTheme(themeId: string) {
     const urlWithId = this.themeUrl + '/' + themeId;
     this.http.get<Theme>(urlWithId).subscribe((theme) => {

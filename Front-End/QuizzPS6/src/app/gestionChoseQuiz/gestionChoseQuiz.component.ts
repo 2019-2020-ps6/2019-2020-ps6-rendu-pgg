@@ -17,12 +17,18 @@ export class GestionChoseQuizComponent implements OnInit {
   public quizForm: FormGroup;
   themeList: Theme[] = [];
   deleteState: number;
+  public newthemeForm: FormGroup;
+
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService, public themeService: ThemeService) {
     this.quizService.quizzes$.subscribe((quiz) => this.quizList = quiz);
     this.state = 0;
     this.deleteState = 0;
     this.themeService.themes$.subscribe((theme) => this.themeList = theme);
+
+    this.newthemeForm = this.formBuilder.group({
+      name: [''],
+    });
 
     this.quizForm = this.formBuilder.group({
       name: [''],
@@ -61,6 +67,12 @@ export class GestionChoseQuizComponent implements OnInit {
     const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
     quizToCreate.questions = [];
     quizToCreate.themeId = Number(this.quizForm.getRawValue().theme);
+    const themeToCreate: Theme = this.newthemeForm.getRawValue() as Theme;
+    if (themeToCreate.name) {
+      themeToCreate.id = (this.themeService.getLastCreatedTheme() + 1);
+      this.themeService.createTheme(themeToCreate);
+      quizToCreate.themeId = Number(themeToCreate.id);
+    }
     // Do you need to log your object here in your class? Uncomment the code below
     // and open your console in your browser by pressing F12 and choose the tab "Console".
     // You will see your quiz object when you click on the create button.
