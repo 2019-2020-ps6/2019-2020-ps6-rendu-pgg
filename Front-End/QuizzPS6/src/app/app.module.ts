@@ -23,7 +23,6 @@ import { SelectionUserComponent } from './selection-user/selection-user.componen
 import { GestionThemeComponent } from './gestion-theme/gestion-theme.component';
 import { AttemptsUserComponent } from './attempts-user/attempts-user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSnackBar} from '@angular/material/snack-bar';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({

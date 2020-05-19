@@ -24,8 +24,8 @@ export class MenuComponent implements OnInit {
     console.log('menu Hub chargé');
   }
 
-  openSnackBar(message) {
-    this.snackBar.open(message);
+  openSnackBar(message, action) {
+    this.snackBar.open(message, action);
   }
 
   playQuiz() {
@@ -41,6 +41,7 @@ export class MenuComponent implements OnInit {
   }
 
   editTheme() {
+    this.openSnackBar('Testing SnackBar', 'dismiss');
     this.state = 5;
   }
 

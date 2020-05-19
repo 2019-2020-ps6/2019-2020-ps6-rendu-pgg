@@ -4,6 +4,7 @@ import { Quiz } from '../../models/quiz.model';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-gestion-user',
@@ -19,7 +20,8 @@ export class GestionUserComponent implements OnInit {
 
   public userForm: FormGroup;
 
-  constructor(public formBuilder: FormBuilder, public userService: UserService, public quizService: QuizService) {
+  constructor(public formBuilder: FormBuilder, public userService: UserService, public quizService: QuizService,
+              private snackBar: MatSnackBar) {
     this.userForm = this.formBuilder.group({
       firstName: [''],
       lastName: [''],
@@ -35,6 +37,9 @@ export class GestionUserComponent implements OnInit {
     console.log('menu user chargé');
   }
 
+  openSnackBar(message, action) {
+    this.snackBar.open(message, action, {duration: 2000});
+  }
   selectUser(user: User) {
     this.state = 1;
     this.currentUser = user;
@@ -54,6 +59,9 @@ export class GestionUserComponent implements OnInit {
     // Now, add your quiz in the list!
     this.userService.addUser(userToCreate);
     this.deleteState = 0;
+    if (userToCreate.firstName && userToCreate.lastName) {
+      this.openSnackBar('Utilisateur créé !', 'Ok');
+    }
   }
 
   confirmDelete() {
@@ -65,6 +73,7 @@ export class GestionUserComponent implements OnInit {
     this.state = 0;
     this.deleteState = 0;
     this.userService.deleteUser(user);
+    this.openSnackBar('Utilisateur supprimé !', 'Ok');
   }
 
   userOption(user: User) {

@@ -22,7 +22,7 @@ export class ThemeService {
 
   getLastCreatedTheme() {
     if (this.themes.length === 0) {
-      return 0;
+      return '0';
     }
     return this.themes.slice(-1)[0].id;
   }

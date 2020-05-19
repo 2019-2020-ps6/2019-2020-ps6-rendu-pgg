@@ -33,7 +33,6 @@
     <button *ngSwitchDefault type="button" class="btn btn2" (click)="editQuiz()">Gérer les Quiz</button>
     <button *ngSwitchDefault type="button" class="btn btn3" (click)="editUser()">Gérer les Utilisateurs</button>
     <button *ngSwitchDefault type="button" class="btn btn3" (click)="editTheme()">Gérer les Thèmes</button>
-    <button *ngSwitchDefault type="button" class="btn btn3" (click)="openSnackBar('ItemDeleted')">Gérer les SnackBar</button>
     <ng-container *ngIf="user">
       {{user.bigPointer ? setBigCursor() : removeBigCursor()}}
     </ng-container>
