@@ -179,4 +179,7 @@ export class EditQuestionsComponent implements OnInit {
     this.quizService.addQuestion(this.quiz, parsed);
   }
 
+  goToSelectionQuiz() {
+    this.state = 5;
+  }
 }

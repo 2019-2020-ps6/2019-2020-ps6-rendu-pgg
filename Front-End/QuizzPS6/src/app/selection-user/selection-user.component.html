@@ -29,8 +29,10 @@
 </head>
 <div [ngSwitch]="state">
     <div *ngSwitchCase="1">
-        <app-parametres-quiz></app-parametres-quiz>
-        <button class="button" (click)="selectTheme()">Choisissez un theme</button>
+      <button type="button" class="button-card" (click)="goToSelectionUser()" style="margin-top:10px; margin-bottom: 10px;width: 140px; height:36px; color: #fff;background:linear-gradient(to right,#2677CD,#53E9C5); border:none; border-radius: 5px;">Retour à la sélection d'utilisateurs
+      </button>
+      <app-parametres-quiz></app-parametres-quiz>
+      <button class="button" (click)="selectTheme()">Choisissez un theme</button>
     </div>
 
     <div *ngSwitchCase="2">

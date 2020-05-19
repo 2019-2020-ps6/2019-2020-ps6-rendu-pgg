@@ -54,8 +54,12 @@
 			<div *ngSwitchCase="1">
 			  <app-selection-quiz></app-selection-quiz>
 			</div>
+      <div *ngSwitchCase="5">
+        <app-selection-user></app-selection-user>
+      </div>
 			<div *ngSwitchDefault>
-
+        <button type="button" class="button-card" (click)="goToSelectionUser()" style="margin-top:10px; margin-bottom: 10px;width: 140px; height:36px; color: #fff;background:linear-gradient(to right,#2677CD,#53E9C5); border:none; border-radius: 5px;">Retour à la sélection d'utilisateurs
+        </button>
 	      <h1 style="text-align: center; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: 600; color: #2690CD;">Choisissez un thème</h1>
         <div class="cont">
           <ul>

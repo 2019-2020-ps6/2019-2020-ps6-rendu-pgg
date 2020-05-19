@@ -104,4 +104,8 @@ export class SelectionQuizComponent implements OnInit {
       console.log('Fin de methode testFilter');
     }
   }
+
+  goToSelectionTheme() {
+    this.state = 5;
+  }
 }

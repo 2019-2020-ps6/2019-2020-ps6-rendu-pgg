@@ -1,3 +1,10 @@
+<div [ngSwitch]="state">
+  <div *ngSwitchCase="5">
+    <app-gestion-chose-quiz></app-gestion-chose-quiz>
+  </div>
+  <div *ngSwitchDefault>
+    <button type="button" class="button-card" (click)="goToSelectionQuiz()" style="margin-top:10px; margin-bottom: 10px;width: 140px; height:36px; color: #fff;background:linear-gradient(to right,#2677CD,#53E9C5); border:none; border-radius: 5px;">Retour à la gestion de Quiz
+    </button>
 <h1 style="text-align: center; margin-top: 50px; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 36px;">Ajouter/Modifier les questions du Quiz : {{ quiz.name }}</h1>
 <div style="width: 45%; border:1px solid #000; float: left; margin: 20px;">
     <fieldset>
@@ -69,3 +76,4 @@
         </div>
 
     </div>
+  </div>

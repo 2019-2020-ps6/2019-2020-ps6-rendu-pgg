@@ -31,4 +31,8 @@ export class SelectionUserComponent implements OnInit {
   selectTheme() {
     this.state = 2;
   }
+
+  goToSelectionUser() {
+    this.state = 0;
+  }
 }

@@ -65,4 +65,8 @@ export class SelectionThemeComponent implements OnInit {
     this.start = this.start - 4;
     this.end = this.end - 4;
   }
+
+  goToSelectionUser() {
+    this.state = 5 ;
+  }
 }
