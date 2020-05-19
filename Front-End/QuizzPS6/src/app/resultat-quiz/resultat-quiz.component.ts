@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-resultat-quiz',
@@ -12,7 +13,7 @@ export class ResultatQuizComponent implements OnInit {
   public state: number;
   public currentUser: User;
 
-  constructor(public userService: UserService) {
+  constructor(public userService: UserService, private snackBar: MatSnackBar) {
     this.userService.userSelected$.subscribe((user) => (this.currentUser = user));
     console.log('RESULTAT QUIZ');
   }
@@ -23,6 +24,10 @@ export class ResultatQuizComponent implements OnInit {
       this.score = Math.max(this.score, 0);
     }
     console.log('New Score');
+  }
+
+  openSnackBar(message, action) {
+    this.snackBar.open(message, action, {duration: 2000});
   }
 
   recommencerQuiz() {

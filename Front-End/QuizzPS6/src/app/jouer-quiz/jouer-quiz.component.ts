@@ -5,6 +5,7 @@ import { Answer, Question } from '../../models/question.model';
 import { Attempt } from 'src/models/attempt.model';
 import { UserService } from 'src/services/user.service';
 import { User } from 'src/models/user.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-jouer-quiz',
@@ -29,7 +30,7 @@ export class JouerQuizComponent implements OnInit {
   public questionsCopy: Question[] = [];
 
   // faire l initialisation du quiz et le recuperer avec le QuizService
-  constructor(public quizService: QuizService, public userService: UserService) {
+  constructor(public quizService: QuizService, public userService: UserService, private snackBar: MatSnackBar) {
     console.log('CONSTRUCTEUR');
     this.quizService.quizSelected$.subscribe((quiz) => {
       this.selectedQuiz = quiz;
@@ -66,10 +67,16 @@ export class JouerQuizComponent implements OnInit {
     }
   }
 
+  openSnackBar(message, action) {
+    this.snackBar.open(message, action, {duration: 2000});
+  }
+
   selectionnerAnswer(answer: Answer, index: number) {
     this.selectedAnswer = answer;
     this.state = 2;
     this.indexAnswer = index;
+    setTimeout(() => {const userPop = 'Réponse \"' + this.selectedAnswer.value + '\" sélectionnée';
+                      this.openSnackBar(userPop, 'Ok'); }, 100);
   }
 
   check() {
@@ -106,6 +113,7 @@ export class JouerQuizComponent implements OnInit {
     }
     console.log('End Previous Question\n\n');
     // Rajouter ici des choses pour stocker les objets des questions precedentes
+    this.openSnackBar('Retour à la question précédente effectué !', 'Ok');
   }
 
   validerAnswer() {
@@ -154,6 +162,7 @@ export class JouerQuizComponent implements OnInit {
       // this.fillQuestionWithAnswers();
     } else {
       console.log('Pas de reponse identifiee !');
+      this.openSnackBar('Veuillez sélectionner une réponse à valider !', 'Ok');
     }
   }
 
@@ -192,6 +201,7 @@ export class JouerQuizComponent implements OnInit {
       console.log('INIT FLEXIBLE');
       this.initFlexibleDifficultyOnQuestion();
       console.log('Fin init flexible ');
+      this.openSnackBar('Question suivante ! ', 'Ok');
     } else {
       // Ici, il faudra renvoyer sur l ecran de fin de partie
       // this.userService.addAttempt(this.selectedUser, new Attempt(this.score, this.selectedQuiz.id));
@@ -200,6 +210,7 @@ export class JouerQuizComponent implements OnInit {
       // this.index = 0;
       // this.resetAlreadyAnsweredQuestion();
       this.setEndOfQuiz();
+      this.openSnackBar('Quiz terminé !', 'Ok');
     }
   }
 

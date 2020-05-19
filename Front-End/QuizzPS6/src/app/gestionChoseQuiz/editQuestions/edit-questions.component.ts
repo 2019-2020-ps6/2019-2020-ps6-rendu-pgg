@@ -3,6 +3,8 @@ import { Quiz } from 'src/models/quiz.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Question, Answer } from 'src/models/question.model';
 import { QuizService } from 'src/services/quiz.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {UserService} from '../../../services/user.service';
 
 @Component({
   selector: 'app-edit-questions',
@@ -16,7 +18,7 @@ export class EditQuestionsComponent implements OnInit {
   public questionEditForm: FormGroup;
   editedQuestion: Question;
 
-  constructor(public formBuilder: FormBuilder, public quizService: QuizService) {
+  constructor(public formBuilder: FormBuilder, public quizService: QuizService, private snackBar: MatSnackBar) {
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
     this.questionForm = this.formBuilder.group({
       label: [''],
@@ -48,8 +50,13 @@ export class EditQuestionsComponent implements OnInit {
   ngOnInit() {
   }
 
+  openSnackBar(message, action) {
+    this.snackBar.open(message, action, {duration: 2000});
+  }
+
   deleteQuestion() {
     this.quizService.deleteQuestion(this.quiz, this.editedQuestion);
+    this.openSnackBar('Question supprimée !', 'Ok');
   }
 
   selectQuestion(question: Question) {
@@ -73,6 +80,9 @@ export class EditQuestionsComponent implements OnInit {
       this.questionEditForm.get('answer4').setValue(this.editedQuestion.answers[3].value);
       this.questionEditForm.get('answer4true').setValue(this.editedQuestion.answers[3].isCorrect);
     }
+
+    setTimeout(() => {const questionPop = 'Question \"' + question.label + '\" sélectionné';
+                      this.openSnackBar(questionPop, 'Ok'); }, 100);
   }
 
   updateQuestion() {
@@ -121,6 +131,8 @@ export class EditQuestionsComponent implements OnInit {
     }
 
     this.quizService.editQuestion(this.quiz, questionToUpdate);
+    setTimeout(() => {const questionPop = 'Question \"' + questionToUpdate.label + '\" sélectionnée';
+                      this.openSnackBar(questionPop, 'Ok'); }, 100);
   }
 
   createQuestions() {
@@ -177,6 +189,8 @@ export class EditQuestionsComponent implements OnInit {
     delete parsed.answer3true;
     delete parsed.answer4true;
     this.quizService.addQuestion(this.quiz, parsed);
+    setTimeout(() => {const questionPop = 'Question \"' + questionToCreate.label + '\" sélectionnée';
+                      this.openSnackBar(questionPop, 'Ok'); }, 100);
   }
 
   goToSelectionQuiz() {

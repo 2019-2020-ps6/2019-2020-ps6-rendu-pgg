@@ -3,6 +3,8 @@ import {Quiz} from '../../models/quiz.model';
 import {QuizService} from '../../services/quiz.service';
 import {ThemeService} from '../../services/theme.service';
 import {Theme} from '../../models/theme.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {UserService} from '../../services/user.service';
 
 
 @Component({
@@ -19,7 +21,7 @@ export class SelectionQuizComponent implements OnInit {
   public start = 0;
   public end = 3;
 
-  constructor(public quizService: QuizService, public themeService: ThemeService) {
+  constructor(public quizService: QuizService, public themeService: ThemeService, private snackBar: MatSnackBar) {
     this.quizService.quizzes$.subscribe((quiz) => {
       this.quizList = quiz;
       if (quiz) {
@@ -49,6 +51,10 @@ export class SelectionQuizComponent implements OnInit {
     }
   }
 
+  openSnackBar(message, action) {
+    this.snackBar.open(message, action, {duration: 1000});
+  }
+
   selectionnerQuiz(quizId: string) {
     console.log('Quiz selectionne !');
     console.log(quizId);
@@ -60,6 +66,8 @@ export class SelectionQuizComponent implements OnInit {
     // this.themeService.themeSelected$.subscribe((theme) => this.currentTheme = theme);
     // console.log(this.currentTheme);
     this.state = 2;
+    setTimeout(() => {const userPop = 'Thème ' + this.selectedQuiz.name + ' sélectionné';
+                      this.openSnackBar(userPop, 'Ok'); }, 100);
   }
 
   check() {
@@ -79,6 +87,7 @@ export class SelectionQuizComponent implements OnInit {
       this.state = 1;
     } else {
       console.log('NUL');
+      this.openSnackBar('Veuillez sélectionner un quiz avant de valider !', 'Ok');
     }
   }
 

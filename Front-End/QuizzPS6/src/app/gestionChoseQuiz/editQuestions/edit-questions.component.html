@@ -9,7 +9,7 @@
 <div style="width: 45%; border:1px solid #000; float: left; margin: 20px;">
     <fieldset>
       <legend style="font-family: Arial, Helvetica, sans-serif; font-weight: 600;margin: 20px;">Liste des Questions</legend>
-          <div class="user" *ngFor="let question of quiz.questions" style="border:1px solid #000;">
+          <div class="user" *ngFor="let question of quiz.questions" style="border:1px solid #000;margin-bottom: 2px;">
             {{ question.label }}
             <button style="float: right;" (click)="selectQuestion(question)">Sélectionner</button>
           </div>

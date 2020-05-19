@@ -45,6 +45,8 @@ export class GestionUserComponent implements OnInit {
     this.currentUser = user;
     this.userService.setSelectedUser(user.id);
     this.deleteState = 0;
+    setTimeout(() => {const userPop = 'Utilisateur ' + this.currentUser.firstName + ' ' + this.currentUser.lastName + ' sélectionné';
+                      this.openSnackBar(userPop, 'Ok'); }, 100);
   }
 
   createUser() {

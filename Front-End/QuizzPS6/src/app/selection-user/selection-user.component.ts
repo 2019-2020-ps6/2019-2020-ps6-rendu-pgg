@@ -1,6 +1,7 @@
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/models/user.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-selection-user',
@@ -12,7 +13,7 @@ export class SelectionUserComponent implements OnInit {
   public state: number;
   public user: User;
 
-  constructor(public userService: UserService) {
+  constructor(public userService: UserService, private snackBar: MatSnackBar) {
     this.userService.users$.subscribe((user) => (this.userList = user));
     this.state = 0;
 
@@ -23,9 +24,15 @@ export class SelectionUserComponent implements OnInit {
 
   ngOnInit() {}
 
+  openSnackBar(message, action) {
+    this.snackBar.open(message, action, {duration: 1000});
+  }
+
   selectUser(userId: string) {
     this.userService.setSelectedUser(userId);
     this.state = 1;
+    setTimeout(() => {const userPop = 'Utilisateur ' + this.user.firstName + ' ' + this.user.lastName + ' sélectionné';
+                      this.openSnackBar(userPop, 'Ok'); }, 100);
   }
 
   selectTheme() {

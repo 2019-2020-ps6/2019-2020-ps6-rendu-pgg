@@ -4,6 +4,7 @@ import { Quiz } from '../../models/quiz.model';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-attempts-user',
@@ -18,7 +19,8 @@ export class AttemptsUserComponent implements OnInit {
 
   public userForm: FormGroup;
 
-  constructor(public formBuilder: FormBuilder, public userService: UserService, public quizService: QuizService) {
+  constructor(public formBuilder: FormBuilder, public userService: UserService, public quizService: QuizService,
+              private snackBar: MatSnackBar) {
     this.userForm = this.formBuilder.group({
       firstName: [''],
       lastName: [''],
@@ -35,6 +37,11 @@ export class AttemptsUserComponent implements OnInit {
   }
   deleteAttempts() {
     this.currentUser.attempts = [];
+    this.openSnackBar('Historique des parties supprimé !', 'Ok');
+  }
+
+  openSnackBar(message, action) {
+    this.snackBar.open(message, action, {duration: 2000});
   }
 
 }

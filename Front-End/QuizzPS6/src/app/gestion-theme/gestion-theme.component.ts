@@ -4,6 +4,8 @@ import { Theme } from '../../models/theme.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {QuizService} from '../../services/quiz.service';
 import {Quiz} from '../../models/quiz.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-gestion-theme',
@@ -18,7 +20,8 @@ export class GestionThemeComponent implements OnInit {
 
   public themeForm: FormGroup;
 
-  constructor(public formBuilder: FormBuilder, public themeService: ThemeService, public quizService: QuizService) {
+  constructor(public formBuilder: FormBuilder, public themeService: ThemeService, public quizService: QuizService,
+              private snackBar: MatSnackBar) {
     this.themeService.themes$.subscribe((user) => this.themeList = user);
     this.quizService.quizzes$.subscribe((quiz) => this.quizList = quiz);
 
@@ -35,10 +38,16 @@ export class GestionThemeComponent implements OnInit {
     console.log('menu theme chargé');
   }
 
+  openSnackBar(message, action) {
+    this.snackBar.open(message, action, {duration: 2000});
+  }
+
   selectTheme(theme: Theme) {
     this.state = 1;
     this.currentTheme = theme;
     this.themeService.setSelectedTheme(theme.id);
+    setTimeout(() => {const themePop = 'Theme ' + theme.name + ' sélectionné !';
+                      this.openSnackBar(themePop, 'Ok'); }, 100);
   }
 
   createTheme() {
@@ -50,6 +59,10 @@ export class GestionThemeComponent implements OnInit {
 
     // Now, add your quiz in the list!
     this.themeService.createTheme(themeToCreate);
+    if (themeToCreate.name !== '') {
+      setTimeout(() => {const themePop = 'Theme ' + themeToCreate.name + ' créé';
+                        this.openSnackBar(themePop, 'Ok'); }, 100);
+    }
   }
 
   deleteTheme(theme: Theme) {
@@ -57,6 +70,8 @@ export class GestionThemeComponent implements OnInit {
 
     this.state = 0;
     this.themeService.deleteTheme(theme);
+    setTimeout(() => {const themePop = 'Theme ' + theme.name + ' supprimé !';
+                      this.openSnackBar(themePop, 'Ok'); }, 100);
   }
 
   ThemeOption(theme: Theme) {

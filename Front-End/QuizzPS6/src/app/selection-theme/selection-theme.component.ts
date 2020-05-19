@@ -3,6 +3,7 @@ import { ThemeService } from '../../services/theme.service';
 import { UserService } from 'src/services/user.service';
 import { Theme } from '../../models/theme.model';
 import { User } from 'src/models/user.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-selection-theme',
@@ -18,7 +19,7 @@ export class SelectionThemeComponent implements OnInit {
   public buttonText = 'Choisissez un thème';
   public selectedUser: User;
 
-  constructor(public themeService: ThemeService, public userService: UserService) {
+  constructor(public themeService: ThemeService, public userService: UserService, private snackBar: MatSnackBar) {
     this.themeService.themes$.subscribe((theme) => (this.themeList = theme));
     this.themeService.themeSelected$.subscribe((theme) => (this.currentTheme = theme));
     this.userService.userSelected$.subscribe((user) => {
@@ -33,6 +34,10 @@ export class SelectionThemeComponent implements OnInit {
     console.log('Selection theme : ');
   }
 
+  openSnackBar(message, action) {
+    this.snackBar.open(message, action, {duration: 1000});
+  }
+
   selectionnerTheme(themeId: string) {
     console.log('Theme selectionne !');
     console.log(themeId);
@@ -45,6 +50,8 @@ export class SelectionThemeComponent implements OnInit {
     // console.log(this.currentTheme);
     this.state = 2;
     this.buttonText = 'Valider';
+    setTimeout(() => {const userPop = 'Thème ' + this.currentTheme.name + ' sélectionné';
+                      this.openSnackBar(userPop, 'Ok'); }, 100);
   }
 
   validerTheme() {
@@ -55,6 +62,7 @@ export class SelectionThemeComponent implements OnInit {
       this.state = 1;
     } else {
       console.log('NUL');
+      this.openSnackBar('Veuillez sélectionner un thème avant de valider !', 'Ok');
     }
   }
   viewNext() {

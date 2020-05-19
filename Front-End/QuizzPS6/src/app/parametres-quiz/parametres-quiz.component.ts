@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/models/user.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from 'src/services/user.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-parametres-quiz',
@@ -12,7 +13,7 @@ export class ParametresQuizComponent implements OnInit {
   public paramsForm: FormGroup;
   public user: User;
 
-  constructor(public formBuilder: FormBuilder, public userService: UserService) {
+  constructor(public formBuilder: FormBuilder, public userService: UserService, private snackBar: MatSnackBar) {
     this.paramsForm = this.formBuilder.group({
       nextQuestionFollows: [],
       bigPointer: [],
@@ -39,6 +40,10 @@ export class ParametresQuizComponent implements OnInit {
     });
   }
 
+  openSnackBar(message, action) {
+    this.snackBar.open(message, action, {duration: 1000});
+  }
+
   presetParams(user: User) {
     this.paramsForm.get('nextQuestionFollows').setValue(user.nextQuestionFollows);
     this.paramsForm.get('bigPointer').setValue(user.bigPointer);
@@ -62,5 +67,6 @@ export class ParametresQuizComponent implements OnInit {
     this.user.answersColor = this.paramsForm.controls.answersColor.value;
     this.user.displayScore = this.paramsForm.controls.displayScore.value;
     this.userService.updateUser(this.user);
+    this.openSnackBar('Paramètres sauvegardés', 'Ok');
   }
 }

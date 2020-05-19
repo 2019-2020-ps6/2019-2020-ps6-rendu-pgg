@@ -4,6 +4,8 @@ import { Quiz } from '../../models/quiz.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {Theme} from '../../models/theme.model';
 import {ThemeService} from '../../services/theme.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-gestion-chose-quiz',
@@ -20,7 +22,8 @@ export class GestionChoseQuizComponent implements OnInit {
   public newthemeForm: FormGroup;
 
 
-  constructor(public formBuilder: FormBuilder, public quizService: QuizService, public themeService: ThemeService) {
+  constructor(public formBuilder: FormBuilder, public quizService: QuizService, public themeService: ThemeService,
+              private snackBar: MatSnackBar) {
     this.quizService.quizzes$.subscribe((quiz) => this.quizList = quiz);
     this.state = 0;
     this.deleteState = 0;
@@ -41,6 +44,10 @@ export class GestionChoseQuizComponent implements OnInit {
     console.log('menu chargé gestion quiz');
   }
 
+  openSnackBar(message, action) {
+    this.snackBar.open(message, action, {duration: 2000});
+  }
+
   createQuiz() {
     this.state = 1;
     this.deleteState = 0;
@@ -50,12 +57,15 @@ export class GestionChoseQuizComponent implements OnInit {
     this.currentQuiz = quiz;
     this.quizService.setSelectedQuiz(this.currentQuiz.id);
     this.deleteState = 0;
+    setTimeout(() => {const userPop = 'Quiz ' + this.currentQuiz.name + ' sélectionné';
+                      this.openSnackBar(userPop, 'Ok'); }, 100);
   }
 
   deleteQuiz(quiz: Quiz) {
     this.quizService.deleteQuiz(quiz);
     this.deleteState = 0;
     this.currentQuiz = this.quizList[0];
+    this.openSnackBar('Quiz supprimé !', 'Ok');
   }
 
   confirmDelete() {

@@ -41,7 +41,6 @@ export class MenuComponent implements OnInit {
   }
 
   editTheme() {
-    this.openSnackBar('Testing SnackBar', 'dismiss');
     this.state = 5;
   }
 
