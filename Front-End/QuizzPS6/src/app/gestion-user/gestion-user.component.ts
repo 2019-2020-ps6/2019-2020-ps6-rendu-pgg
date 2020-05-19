@@ -62,7 +62,10 @@ export class GestionUserComponent implements OnInit {
     this.userService.addUser(userToCreate);
     this.deleteState = 0;
     if (userToCreate.firstName && userToCreate.lastName) {
-      this.openSnackBar('Utilisateur créé !', 'Ok');
+      setTimeout(() => {const userPop = 'Utilisateur ' + userToCreate.firstName + ' ' + userToCreate.lastName + ' créé';
+                        this.openSnackBar(userPop, 'Ok'); }, 100);
+    } else {
+      this.openSnackBar('Veuillez renseigner un nom et un prénom d\'utilisateur à créer ! ', 'Ok');
     }
   }
 

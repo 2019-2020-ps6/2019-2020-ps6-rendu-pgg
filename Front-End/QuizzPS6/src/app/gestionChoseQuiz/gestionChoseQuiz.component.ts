@@ -90,6 +90,12 @@ export class GestionChoseQuizComponent implements OnInit {
     // Now, add your quiz in the list!
     this.quizService.addQuiz(quizToCreate);
     this.state = 0;
+    if (quizToCreate.name !== '' && quizToCreate.themeId !== undefined) {
+      setTimeout(() => {const quizPop = 'Quiz \"' + quizToCreate.name + '\" créé';
+                        this.openSnackBar(quizPop, 'Ok'); }, 100);
+    } else {
+      this.openSnackBar('Veuillez renseigner un nom de quiz à créer ainsi qu\'un thème ! ', 'Ok');
+    }
   }
 
 }

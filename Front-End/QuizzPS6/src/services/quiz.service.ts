@@ -89,4 +89,20 @@ export class QuizService {
     this.deleteQuestion(quiz, question);
     this.addQuestion(quiz, question);
   }
+  countThemeQuiz(theme: Theme) {
+    let amount = 0;
+    for (const quiz of this.quizzes) {
+      // console.log('lafete');
+      // console.log(quiz.themeId);
+      // console.log(theme.id);
+      if (quiz.themeId.toString() === theme.id.toString()) {
+          if (quiz.questions.length > 0) {
+            // console.log('HOURRA');
+            amount++;
+          }
+      }
+    }
+    // console.log('Amount : ' + amount);
+    return amount;
+  }
 }

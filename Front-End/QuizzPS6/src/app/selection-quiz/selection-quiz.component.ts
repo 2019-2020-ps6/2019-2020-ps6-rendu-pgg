@@ -26,7 +26,7 @@ export class SelectionQuizComponent implements OnInit {
       this.quizList = quiz;
       if (quiz) {
         if (this.selectedTheme) {
-           this.testFilter();
+           this.filterQuizzes();
            console.log('CONSTRUCTEUR INIT ABONNEMENT');
         }
       }
@@ -46,7 +46,7 @@ export class SelectionQuizComponent implements OnInit {
     console.log('Fin affichage selection Quiz');
     if (this.quizList) {
       if (this.selectedTheme) {
-        this.testFilter();
+        this.filterQuizzes();
       }
     }
   }
@@ -100,7 +100,7 @@ export class SelectionQuizComponent implements OnInit {
     this.end = this.end - 3;
   }
 
-  testFilter() {
+  filterQuizzes() {
     if (this.quizList === undefined) {
       console.log('Liste de Quiz non instanciee');
     } else {

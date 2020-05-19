@@ -62,6 +62,8 @@ export class GestionThemeComponent implements OnInit {
     if (themeToCreate.name !== '') {
       setTimeout(() => {const themePop = 'Theme ' + themeToCreate.name + ' créé';
                         this.openSnackBar(themePop, 'Ok'); }, 100);
+    } else {
+      this.openSnackBar('Veuillez renseigner un nom de thème à créer ! ', 'Ok');
     }
   }
 

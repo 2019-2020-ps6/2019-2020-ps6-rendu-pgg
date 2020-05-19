@@ -4,6 +4,8 @@ import { UserService } from 'src/services/user.service';
 import { Theme } from '../../models/theme.model';
 import { User } from 'src/models/user.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {QuizService} from '../../services/quiz.service';
+import {Quiz} from '../../models/quiz.model';
 
 @Component({
   selector: 'app-selection-theme',
@@ -11,7 +13,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: [ './selection-theme.component.scss' ]
 })
 export class SelectionThemeComponent implements OnInit {
+  public filteredThemes: Theme[] = [];
   public themeList: Theme[] = [];
+  public quizList: Quiz[];
   public state: number;
   public currentTheme: Theme;
   public start = 0;
@@ -19,8 +23,19 @@ export class SelectionThemeComponent implements OnInit {
   public buttonText = 'Choisissez un thème';
   public selectedUser: User;
 
-  constructor(public themeService: ThemeService, public userService: UserService, private snackBar: MatSnackBar) {
-    this.themeService.themes$.subscribe((theme) => (this.themeList = theme));
+  constructor(public themeService: ThemeService, public userService: UserService, private snackBar: MatSnackBar,
+              public quizService: QuizService) {
+    this.quizService.quizzes$.subscribe((quiz) => {
+      this.quizList = quiz;
+    });
+    this.themeService.themes$.subscribe((theme) => {
+      this.themeList = theme;
+      setTimeout(() => {
+        if (theme) {
+          this.initThemeNumberOfQuestions();
+          this.filterThemes();
+        } }, 100);
+    });
     this.themeService.themeSelected$.subscribe((theme) => (this.currentTheme = theme));
     this.userService.userSelected$.subscribe((user) => {
       this.selectedUser = user;
@@ -32,6 +47,8 @@ export class SelectionThemeComponent implements OnInit {
     // 1. fetch theme list
     // 2. assign theme list fetched into themeList
     console.log('Selection theme : ');
+    setTimeout(() => {this.initThemeNumberOfQuestions(); }, 100);
+    console.log('Fin init');
   }
 
   openSnackBar(message, action) {
@@ -51,7 +68,7 @@ export class SelectionThemeComponent implements OnInit {
     this.state = 2;
     this.buttonText = 'Valider';
     setTimeout(() => {const userPop = 'Thème ' + this.currentTheme.name + ' sélectionné';
-                      this.openSnackBar(userPop, 'Ok'); }, 100);
+                      this.openSnackBar(userPop, 'Ok'); }, 200);
   }
 
   validerTheme() {
@@ -76,5 +93,25 @@ export class SelectionThemeComponent implements OnInit {
 
   goToSelectionUser() {
     this.state = 5 ;
+  }
+  initThemeNumberOfQuestions() {
+    // console.log('In Init theme Number of Questions');
+    for (const themeI of this.themeList) {
+      // console.log('Testing hihi');
+      themeI.numberofquestions = this.quizService.countThemeQuiz(themeI);
+    }
+  }
+
+  filterThemes() {
+    if (this.themeList === undefined || this.quizList === undefined) {
+      console.log('Liste de Quiz non instanciee');
+    } else {
+      console.log('Avant testFilter');
+      console.log(this.filteredThemes);
+      this.filteredThemes = this.themeList.filter(theme => (theme.numberofquestions > 0));
+      console.log('Apres testFilter');
+      console.log(this.filteredThemes);
+      console.log('Fin de methode testFilter');
+    }
   }
 }
