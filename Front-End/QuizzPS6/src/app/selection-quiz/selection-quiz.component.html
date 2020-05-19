@@ -70,7 +70,7 @@
               <ng-container *ngFor="let quizItem of filteredQuizzes | slice:start:end" value="quizItem" >
                 <li>
                   <button class="button-card" (click)="selectionnerQuiz(quizItem.id)" style="color: white; border: none; border-radius: 5px; background-color: black; width: 80px;">
-                    {{quizItem.name}} <br/>
+                    {{quizItem.name}} <br/> <br/>Nombre de questions : {{quizItem.questions.length}}
 
                     <!--
                     ID du Quiz :
