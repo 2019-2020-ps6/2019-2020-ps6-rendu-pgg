@@ -17,7 +17,7 @@
         <ul>
           <li class="user" *ngFor="let user of userList">
             {{ user.firstName }} {{ user.lastName }}
-            <button (click)="selectUser(user)">Sélectionner</button>
+            <button (click)="selectUser(user)" style="margin: 0 auto; width: 150px; height: 25px; background-color: transparent; color: black; border: 2px solid #2690CD; border-radius: 7px; font-weight: 800; font-family: Arial, Helvetica, sans-serif;">Sélectionner</button>
           </li>
         </ul>
       </fieldset>
@@ -31,7 +31,7 @@
             Nom : <input class="input-custom" type="text" id="name" [formControlName]="'lastName'">
           </label>
           <br>
-          <button type="submit" class="button-card" (click)="createUser()">Créer un nouvel utilisateur</button>
+          <button type="submit" class="button-card" (click)="createUser()" style="margin: 0 auto; width: 300px; height: 45px; background-color: transparent; color: black; border: 2px solid #2690CD; border-radius: 7px; font-weight: 800; font-family: Arial, Helvetica, sans-serif;">Créer un nouvel utilisateur</button>
         </form>
       </div>
     </div>
@@ -41,11 +41,11 @@
       <div *ngSwitchCase="1">
         Statistiques de {{ currentUser.firstName }}
         <br>{{ currentUser.attempts.length }} tentative(s) :
-        <button type ="button" class="ButtonAttempts" (click)="seeAttempts()">Voir historiques parties de {{currentUser.firstName}}</button>
+        <button type ="button" class="ButtonAttempts" (click)="seeAttempts()" style="margin: 0 auto; width: auto; height: auto; background-color: transparent; color: black; border: 2px solid #2690CD; border-radius: 7px; font-weight: 800; font-family: Arial, Helvetica, sans-serif;">Voir historiques parties de {{currentUser.firstName}}</button>
         <br>
-        <button type ="button" class="ButtonParameter" (click)="userOption(currentUser)">Paramètres de {{currentUser.firstName}}</button>
+        <button type ="button" class="ButtonParameter" (click)="userOption(currentUser)" style="margin: 0 auto; width: auto; height: auto; background-color: transparent; color: black; border: 2px solid #2690CD; border-radius: 7px; font-weight: 800; font-family: Arial, Helvetica, sans-serif;">Paramètres de {{currentUser.firstName}}</button>
         <br>
-        <button (click)="confirmDelete()">Supprimer l'utilisateur</button>
+        <button (click)="confirmDelete()" style="margin: 0 auto; width: auto; height: auto; background-color: transparent; color: black; border: 2px solid #2690CD; border-radius: 7px; font-weight: 800; font-family: Arial, Helvetica, sans-serif;">Supprimer l'utilisateur</button>
         <div *ngIf="this.deleteState === 1" class="confirmBox">
           <p>Êtes-vous sûr de vouloir supprimer {{currentUser.firstName}} {{currentUser.lastName}} ?</p>
           <p>Cette action est irréversible.</p>
@@ -61,12 +61,12 @@
   </div>
 
   <div *ngSwitchCase="4">
+    <button (click)="this.state = 0" style="margin: 0 auto;  margin-top:10px; margin-bottom: 10px; width: 300px; height: 45px; background-color: transparent; color: black; border: 2px solid #2690CD; border-radius: 7px; font-weight: 800; font-family: Arial, Helvetica, sans-serif;">Retour à la liste des utilisateurs</button>
     <app-parametres-quiz></app-parametres-quiz>
-    <button (click)="this.state = 0">Retour à la liste des utilisateurs</button>
   </div>
   <div *ngSwitchCase="5">
+    <button (click)="this.state = 0" style="margin: 0 auto; margin-top:10px; width: 300px; height: 45px; background-color: transparent; color: black; border: 2px solid #2690CD; border-radius: 7px; font-weight: 800; font-family: Arial, Helvetica, sans-serif;">Retour à la liste des utilisateurs</button>
     <app-attempts-user></app-attempts-user>
-    <button (click)="this.state = 0">Retour à la liste des utilisateurs</button>
   </div>
 </div>
 </body>
