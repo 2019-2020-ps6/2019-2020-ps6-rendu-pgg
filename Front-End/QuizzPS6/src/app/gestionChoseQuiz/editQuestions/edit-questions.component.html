@@ -11,10 +11,10 @@
       <legend style="font-family: Arial, Helvetica, sans-serif; font-weight: 600;margin: 20px;">Liste des Questions</legend>
           <div class="user" *ngFor="let question of quiz.questions" style="border:1px solid #000;margin-bottom: 2px;">
             {{ question.label }}
-            <button style="float: right;" (click)="selectQuestion(question)">Sélectionner</button>
-          </div>
+            <button class="button-style" style="float: right;" (click)="selectQuestion(question)">Sélectionner</button>
+</div>
     </fieldset>
-    <button (click)="this.state=0">Ajouter une nouvelle question</button>
+    <button class="button-style" (click)="this.state=0">Ajouter une nouvelle question</button>
   </div>
 
   <div style="width: 45%; border:1px solid #000; float: right; margin: 20px; text-align: center;" [ngSwitch]="state">
@@ -42,7 +42,7 @@
                     Réponse 4 : <input class="input-custom" type="text" id="answer4" [formControlName]="'answer4'"></label>
                     <label for="answer4true"><input type="checkbox" id="answer4true" name="answer4true" [formControlName]="'answer4true'">bonne réponse</label>
                 <br>
-                <button type="submit" class="button-card" (click)="createQuestions()">Valider cette question</button>
+                <button type="submit" class="button-card button-style" (click)="createQuestions()">Valider cette question</button>
             </form>
         </div>
 
@@ -70,8 +70,8 @@
                     Réponse 4 : <input class="input-custom" type="text" id="answer4" [formControlName]="'answer4'"></label>
                     <label for="answer4true"><input type="checkbox" id="answer4true" name="answer4true" [formControlName]="'answer4true'">bonne réponse</label>
                 <br>
-                <button type="submit" class="button-card" (click)="updateQuestion()">Valider cette question</button><br>
-                <button button type="submit" class="button-card" (click)="deleteQuestion()">Supprimer cette question</button>
+                <button type="submit" class="button-style" (click)="updateQuestion()">Valider cette question</button><br>
+                <button button type="submit" class="button-style" (click)="deleteQuestion()">Supprimer cette question</button>
             </form>
         </div>
 
