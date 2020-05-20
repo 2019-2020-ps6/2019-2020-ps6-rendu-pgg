@@ -20,6 +20,7 @@ export class SelectionQuizComponent implements OnInit {
   public selectedTheme: Theme;
   public start = 0;
   public end = 3;
+  private color: string;
 
   constructor(public quizService: QuizService, public themeService: ThemeService, private snackBar: MatSnackBar) {
     this.quizService.quizzes$.subscribe((quiz) => {
@@ -117,4 +118,5 @@ export class SelectionQuizComponent implements OnInit {
   goToSelectionTheme() {
     this.state = 5;
   }
+
 }

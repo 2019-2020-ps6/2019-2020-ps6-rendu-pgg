@@ -12,13 +12,11 @@
 				 	display: inline-flex;
 				 	border: 1px solid black;
 				 	border-radius: 8px;
-				 	margin-left: 20px;
 				 	padding: 90px;
 				 	padding-bottom: 125px;
 				 	padding-top: 125px;
 				 }
 			.cont{
-				 	width: 1200px;
 				 	height: 300px;
 				 	overflow: hidden;
 				 	padding-bottom: 80px;
@@ -64,8 +62,8 @@
         <div class="cont">
           <div *ngIf="filteredThemes">
           <ul>
-            <li *ngFor="let themeItem of filteredThemes | slice:start:end" value="themeItem">
-              <button class="button-card" (click)="selectionnerTheme(themeItem.id)" style="color: white; border: none; border-radius: 5px; background-color: black; width: 80px;">
+            <li *ngFor="let themeItem of filteredThemes | slice:start:end" value="themeItem" style="margin-right: 1rem;">
+              <button class="button-card" (click)="selectionnerTheme(themeItem.id)" style="color: black; border: none; border-radius: 5px; background-color: lightgrey; width: 150px;font-size: 0.8rem ;font-weight: bold;">
                 {{themeItem.name}} <br/><br/>Nombre de quizs : {{themeItem.numberofquestions}}
               </button>
             </li>
@@ -73,7 +71,7 @@
           </div>
         </div>
         <div class="center">
-          <input *ngIf="start>=4" type="button" class="button" value="<< Previous" (click)="viewPrevious()" style="margin: 0 auto; width: 100px; height: 100px; background-color: transparent; color: black; border: 2px solid #2690CD; border-radius: 50%; font-weight: 800; font-family: Arial, Helvetica, sans-serif;">
+          <input *ngIf="start>=3" type="button" class="button" value="<< Previous" (click)="viewPrevious()" style="margin: 0 auto; width: 100px; height: 100px; background-color: transparent; color: black; border: 2px solid #2690CD; border-radius: 50%; font-weight: 800; font-family: Arial, Helvetica, sans-serif;">
           <div *ngIf="filteredThemes">
             <input *ngIf="end<filteredThemes.length" type="button" class="button" value="Next >>" (click)="viewNext()" style="margin: 0 auto; width: 100px; height: 100px; background-color: transparent; color: black; border: 2px solid #2690CD; border-radius: 50%; font-weight: 800; font-family: Arial, Helvetica, sans-serif;">
           </div>

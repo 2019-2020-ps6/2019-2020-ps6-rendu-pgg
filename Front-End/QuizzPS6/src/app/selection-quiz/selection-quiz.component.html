@@ -13,18 +13,18 @@
         display: inline-flex;
         border: 1px solid black;
         border-radius: 8px;
-        margin-left: 20px;
         padding: 90px;
         padding-bottom: 125px;
         padding-top: 125px;
       }
       .cont{
-        width: 1200px;
         height: 300px;
+        max-height: 300px;
         overflow: hidden;
         padding-bottom: 80px;
         text-align: center;
       }
+
       #bouton1{
         font-size: 20px;
         border-radius: 14px 2px 2px 14px;
@@ -33,9 +33,10 @@
         padding-right: 15px;
         padding-left: 15px;
       }
+
       .bouton{
         width: 700px;
-        height: 80px;
+        height: 75px;
         border-color: black;
         font-size: 20px;
       }
@@ -61,25 +62,16 @@
 			<div *ngSwitchDefault>
         <button type="button" class="button-card" (click)="goToSelectionTheme()" style="margin-top:10px; margin-bottom: 10px;width: 140px; height:36px; color: #fff;background:linear-gradient(to right,#2677CD,#53E9C5); border:none; border-radius: 5px;">Retour à la sélection de thèmes
         </button>
-        <h1>Choisir un quiz sur le thème : {{selectedTheme.name}}</h1>
-        <!--<div *ngIf="selectedTheme" class="cont">
-        Quand on aura acces au selectedTheme, on utilsera cette valeur -->
+        <h1 style="text-align: center; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: 600; color: #2690CD;">Choisir un quiz sur le thème : {{selectedTheme.name}}</h1>
         <div *ngIf="quizList" class="cont"><br>
           <div *ngIf="filteredQuizzes">
             <ul>
-              <ng-container *ngFor="let quizItem of filteredQuizzes | slice:start:end" value="quizItem" >
-                <li>
-                  <button class="button-card" (click)="selectionnerQuiz(quizItem.id)" style="color: white; border: none; border-radius: 5px; background-color: black; width: 80px;">
-                    {{quizItem.name}} <br/> <br/>Nombre de questions : {{quizItem.questions.length}}
-
-                    <!--
-                    ID du Quiz :
-                    {{quizItem.id}}
-                    -->
+                <li *ngFor="let quizItem of filteredQuizzes | slice:start:end" value="quizItem" style="margin-right: 1rem;">
+                  <button class="button-card" (click)="selectionnerQuiz(quizItem.id)" style="color: black; border: none; border-radius: 5px; background-color: lightgrey; width: 8rem; height: 3.5rem;font-size: 0.8rem ;font-weight: bold;">
+                    {{quizItem.name}} <br/> <br/>Nombre de questions : {{quizItem.questions.length}} <!-- ID du Quiz : {{quizItem.id}} -->
                   </button>
                 </li>
-              </ng-container>
-          </ul>
+            </ul>
           </div>
         </div>
 

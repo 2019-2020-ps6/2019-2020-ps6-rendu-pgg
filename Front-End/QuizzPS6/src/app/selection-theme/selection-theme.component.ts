@@ -19,7 +19,7 @@ export class SelectionThemeComponent implements OnInit {
   public state: number;
   public currentTheme: Theme;
   public start = 0;
-  public end = 4;
+  public end = 3;
   public buttonText = 'Choisissez un thème';
   public selectedUser: User;
 
@@ -83,12 +83,12 @@ export class SelectionThemeComponent implements OnInit {
     }
   }
   viewNext() {
-    this.start = this.start + 4;
-    this.end = this.start + 4;
+    this.start = this.start + 3;
+    this.end = this.start + 3;
   }
   viewPrevious() {
-    this.start = this.start - 4;
-    this.end = this.end - 4;
+    this.start = this.start - 3;
+    this.end = this.end - 3;
   }
 
   goToSelectionUser() {
