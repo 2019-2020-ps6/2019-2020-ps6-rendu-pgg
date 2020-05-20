@@ -155,6 +155,7 @@ export class JouerQuizComponent implements OnInit {
           this.currentLessQuestionsNumber++;
           // this.currentLessQuestionsNumber = Math.min(2, this.currentLessQuestionsNumber);
           this.score = this.score - 10;
+          this.openSnackBar('Mauvaise réponse ! ', 'Ok');
         } else {
           this.goToNextQuestion(false);
         }
@@ -174,9 +175,11 @@ export class JouerQuizComponent implements OnInit {
     if (correct) {
       this.score = this.score + 50;
       console.log('Bonne reponse');
+      this.openSnackBar('Bonne réponse ! ', 'Ok');
     } else {
       this.score = this.score - 10;
       console.log('Mauvaise reponse');
+      this.openSnackBar('Mauvaise réponse ! ', 'Ok');
     }
     this.state = 0;
     this.selectedAnswer = undefined;
@@ -201,7 +204,7 @@ export class JouerQuizComponent implements OnInit {
       console.log('INIT FLEXIBLE');
       this.initFlexibleDifficultyOnQuestion();
       console.log('Fin init flexible ');
-      this.openSnackBar('Question suivante ! ', 'Ok');
+      // this.openSnackBar('Question suivante ! ', 'Ok');
     } else {
       // Ici, il faudra renvoyer sur l ecran de fin de partie
       // this.userService.addAttempt(this.selectedUser, new Attempt(this.score, this.selectedQuiz.id));
