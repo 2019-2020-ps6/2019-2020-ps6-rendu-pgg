@@ -18,8 +18,8 @@
         padding-top: 125px;
       }
       .cont{
-        height: 300px;
-        max-height: 300px;
+        height: 17rem;
+        max-height: 17rem;
         overflow: hidden;
         padding-bottom: 80px;
         text-align: center;
@@ -67,7 +67,7 @@
           <div *ngIf="filteredQuizzes">
             <ul>
                 <li *ngFor="let quizItem of filteredQuizzes | slice:start:end" value="quizItem" style="margin-right: 1rem;">
-                  <button class="button-card" (click)="selectionnerQuiz(quizItem.id)" style="color: black; border: none; border-radius: 5px; background-color: lightgrey; width: 8rem; height: 3.5rem;font-size: 0.8rem ;font-weight: bold;">
+                  <button class="button-card" (click)="selectionnerQuiz(quizItem.id)" style="color: black; border: none; border-radius: 5px; background-color: lightgrey; width: 8rem; height: 4rem;font-size: 0.8rem ;font-weight: bold;">
                     {{quizItem.name}} <br/> <br/>Nombre de questions : {{quizItem.questions.length}} <!-- ID du Quiz : {{quizItem.id}} -->
                   </button>
                 </li>
