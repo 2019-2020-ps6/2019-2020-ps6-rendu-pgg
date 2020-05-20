@@ -16,23 +16,23 @@
             <legend style="font-family: Arial, Helvetica, sans-serif; font-weight: 600;margin: 20px;">Liste des Quiz</legend>
                 <div class="user" *ngFor="let quiz of quizList" style="border:1px solid #000;">
                   {{ quiz.name }}
-                  <button style="float: right; margin-right: 1em;" (click)="selectQuiz(quiz)">Sélectionner</button>
+                  <button class="button-style" (click)="selectQuiz(quiz)">Sélectionner</button>
                 </div>
           </fieldset>
-          <button (click)="this.state=1">Créer un nouveau quiz</button>
+          <button (click)="this.state=1" style="margin: 0 auto; width: 300px; height: 45px; background-color: transparent; color: black; border: 2px solid #2690CD; border-radius: 7px; font-weight: 800; font-family: Arial, Helvetica, sans-serif;">Créer un nouveau quiz</button>
         </div>
 
         <div style="width: 45%; border:1px solid #000; float: right; margin: 20px; text-align: center;">
           <div *ngIf="currentQuiz">
-            <h2>{{ currentQuiz.name }}</h2>
+            <h2 class="quiz-name">{{ currentQuiz.name }}</h2>
             <h3>{{ currentQuiz.questions.length }} questions</h3>
-            <button (click)="this.state=2">Ajouter/modifier des questions</button><br>
-            <button (click)="this.deleteState = 1">Supprimer ce Quiz</button>
+            <button class="button-style" (click)="this.state=2">Ajouter/modifier des questions</button><br>
+            <button class="button-style" (click)="this.deleteState = 1">Supprimer ce Quiz</button>
             <div *ngIf="this.deleteState === 1" class="confirmBox">
               <p>Êtes-vous sûr de vouloir supprimer ce quiz ?</p>
               <p>Cette action est irréversible.</p>
-              <button type ="button" (click)="this.deleteState = 0">Annuler</button>
-              <button type ="button" (click)="deleteQuiz(currentQuiz)">Supprimer</button>
+              <button type ="button" class="button-style" (click)="this.deleteState = 0">Annuler</button>
+              <button type ="button" class="button-style" (click)="deleteQuiz(currentQuiz)">Supprimer</button>
             </div>
           </div>
         </div>
@@ -61,12 +61,12 @@
             </form>
           </label>
           <br>
-          <button type="submit" class="button-card" (click)="submitQuiz()">Créer le quiz</button>
+          <button type="submit" class="button-card" (click)="submitQuiz()" style="margin: 0 auto; width: 300px; height: 45px; background-color: transparent; color: black; border: 2px solid #2690CD; border-radius: 7px; font-weight: 800; font-family: Arial, Helvetica, sans-serif;">Créer le quiz</button>
         </form>
       </div>
 
       <div style="width: 45%; border:1px solid #000; float: right; margin: 20px; text-align: center;">
-        <button (click)="this.state=0">Annuler et quitter</button>
+        <button class="button-card button-style" (click)="this.state=0">Annuler et quitter</button>
       </div>
 
     </div>
