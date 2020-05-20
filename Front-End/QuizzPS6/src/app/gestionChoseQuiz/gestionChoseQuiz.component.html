@@ -29,7 +29,7 @@
             <button class="button-style" (click)="this.state=2">Ajouter/modifier des questions</button><br>
             <button class="button-style" (click)="this.deleteState = 1" style="border: 2px solid red;">Supprimer ce Quiz</button>
             <div *ngIf="this.deleteState === 1" class="confirmBox">
-              <p>Êtes-vous sûr de vouloir supprimer ce quiz ?</p>
+              <p>Êtes-vous sûr de vouloir supprimer ce thème ?</p>
               <p>Cette action est irréversible.</p>
               <button type ="button" class="button-style" (click)="this.deleteState = 0">Annuler</button>
               <button type ="button" class="button-style" (click)="deleteQuiz(currentQuiz)">Supprimer</button>

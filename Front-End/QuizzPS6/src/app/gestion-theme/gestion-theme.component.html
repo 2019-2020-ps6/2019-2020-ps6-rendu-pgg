@@ -36,7 +36,13 @@
       <div *ngSwitchCase="1">
         Information de  {{ currentTheme.name }}
         <br>
-        <button (click)="deleteTheme(currentTheme)" style="width: auto;  height: auto;  background-color: transparent;  color: black;  border: 2px solid red;  border-radius: 7px;  font-weight: 800;  font-family: Arial, Helvetica, sans-serif;">Supprimer le thème</button>
+        <button (click)="this.deleteState = 1" style="width: auto;  height: auto;  background-color: transparent;  color: black;  border: 2px solid red;  border-radius: 7px;  font-weight: 800;  font-family: Arial, Helvetica, sans-serif;">Supprimer le thème</button>
+        <div *ngIf="this.deleteState === 1" class="confirmBox">
+          <p>Êtes-vous sûr de vouloir supprimer ce quiz ?</p>
+          <p>Cette action est irréversible.</p>
+          <button type ="button" class="button-style" (click)="this.deleteState = 0">Annuler</button>
+          <button type ="button" class="button-style" (click)="deleteTheme(currentTheme)">Supprimer</button>
+        </div>
       </div>
       <div *ngSwitchDefault>
         Sélectionnez un thème dans la liste

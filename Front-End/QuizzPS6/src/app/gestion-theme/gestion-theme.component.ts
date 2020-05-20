@@ -19,11 +19,13 @@ export class GestionThemeComponent implements OnInit {
   state: number;
 
   public themeForm: FormGroup;
+  deleteState: number;
 
   constructor(public formBuilder: FormBuilder, public themeService: ThemeService, public quizService: QuizService,
               private snackBar: MatSnackBar) {
     this.themeService.themes$.subscribe((user) => this.themeList = user);
     this.quizService.quizzes$.subscribe((quiz) => this.quizList = quiz);
+    this.deleteState = 0;
 
     this.themeForm = this.formBuilder.group({
       name: [''],
@@ -69,7 +71,7 @@ export class GestionThemeComponent implements OnInit {
 
   deleteTheme(theme: Theme) {
     // tslint:disable-next-line:no-shadowed-variable
-
+    this.deleteState = 0;
     this.state = 0;
     this.themeService.deleteTheme(theme);
     setTimeout(() => {const themePop = 'Theme ' + theme.name + ' supprimé !';

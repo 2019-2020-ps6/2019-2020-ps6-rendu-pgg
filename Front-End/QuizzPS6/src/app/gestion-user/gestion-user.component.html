@@ -45,12 +45,12 @@
         <br>
         <button type ="button" class="ButtonParameter" (click)="userOption(currentUser)" style="margin: 0 auto; width: auto; height: auto; background-color: transparent; color: black; border: 2px solid #2690CD; border-radius: 7px; font-weight: 800; font-family: Arial, Helvetica, sans-serif;">Paramètres de {{currentUser.firstName}}</button>
         <br>
-        <button (click)="confirmDelete()" style="margin: 0 auto; width: auto; height: auto; background-color: transparent; color: black; border: 2px solid #2690CD; border-radius: 7px; font-weight: 800; font-family: Arial, Helvetica, sans-serif;">Supprimer l'utilisateur</button>
+        <button (click)="confirmDelete()" style="margin: 0 auto; width: auto; height: auto; background-color: transparent; color: black; border: 2px solid red; border-radius: 7px; font-weight: 800; font-family: Arial, Helvetica, sans-serif;">Supprimer l'utilisateur</button>
         <div *ngIf="this.deleteState === 1" class="confirmBox">
           <p>Êtes-vous sûr de vouloir supprimer {{currentUser.firstName}} {{currentUser.lastName}} ?</p>
           <p>Cette action est irréversible.</p>
-          <button type ="button" (click)="this.deleteState = 0">Annuler</button>
-          <button type ="button" (click)="deleteUser(currentUser)">Supprimer</button>
+          <button type ="button" class="button-style" (click)="this.deleteState = 0">Annuler</button>
+          <button type ="button" class="button-style" (click)="deleteUser(currentUser)" style="border: 2px solid red;">Supprimer</button>
         </div>
       </div>
       <div *ngSwitchDefault>
