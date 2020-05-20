@@ -19,24 +19,22 @@ body{
     border:  1px solid #3498db;
     background : none;
     padding: 10px 20px;
-    font-size: 20px;
+    font-size: 2rem;
     font-family: "montserrat";
     cursor: pointer;
     margin: 10px;
     transition: 0.8s;
     position: relative;
     overflow: hidden;
+
+
+  color: white;
+  background:linear-gradient(to right,#2677CD,#53E9C5);
+  border:none;
+  border-radius: 5px;
 }
 
-.btn1{
-    color:#3498db;
-}
-.btn2{
-    color:#3498db;
-}
-.btn3{
-    color:#3498db;
-}
+
 .btn1:hover,.btn2:hover,.btn3:hover{
     color:#3498db ;
 }
